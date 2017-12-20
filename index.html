@@ -258,10 +258,24 @@
                     <a href="#listar-todas-inscricoes" class="toc-h2 toc-link" data-title="Listar todas inscrições">Listar todas inscrições</a>
                   </li>
                   <li>
-                    <a href="#informacoes-de-um-unico-vestibular-get-api-applications-id" class="toc-h2 toc-link" data-title="Informações de um único vestibular GET /api/applications/{id}">Informações de um único vestibular GET /api/applications/{id}</a>
+                    <a href="#informacoes-de-um-unico-vestibular" class="toc-h2 toc-link" data-title="Informações de um único vestibular">Informações de um único vestibular</a>
                   </li>
                   <li>
                     <a href="#atualizacao-de-processo-seletivo" class="toc-h2 toc-link" data-title="Atualização de processo seletivo">Atualização de processo seletivo</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#informacoes-de-admissoes" class="toc-h1 toc-link" data-title="Informações de admissões">Informações de admissões</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#listar-todas-admissoes" class="toc-h2 toc-link" data-title="Listar todas admissões">Listar todas admissões</a>
+                  </li>
+                  <li>
+                    <a href="#informacoes-de-uma-unica-admissao" class="toc-h2 toc-link" data-title="Informações de uma única admissão">Informações de uma única admissão</a>
+                  </li>
+                  <li>
+                    <a href="#atualizacao-de-admissao" class="toc-h2 toc-link" data-title="Atualização de admissão">Atualização de admissão</a>
                   </li>
               </ul>
           </li>
@@ -590,7 +604,155 @@ Status Code: 200 OK
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-2'>Informações de resultado</h3>
-<p>As informações de retorno e definições de status pode ser encontrado em <a href="#busca-de-alunos">busca de alunos</a></p>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id do aluno.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>nome do aluno</td>
+</tr>
+<tr>
+<td>cpf</td>
+<td>string</td>
+<td>cpf do aluno</td>
+</tr>
+<tr>
+<td>birth_date</td>
+<td>string</td>
+<td>data de nascimento do aluno</td>
+</tr>
+<tr>
+<td>emails</td>
+<td>array de string</td>
+<td>lista de emails do aluno</td>
+</tr>
+<tr>
+<td>phones</td>
+<td>array de string</td>
+<td>lista de telefones do aluno</td>
+</tr>
+<tr>
+<td>address_information</td>
+<td>object</td>
+<td>objeto com dados onde aluno reside</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>endereço onde aluno reside</td>
+</tr>
+<tr>
+<td>number</td>
+<td>string</td>
+<td>número onde aluno reside</td>
+</tr>
+<tr>
+<td>neighborhood</td>
+<td>string</td>
+<td>bairro onde aluno reside</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>cidade onde aluno reside</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>estado onde aluno reside</td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td>string</td>
+<td>código postal onde aluno reside</td>
+</tr>
+<tr>
+<td>admissions</td>
+<td>object</td>
+<td>objeto com informações de processo de matricula</td>
+</tr>
+<tr>
+<td>id (admissions)</td>
+<td>number</td>
+<td>id do processo de matricula</td>
+</tr>
+<tr>
+<td>course_sku</td>
+<td>string</td>
+<td>código do curso fornecido pela universidade</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>status que se encontra o processo de matricula</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-status-2'>Significado dos status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Processo Seletivo Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento Solicitado</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento Confirmado</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
+</tr>
+</tbody></table>
 <h1 id='inscricoes-em-vestibular'>Inscrições em vestibular</h1><h2 id='listar-todas-inscricoes'>Listar todas inscrições</h2>
 <blockquote>
 <p>Requisição</p>
@@ -690,7 +852,7 @@ Status Code: 200 OK
 <td>objeto com dados do aluno</td>
 </tr>
 <tr>
-<td>id</td>
+<td>id (student)</td>
 <td>number</td>
 <td>id do aluno.</td>
 </tr>
@@ -822,7 +984,7 @@ Status Code: 200 OK
 <tr>
 <td>type</td>
 <td>string</td>
-<td>tipo de exame (vestibular ou enem)</td>
+<td>tipo de exame (exam ou enem)</td>
 </tr>
 <tr>
 <td>cursor</td>
@@ -830,7 +992,7 @@ Status Code: 200 OK
 <td>código para pegar os próximos passos</td>
 </tr>
 </tbody></table>
-<h2 id='informacoes-de-um-unico-vestibular-get-api-applications-id'>Informações de um único vestibular GET /api/applications/{id}</h2>
+<h2 id='informacoes-de-um-unico-vestibular'>Informações de um único vestibular</h2>
 <blockquote>
 <p>Requisição</p>
 </blockquote>
@@ -903,9 +1065,163 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>id</code></td>
+<td>id</td>
 <td>Path</td>
 <td>ID da inscrição</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-4'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id do vestibular</td>
+</tr>
+<tr>
+<td>student</td>
+<td>object</td>
+<td>objeto com dados do aluno</td>
+</tr>
+<tr>
+<td>id (student)</td>
+<td>number</td>
+<td>id do aluno.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>nome do aluno</td>
+</tr>
+<tr>
+<td>cpf</td>
+<td>string</td>
+<td>cpf do aluno</td>
+</tr>
+<tr>
+<td>birth_date</td>
+<td>string</td>
+<td>data de nascimento do aluno</td>
+</tr>
+<tr>
+<td>emails</td>
+<td>array de string</td>
+<td>lista de emails do aluno</td>
+</tr>
+<tr>
+<td>phones</td>
+<td>array de string</td>
+<td>lista de telefones do aluno</td>
+</tr>
+<tr>
+<td>address_information</td>
+<td>object</td>
+<td>objeto com dados onde aluno reside</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>endereço onde aluno reside</td>
+</tr>
+<tr>
+<td>number</td>
+<td>string</td>
+<td>número onde aluno reside</td>
+</tr>
+<tr>
+<td>neighborhood</td>
+<td>string</td>
+<td>bairro onde aluno reside</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>cidade onde aluno reside</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>estado onde aluno reside</td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td>string</td>
+<td>código postal onde aluno reside</td>
+</tr>
+<tr>
+<td>exam</td>
+<td>object</td>
+<td>objeto com informações do exame</td>
+</tr>
+<tr>
+<td>course_skus</td>
+<td>array</td>
+<td>lista com os cursos pertencentes a este exame</td>
+</tr>
+<tr>
+<td>local</td>
+<td>object</td>
+<td>objeto com dados do exame</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>endereço da localização do vestibular</td>
+</tr>
+<tr>
+<td>number</td>
+<td>string</td>
+<td>número da localização do vestibular</td>
+</tr>
+<tr>
+<td>neighborhood</td>
+<td>string</td>
+<td>bairro da localização do vestibular</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>cidade da localização do vestibular</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>estado da localização do vestibular</td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td>string</td>
+<td>código postal da localização do vestibular</td>
+</tr>
+<tr>
+<td>dates</td>
+<td>string</td>
+<td>data da realização do vestibular</td>
+</tr>
+<tr>
+<td>times</td>
+<td>string</td>
+<td>hora da realização do vestibular</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>status do vestibular</td>
+</tr>
+<tr>
+<td>result</td>
+<td>string</td>
+<td>resultado do vestibular</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>tipo de exame (exam ou enem)</td>
 </tr>
 </tbody></table>
 <h2 id='atualizacao-de-processo-seletivo'>Atualização de processo seletivo</h2>
@@ -988,9 +1304,1032 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>status</code></td>
+<td>status</td>
 <td>Form</td>
 <td>Situação do aluno entre <code>registered</code>, <code>approved</code>, <code>failed</code></td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-5'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id do vestibular</td>
+</tr>
+<tr>
+<td>student</td>
+<td>object</td>
+<td>objeto com dados do aluno</td>
+</tr>
+<tr>
+<td>id (student)</td>
+<td>number</td>
+<td>id do aluno.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>nome do aluno</td>
+</tr>
+<tr>
+<td>cpf</td>
+<td>string</td>
+<td>cpf do aluno</td>
+</tr>
+<tr>
+<td>birth_date</td>
+<td>string</td>
+<td>data de nascimento do aluno</td>
+</tr>
+<tr>
+<td>emails</td>
+<td>array de string</td>
+<td>lista de emails do aluno</td>
+</tr>
+<tr>
+<td>phones</td>
+<td>array de string</td>
+<td>lista de telefones do aluno</td>
+</tr>
+<tr>
+<td>address_information</td>
+<td>object</td>
+<td>objeto com dados onde aluno reside</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>endereço onde aluno reside</td>
+</tr>
+<tr>
+<td>number</td>
+<td>string</td>
+<td>número onde aluno reside</td>
+</tr>
+<tr>
+<td>neighborhood</td>
+<td>string</td>
+<td>bairro onde aluno reside</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>cidade onde aluno reside</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>estado onde aluno reside</td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td>string</td>
+<td>código postal onde aluno reside</td>
+</tr>
+<tr>
+<td>exam</td>
+<td>object</td>
+<td>objeto com informações do exame</td>
+</tr>
+<tr>
+<td>course_skus</td>
+<td>array</td>
+<td>lista com os cursos pertencentes a este exame</td>
+</tr>
+<tr>
+<td>local</td>
+<td>object</td>
+<td>objeto com dados do exame</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>endereço da localização do vestibular</td>
+</tr>
+<tr>
+<td>number</td>
+<td>string</td>
+<td>número da localização do vestibular</td>
+</tr>
+<tr>
+<td>neighborhood</td>
+<td>string</td>
+<td>bairro da localização do vestibular</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>cidade da localização do vestibular</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>estado da localização do vestibular</td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td>string</td>
+<td>código postal da localização do vestibular</td>
+</tr>
+<tr>
+<td>dates</td>
+<td>string</td>
+<td>data da realização do vestibular</td>
+</tr>
+<tr>
+<td>times</td>
+<td>string</td>
+<td>hora da realização do vestibular</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>status do vestibular</td>
+</tr>
+<tr>
+<td>result</td>
+<td>string</td>
+<td>resultado do vestibular</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>tipo de exame (exam ou enem)</td>
+</tr>
+</tbody></table>
+<h3 id='significado-do-retorno-de-status'>Significado do retorno de status</h3>
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>registered</td>
+<td>Registrado para realizar vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Recusado no vestibular</td>
+</tr>
+</tbody></table>
+<h1 id='informacoes-de-admissoes'>Informações de admissões</h1><h2 id='listar-todas-admissoes'>Listar todas admissões</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/admissions
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-TARDE-EAD-91119"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">394932</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"José da Silva"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111.222.333-44"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1991-01-01"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"teste@exemplo.com"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"(11) 98888-7777"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"address_information"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Sandra"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"432S"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chácara Dora"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Araçariguama"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"local"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registered"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASAKDSaldlwp20"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Retorna todas as admissões da faculdade.</p>
+
+<p>Admissões são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, retorna um valor <code>cursor</code> adicional que deve ser utilizado de parâmetro na próxima requisição para continuar.</p>
+<h3 id='parametros-6'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>cursor</code></td>
+<td>Query</td>
+<td>valor cursor utilizado para continuar uma paginação anterior</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-6'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>items</td>
+<td>array</td>
+<td>lista de objetos com dados de inscrições de vestibular</td>
+</tr>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id da admissão</td>
+</tr>
+<tr>
+<td>course_sku</td>
+<td>string</td>
+<td>status atual da admissão do aluno</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>status da admissão do aluno</td>
+</tr>
+<tr>
+<td>application</td>
+<td>object</td>
+<td>objeto do vestibular referente a essa admissão</td>
+</tr>
+<tr>
+<td>application[id]</td>
+<td>number</td>
+<td>id do vestibular</td>
+</tr>
+<tr>
+<td>application[student]</td>
+<td>object</td>
+<td>objeto com os dados do aluno</td>
+</tr>
+<tr>
+<td>student[id]</td>
+<td>number</td>
+<td>id do aluno</td>
+</tr>
+<tr>
+<td>student[name]</td>
+<td>string</td>
+<td>nome do aluno</td>
+</tr>
+<tr>
+<td>student[cpf]</td>
+<td>string</td>
+<td>cpf do aluno</td>
+</tr>
+<tr>
+<td>student[birth_date]</td>
+<td>string</td>
+<td>data de nascimento do aluno</td>
+</tr>
+<tr>
+<td>student[emails]</td>
+<td>array de string</td>
+<td>lista de emails do aluno</td>
+</tr>
+<tr>
+<td>student[phones]</td>
+<td>array de string</td>
+<td>lista de telefones do aluno</td>
+</tr>
+<tr>
+<td>student[address_information]</td>
+<td>object</td>
+<td>objeto com dados onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[address]</td>
+<td>string</td>
+<td>endereço onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[number]</td>
+<td>string</td>
+<td>número onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[neighborhood]</td>
+<td>string</td>
+<td>bairro onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[city]</td>
+<td>string</td>
+<td>cidade onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[state]</td>
+<td>string</td>
+<td>estado onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[postal_code]</td>
+<td>string</td>
+<td>código postal onde aluno reside</td>
+</tr>
+<tr>
+<td>exam</td>
+<td>object</td>
+<td>objeto com informações do exame</td>
+</tr>
+<tr>
+<td>exam[course_skus]</td>
+<td>array</td>
+<td>lista com os cursos pertencentes a este exame</td>
+</tr>
+<tr>
+<td>exam[local]</td>
+<td>object</td>
+<td>objeto com dados do exame</td>
+</tr>
+<tr>
+<td>local[address]</td>
+<td>string</td>
+<td>endereço da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[number]</td>
+<td>string</td>
+<td>número da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[neighborhood]</td>
+<td>string</td>
+<td>bairro da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[city]</td>
+<td>string</td>
+<td>cidade da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[state]</td>
+<td>string</td>
+<td>estado da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[postal_code]</td>
+<td>string</td>
+<td>código postal da localização do vestibular</td>
+</tr>
+<tr>
+<td>exam[dates]</td>
+<td>string</td>
+<td>data da realização do vestibular</td>
+</tr>
+<tr>
+<td>exam[times]</td>
+<td>string</td>
+<td>hora da realização do vestibular</td>
+</tr>
+<tr>
+<td>exam[status]</td>
+<td>string</td>
+<td>status do vestibular</td>
+</tr>
+<tr>
+<td>application[result]</td>
+<td>string</td>
+<td>resultado do vestibular</td>
+</tr>
+<tr>
+<td>application[type]</td>
+<td>string</td>
+<td>tipo de exame (exam ou enem)</td>
+</tr>
+<tr>
+<td>cursor</td>
+<td>string</td>
+<td>código para pegar os próximos passos</td>
+</tr>
+</tbody></table>
+<h2 id='informacoes-de-uma-unica-admissao'>Informações de uma única admissão</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/admissions/123456
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-TARDE-EAD-91119"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">394932</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"José da Silva"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111.222.333-44"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1991-01-01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"teste@exemplo.com"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"(11) 98888-7777"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"address_information"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Sandra"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"432S"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chácara Dora"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Araçariguama"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"local"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registered"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Resposta quando não encontra nenhuma admissão</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Retorna uma admissão específica da faculdade.</p>
+<h3 id='parametros-7'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>id da admissão</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-7'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>items</td>
+<td>array</td>
+<td>lista de objetos com dados de inscrições de vestibular</td>
+</tr>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id da admissão</td>
+</tr>
+<tr>
+<td>course_sku</td>
+<td>string</td>
+<td>status atual da admissão do aluno</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>status da admissão do aluno</td>
+</tr>
+<tr>
+<td>application</td>
+<td>object</td>
+<td>objeto do vestibular referente a essa admissão</td>
+</tr>
+<tr>
+<td>application[id]</td>
+<td>number</td>
+<td>id do vestibular</td>
+</tr>
+<tr>
+<td>application[student]</td>
+<td>object</td>
+<td>objeto com os dados do aluno</td>
+</tr>
+<tr>
+<td>student[id]</td>
+<td>number</td>
+<td>id do aluno</td>
+</tr>
+<tr>
+<td>student[name]</td>
+<td>string</td>
+<td>nome do aluno</td>
+</tr>
+<tr>
+<td>student[cpf]</td>
+<td>string</td>
+<td>cpf do aluno</td>
+</tr>
+<tr>
+<td>student[birth_date]</td>
+<td>string</td>
+<td>data de nascimento do aluno</td>
+</tr>
+<tr>
+<td>student[emails]</td>
+<td>array de string</td>
+<td>lista de emails do aluno</td>
+</tr>
+<tr>
+<td>student[phones]</td>
+<td>array de string</td>
+<td>lista de telefones do aluno</td>
+</tr>
+<tr>
+<td>student[address_information]</td>
+<td>object</td>
+<td>objeto com dados onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[address]</td>
+<td>string</td>
+<td>endereço onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[number]</td>
+<td>string</td>
+<td>número onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[neighborhood]</td>
+<td>string</td>
+<td>bairro onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[city]</td>
+<td>string</td>
+<td>cidade onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[state]</td>
+<td>string</td>
+<td>estado onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[postal_code]</td>
+<td>string</td>
+<td>código postal onde aluno reside</td>
+</tr>
+<tr>
+<td>exam</td>
+<td>object</td>
+<td>objeto com informações do exame</td>
+</tr>
+<tr>
+<td>exam[course_skus]</td>
+<td>array</td>
+<td>lista com os cursos pertencentes a este exame</td>
+</tr>
+<tr>
+<td>exam[local]</td>
+<td>object</td>
+<td>objeto com dados do exame</td>
+</tr>
+<tr>
+<td>local[address]</td>
+<td>string</td>
+<td>endereço da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[number]</td>
+<td>string</td>
+<td>número da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[neighborhood]</td>
+<td>string</td>
+<td>bairro da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[city]</td>
+<td>string</td>
+<td>cidade da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[state]</td>
+<td>string</td>
+<td>estado da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[postal_code]</td>
+<td>string</td>
+<td>código postal da localização do vestibular</td>
+</tr>
+<tr>
+<td>exam[dates]</td>
+<td>string</td>
+<td>data da realização do vestibular</td>
+</tr>
+<tr>
+<td>exam[times]</td>
+<td>string</td>
+<td>hora da realização do vestibular</td>
+</tr>
+<tr>
+<td>exam[status]</td>
+<td>string</td>
+<td>status do vestibular</td>
+</tr>
+<tr>
+<td>application[result]</td>
+<td>string</td>
+<td>resultado do vestibular</td>
+</tr>
+<tr>
+<td>application[type]</td>
+<td>string</td>
+<td>tipo de exame (exam ou enem)</td>
+</tr>
+</tbody></table>
+<h2 id='atualizacao-de-admissao'>Atualização de admissão</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/admissions/123456 <span class="se">\</span>
+  -d <span class="nv">status</span><span class="o">=</span><span class="s2">"submitted_docs"</span>
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-TARDE-EAD-91119"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"submitted_docs"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">394932</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"José da Silva"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111.222.333-44"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1991-01-01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"teste@exemplo.com"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"(11) 98888-7777"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"address_information"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Sandra"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"432S"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chácara Dora"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Araçariguama"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"local"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registered"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando parâmetros estão incorretos</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Situação fornecida não é válida"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando não encontra a admissão</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Atualiza o status admissão específica.</p>
+<h3 id='parametros-8'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>form</td>
+<td>situação da admissão</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-8'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>items</td>
+<td>array</td>
+<td>lista de objetos com dados de inscrições de vestibular</td>
+</tr>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id da admissão</td>
+</tr>
+<tr>
+<td>course_sku</td>
+<td>string</td>
+<td>status atual da admissão do aluno</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>status da admissão do aluno</td>
+</tr>
+<tr>
+<td>application</td>
+<td>object</td>
+<td>objeto do vestibular referente a essa admissão</td>
+</tr>
+<tr>
+<td>application[id]</td>
+<td>number</td>
+<td>id do vestibular</td>
+</tr>
+<tr>
+<td>application[student]</td>
+<td>object</td>
+<td>objeto com os dados do aluno</td>
+</tr>
+<tr>
+<td>student[id]</td>
+<td>number</td>
+<td>id do aluno</td>
+</tr>
+<tr>
+<td>student[name]</td>
+<td>string</td>
+<td>nome do aluno</td>
+</tr>
+<tr>
+<td>student[cpf]</td>
+<td>string</td>
+<td>cpf do aluno</td>
+</tr>
+<tr>
+<td>student[birth_date]</td>
+<td>string</td>
+<td>data de nascimento do aluno</td>
+</tr>
+<tr>
+<td>student[emails]</td>
+<td>array de string</td>
+<td>lista de emails do aluno</td>
+</tr>
+<tr>
+<td>student[phones]</td>
+<td>array de string</td>
+<td>lista de telefones do aluno</td>
+</tr>
+<tr>
+<td>student[address_information]</td>
+<td>object</td>
+<td>objeto com dados onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[address]</td>
+<td>string</td>
+<td>endereço onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[number]</td>
+<td>string</td>
+<td>número onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[neighborhood]</td>
+<td>string</td>
+<td>bairro onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[city]</td>
+<td>string</td>
+<td>cidade onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[state]</td>
+<td>string</td>
+<td>estado onde aluno reside</td>
+</tr>
+<tr>
+<td>address_information[postal_code]</td>
+<td>string</td>
+<td>código postal onde aluno reside</td>
+</tr>
+<tr>
+<td>exam</td>
+<td>object</td>
+<td>objeto com informações do exame</td>
+</tr>
+<tr>
+<td>exam[course_skus]</td>
+<td>array</td>
+<td>lista com os cursos pertencentes a este exame</td>
+</tr>
+<tr>
+<td>exam[local]</td>
+<td>object</td>
+<td>objeto com dados do exame</td>
+</tr>
+<tr>
+<td>local[address]</td>
+<td>string</td>
+<td>endereço da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[number]</td>
+<td>string</td>
+<td>número da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[neighborhood]</td>
+<td>string</td>
+<td>bairro da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[city]</td>
+<td>string</td>
+<td>cidade da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[state]</td>
+<td>string</td>
+<td>estado da localização do vestibular</td>
+</tr>
+<tr>
+<td>local[postal_code]</td>
+<td>string</td>
+<td>código postal da localização do vestibular</td>
+</tr>
+<tr>
+<td>exam[dates]</td>
+<td>string</td>
+<td>data da realização do vestibular</td>
+</tr>
+<tr>
+<td>exam[times]</td>
+<td>string</td>
+<td>hora da realização do vestibular</td>
+</tr>
+<tr>
+<td>exam[status]</td>
+<td>string</td>
+<td>status do vestibular</td>
+</tr>
+<tr>
+<td>application[result]</td>
+<td>string</td>
+<td>resultado do vestibular</td>
+</tr>
+<tr>
+<td>application[type]</td>
+<td>string</td>
+<td>tipo de exame (exam ou enem)</td>
+</tr>
+</tbody></table>
+<h3 id='significado-do-retorno-de-status-2'>Significado do retorno de status</h3>
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Processo Seletivo Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento Solicitado</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento Confirmado</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
 </tr>
 </tbody></table>
 <h1 id='notificacoes'>Notificações</h1>
