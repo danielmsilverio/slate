@@ -2338,14 +2338,43 @@ Status Code: 200 OK
 <p>A rota deve aceitar JSON.</p>
 
 <p>A rota deve aceitar apenas POSTs.</p>
-<h2 id='definicao-base-do-evento'>Definição base do evento</h2><pre class="highlight plaintext"><code>BaseEvent = {
+<h2 id='definicao-base-do-evento'>Definição base do evento</h2><pre class="highlight plaintext"><code> {
   event_type: string,
   created: timestamp,
   api_version: string,
   data: object
 }
 </code></pre>
-<p>Todos os eventos possuem um tipo associado, um timestamp UTC de criação do evento, a versão atual da API como string, e um objeto de dados efetivamente representando a notificação, que varia com o tipo.</p>
+<p>Estrutura base das notificações:</p>
+
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>created</td>
+<td>string</td>
+<td>data que foi criado o evento (timestamp UTC)</td>
+</tr>
+<tr>
+<td>api_version</td>
+<td>string</td>
+<td>informação da versão atual da API</td>
+</tr>
+<tr>
+<td>event_type</td>
+<td>string</td>
+<td>tipo de evento</td>
+</tr>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>Objeto com informações de acordo com o tipo de evento</td>
+</tr>
+</tbody></table>
 <h2 id='notificacao-de-nova-inscricao-de-vestibular'>Notificação de nova inscrição de vestibular</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NewApplication"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-15T17:34:26.173"</span><span class="p">,</span><span class="w">
@@ -2397,7 +2426,186 @@ Status Code: 200 OK
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Indica que uma nova inscrição foi feita.</p>
+<p>Indica que uma nova inscrição para vestibular foi feita</p>
+<h3 id='parametros-9'>Parametros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>created</td>
+<td>string</td>
+<td>data que foi criado o evento (timestamp UTC)</td>
+</tr>
+<tr>
+<td>api_version</td>
+<td>string</td>
+<td>informação da versão atual da API</td>
+</tr>
+<tr>
+<td>event_type</td>
+<td>string</td>
+<td>tipo de evento, no caso <code>NewApplication</code></td>
+</tr>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>Objeto com informações de acordo com o tipo de evento</td>
+</tr>
+<tr>
+<td>application</td>
+<td>object</td>
+<td>objeto com informações do vestibular</td>
+</tr>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id do vestibular</td>
+</tr>
+<tr>
+<td>student</td>
+<td>object</td>
+<td>objeto com dados do aluno</td>
+</tr>
+<tr>
+<td>id (student)</td>
+<td>number</td>
+<td>id do aluno.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>nome do aluno</td>
+</tr>
+<tr>
+<td>cpf</td>
+<td>string</td>
+<td>cpf do aluno</td>
+</tr>
+<tr>
+<td>birth_date</td>
+<td>string</td>
+<td>data de nascimento do aluno</td>
+</tr>
+<tr>
+<td>emails</td>
+<td>array de string</td>
+<td>lista de emails do aluno</td>
+</tr>
+<tr>
+<td>phones</td>
+<td>array de string</td>
+<td>lista de telefones do aluno</td>
+</tr>
+<tr>
+<td>address_information</td>
+<td>object</td>
+<td>objeto com dados onde aluno reside</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>endereço onde aluno reside</td>
+</tr>
+<tr>
+<td>number</td>
+<td>string</td>
+<td>número onde aluno reside</td>
+</tr>
+<tr>
+<td>neighborhood</td>
+<td>string</td>
+<td>bairro onde aluno reside</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>cidade onde aluno reside</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>estado onde aluno reside</td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td>string</td>
+<td>código postal onde aluno reside</td>
+</tr>
+<tr>
+<td>exam</td>
+<td>object</td>
+<td>objeto com informações do exame</td>
+</tr>
+<tr>
+<td>course_skus</td>
+<td>array</td>
+<td>lista com os cursos pertencentes a este exame</td>
+</tr>
+<tr>
+<td>local</td>
+<td>object</td>
+<td>objeto com dados do exame</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>endereço da localização do vestibular</td>
+</tr>
+<tr>
+<td>number</td>
+<td>string</td>
+<td>número da localização do vestibular</td>
+</tr>
+<tr>
+<td>neighborhood</td>
+<td>string</td>
+<td>bairro da localização do vestibular</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>cidade da localização do vestibular</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>estado da localização do vestibular</td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td>string</td>
+<td>código postal da localização do vestibular</td>
+</tr>
+<tr>
+<td>dates</td>
+<td>string</td>
+<td>data da realização do vestibular</td>
+</tr>
+<tr>
+<td>times</td>
+<td>string</td>
+<td>hora da realização do vestibular</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>status do vestibular</td>
+</tr>
+<tr>
+<td>result</td>
+<td>string</td>
+<td>resultado do vestibular</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>tipo de exame (exam ou enem)</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
