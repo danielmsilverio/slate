@@ -1495,8 +1495,8 @@ Status Code: 200 OK
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-TARDE-EAD-91119"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
@@ -1751,14 +1751,14 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/admissions/123456
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/admissions/12345
 </code></pre>
 <blockquote>
 <p>Resposta</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-TARDE-EAD-91119"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
@@ -2011,15 +2011,15 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/admissions/123456 <span class="se">\</span>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/admissions/12345 <span class="se">\</span>
   -d <span class="nv">status</span><span class="o">=</span><span class="s2">"submitted_docs"</span>
 </code></pre>
 <blockquote>
 <p>Resposta</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-TARDE-EAD-91119"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"submitted_docs"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
