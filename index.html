@@ -280,6 +280,37 @@
               </ul>
           </li>
           <li>
+            <a href="#grupos-de-exames" class="toc-h1 toc-link" data-title="Grupos de exames">Grupos de exames</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#listar-todos-os-grupos-de-exames" class="toc-h2 toc-link" data-title="Listar todos os grupos de exames">Listar todos os grupos de exames</a>
+                  </li>
+                  <li>
+                    <a href="#informacoes-de-um-unico-grupo-de-exames" class="toc-h2 toc-link" data-title="Informações de um único grupo de exames">Informações de um único grupo de exames</a>
+                  </li>
+                  <li>
+                    <a href="#criacao-de-grupo-de-exames" class="toc-h2 toc-link" data-title="Criação de grupo de exames">Criação de grupo de exames</a>
+                  </li>
+                  <li>
+                    <a href="#suspender-um-grupo-de-exames" class="toc-h2 toc-link" data-title="Suspender um grupo de exames">Suspender um grupo de exames</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#informacoes-de-exames" class="toc-h1 toc-link" data-title="Informações de exames">Informações de exames</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#listar-todos-os-exames" class="toc-h2 toc-link" data-title="Listar todos os exames">Listar todos os exames</a>
+                  </li>
+                  <li>
+                    <a href="#informacoes-de-um-unico-exame" class="toc-h2 toc-link" data-title="Informações de um único exame">Informações de um único exame</a>
+                  </li>
+                  <li>
+                    <a href="#criacao-de-grupo-de-exames-2" class="toc-h2 toc-link" data-title="Criação de grupo de exames">Criação de grupo de exames</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#notificacoes" class="toc-h1 toc-link" data-title="Notificações">Notificações</a>
               <ul class="toc-list-h2">
                   <li>
@@ -2332,6 +2363,987 @@ Status Code: 200 OK
 <td>Desistência confirmada</td>
 </tr>
 </tbody></table>
+<h1 id='grupos-de-exames'>Grupos de exames</h1><h2 id='listar-todos-os-grupos-de-exames'>Listar todos os grupos de exames</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exam_groups
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"19:30"</span><span class="p">],</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASAKDSaldlwp20"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Retorna todos os grupos de exames.</p>
+
+<p>Grupos de exames são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, retorna um valor <code>cursor</code> adicional que deve ser utilizado de parâmetro na próxima requisição para continuar.</p>
+<h3 id='parametros-9'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>cursor</code></td>
+<td>Query</td>
+<td>valor cursor utilizado para continuar uma paginação anterior</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-9'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id do grupo de exames</td>
+</tr>
+<tr>
+<td>course_skus</td>
+<td>array</td>
+<td>cursos que usam como entrada esses exames</td>
+</tr>
+<tr>
+<td>addresses</td>
+<td>object array</td>
+<td>lista dos objetos dos endereços dos exames</td>
+</tr>
+<tr>
+<td>addresses[address]</td>
+<td>string</td>
+<td>endereço onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[number]</td>
+<td>string</td>
+<td>número de onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[neighborhood]</td>
+<td>string</td>
+<td>bairro onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[city]</td>
+<td>string</td>
+<td>cidade onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[state]</td>
+<td>string</td>
+<td>estado onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[postal_code]</td>
+<td>string</td>
+<td>código postal de onde será feito o exame</td>
+</tr>
+<tr>
+<td>dates</td>
+<td>array</td>
+<td>lista das datas dos exames</td>
+</tr>
+<tr>
+<td>times</td>
+<td>array</td>
+<td>lista dos horários de aplicações dos exames</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>situação dos exames entre <code>active</code>, <code>inactive</code> e <code>partially_active</code></td>
+</tr>
+<tr>
+<td>kind</td>
+<td>string</td>
+<td>tipo dos exames referentes a esse grupo de exames</td>
+</tr>
+<tr>
+<td>cursor</td>
+<td>string</td>
+<td>código para pegar os próximos passos</td>
+</tr>
+</tbody></table>
+<h2 id='informacoes-de-um-unico-grupo-de-exames'>Informações de um único grupo de exames</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exam_groups/1234
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"19:30"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Resposta quando não encontra nenhum grupo de exames</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>(No arquivo do ruerro nao tinha id nessa tabela, mas to considerando que tenha, pq essa parte só vai fazer sentido se tiver)
+Retorna uma admissão específica da faculdade.</p>
+<h3 id='parametros-10'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>id do grupo de exames</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-10'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id do grupo de exames</td>
+</tr>
+<tr>
+<td>course_skus</td>
+<td>array</td>
+<td>cursos que usam como entrada esses exames</td>
+</tr>
+<tr>
+<td>addresses</td>
+<td>object array</td>
+<td>lista dos objetos dos endereços dos exames</td>
+</tr>
+<tr>
+<td>addresses[address]</td>
+<td>string</td>
+<td>endereço onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[number]</td>
+<td>string</td>
+<td>número de onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[neighborhood]</td>
+<td>string</td>
+<td>bairro onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[city]</td>
+<td>string</td>
+<td>cidade onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[state]</td>
+<td>string</td>
+<td>estado onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[postal_code]</td>
+<td>string</td>
+<td>código postal de onde será feito o exame</td>
+</tr>
+<tr>
+<td>dates</td>
+<td>array</td>
+<td>lista das datas dos exames</td>
+</tr>
+<tr>
+<td>times</td>
+<td>array</td>
+<td>lista dos horários de aplicações dos exames</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>situação dos exames entre <code>active</code>, <code>inactive</code> e <code>partially_active</code></td>
+</tr>
+<tr>
+<td>kind</td>
+<td>string</td>
+<td>tipo dos exames referentes a esse grupo de exames</td>
+</tr>
+</tbody></table>
+<h2 id='criacao-de-grupo-de-exames'>Criação de grupo de exames</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exam_groups/new
+  <span class="se">\ </span>-d <span class="s2">"data.json"</span>
+</code></pre>
+<blockquote>
+<p>data.json</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"19:30"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando parâmetros estão incorretos</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(Mensagem do SQL?)"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Cria um grupo de exames</p>
+<h3 id='parametros-11'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>form</td>
+<td>novo status do grupo de exame</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-dos-argumentos'>Informações dos argumentos</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id do grupo de exames</td>
+</tr>
+<tr>
+<td>course_skus</td>
+<td>array</td>
+<td>cursos que usam como entrada esses exames</td>
+</tr>
+<tr>
+<td>addresses</td>
+<td>object array</td>
+<td>lista dos objetos dos endereços dos exames</td>
+</tr>
+<tr>
+<td>addresses[address]</td>
+<td>string</td>
+<td>endereço onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[number]</td>
+<td>string</td>
+<td>número de onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[neighborhood]</td>
+<td>string</td>
+<td>bairro onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[city]</td>
+<td>string</td>
+<td>cidade onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[state]</td>
+<td>string</td>
+<td>estado onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[postal_code]</td>
+<td>string</td>
+<td>código postal de onde será feito o exame</td>
+</tr>
+<tr>
+<td>dates</td>
+<td>array</td>
+<td>lista das datas dos exames</td>
+</tr>
+<tr>
+<td>times</td>
+<td>array</td>
+<td>lista dos horários de aplicações dos exames</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>situação dos exames entre <code>active</code>, <code>inactive</code> e <code>partially_active</code></td>
+</tr>
+<tr>
+<td>kind</td>
+<td>string</td>
+<td>tipo dos exames referentes a esse grupo de exames</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-status-3'>Significado dos status</h3>
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>active</td>
+<td>Todas as combinações de exame neste grupo estão ativas para serem escolhidas</td>
+</tr>
+<tr>
+<td>inactive</td>
+<td>Nenhuma combinação de exame neste grupo está ativa para ser escolhida</td>
+</tr>
+<tr>
+<td>partially_active</td>
+<td>Algumas combinações de exame neste grupo não estão ativas para serem escolhidas</td>
+</tr>
+</tbody></table>
+<h2 id='suspender-um-grupo-de-exames'>Suspender um grupo de exames</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X PUT --user secretary:password http://queroalunos.com/api/exam_groups/1234/status
+  <span class="se">\ </span>-d <span class="s1">'inactive'</span>
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"19:30"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inactive"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando parâmetros estão incorretos</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Situação fornecida não é válida"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando não encontra a admissão</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Suspende um grupo de exames.</p>
+<h3 id='parametros-12'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>form</td>
+<td>novo status do grupo de exame</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-11'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id do grupo de exames</td>
+</tr>
+<tr>
+<td>course_skus</td>
+<td>array</td>
+<td>cursos que usam como entrada esses exames</td>
+</tr>
+<tr>
+<td>addresses</td>
+<td>object array</td>
+<td>lista dos objetos dos endereços dos exames</td>
+</tr>
+<tr>
+<td>addresses[address]</td>
+<td>string</td>
+<td>endereço onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[number]</td>
+<td>string</td>
+<td>número de onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[neighborhood]</td>
+<td>string</td>
+<td>bairro onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[city]</td>
+<td>string</td>
+<td>cidade onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[state]</td>
+<td>string</td>
+<td>estado onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[postal_code]</td>
+<td>string</td>
+<td>código postal de onde será feito o exame</td>
+</tr>
+<tr>
+<td>dates</td>
+<td>array</td>
+<td>lista das datas dos exames</td>
+</tr>
+<tr>
+<td>times</td>
+<td>array</td>
+<td>lista dos horários de aplicações dos exames</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>situação dos exames entre <code>active</code>, <code>inactive</code> e <code>partially_active</code></td>
+</tr>
+<tr>
+<td>kind</td>
+<td>string</td>
+<td>tipo dos exames referentes a esse grupo de exames</td>
+</tr>
+</tbody></table>
+<h3 id='significado-do-retorno-de-status-3'>Significado do retorno de status</h3>
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>active</td>
+<td>Todas as combinações de exame neste grupo estão ativas para serem escolhidas</td>
+</tr>
+<tr>
+<td>inactive</td>
+<td>Nenhuma combinação de exame neste grupo está ativa para ser escolhida</td>
+</tr>
+<tr>
+<td>partially_active</td>
+<td>Algumas combinações de exame neste grupo não estão ativas para serem escolhidas</td>
+</tr>
+</tbody></table>
+<h1 id='informacoes-de-exames'>Informações de exames</h1><h2 id='listar-todos-os-exames'>Listar todos os exames</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exams
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+  </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASAKDSaldlwp20"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Retorna todos os exames inscritos e cancelados.</p>
+
+<p>Exames são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, retorna um valor <code>cursor</code> adicional que deve ser utilizado de parâmetro na próxima requisição para continuar.</p>
+<h3 id='parametros-13'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>cursor</code></td>
+<td>Query</td>
+<td>valor cursor utilizado para continuar uma paginação anterior</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-12'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>items</td>
+<td>array</td>
+<td>lista de objetos com dados de inscrições de vestibular</td>
+</tr>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id do exame</td>
+</tr>
+<tr>
+<td>course_skus</td>
+<td>array</td>
+<td>cursos que usam como entrada esse exame</td>
+</tr>
+<tr>
+<td>address</td>
+<td>object</td>
+<td>lista dos objetos dos endereços referentes a esse grupo de exames</td>
+</tr>
+<tr>
+<td>address[address]</td>
+<td>string</td>
+<td>endereço onde será feito o exame</td>
+</tr>
+<tr>
+<td>address[number]</td>
+<td>string</td>
+<td>número de onde será feito o exame</td>
+</tr>
+<tr>
+<td>address[neighborhood]</td>
+<td>string</td>
+<td>bairro onde será feito o exame</td>
+</tr>
+<tr>
+<td>address[city]</td>
+<td>string</td>
+<td>cidade onde será feito o exame</td>
+</tr>
+<tr>
+<td>address[state]</td>
+<td>string</td>
+<td>estado onde será feito o exame</td>
+</tr>
+<tr>
+<td>address[postal_code]</td>
+<td>string</td>
+<td>código postal de onde será feito o exame</td>
+</tr>
+<tr>
+<td>dates</td>
+<td>string</td>
+<td>data do exame</td>
+</tr>
+<tr>
+<td>times</td>
+<td>string</td>
+<td>horário do exame</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>situação do exame entre <code>active</code> e <code>inactive</code></td>
+</tr>
+<tr>
+<td>cursor</td>
+<td>string</td>
+<td>código para pegar os próximos passos</td>
+</tr>
+</tbody></table>
+<h2 id='informacoes-de-um-unico-exame'>Informações de um único exame</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exams/456
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Resposta quando não encontra nenhum exame</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>(No arquivo do ruerro nao tinha id nessa tabela, mas to considerando que tenha, pq essa parte só vai fazer sentido se tiver)
+Retorna uma admissão específica da faculdade.</p>
+<h3 id='parametros-14'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>id do exame</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-13'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id do exame</td>
+</tr>
+<tr>
+<td>course_skus</td>
+<td>array</td>
+<td>cursos que usam como entrada esse exame</td>
+</tr>
+<tr>
+<td>address</td>
+<td>object</td>
+<td>lista dos objetos dos endereços referentes a esse grupo de exames</td>
+</tr>
+<tr>
+<td>address[address]</td>
+<td>string</td>
+<td>endereço onde será feito o exame</td>
+</tr>
+<tr>
+<td>address[number]</td>
+<td>string</td>
+<td>número de onde será feito o exame</td>
+</tr>
+<tr>
+<td>address[neighborhood]</td>
+<td>string</td>
+<td>bairro onde será feito o exame</td>
+</tr>
+<tr>
+<td>address[city]</td>
+<td>string</td>
+<td>cidade onde será feito o exame</td>
+</tr>
+<tr>
+<td>address[state]</td>
+<td>string</td>
+<td>estado onde será feito o exame</td>
+</tr>
+<tr>
+<td>address[postal_code]</td>
+<td>string</td>
+<td>código postal de onde será feito o exame</td>
+</tr>
+<tr>
+<td>dates</td>
+<td>string</td>
+<td>data do exame</td>
+</tr>
+<tr>
+<td>times</td>
+<td>string</td>
+<td>horário do exame</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>situação do exame entre <code>active</code> e <code>inactive</code></td>
+</tr>
+</tbody></table>
+<h2 id='criacao-de-grupo-de-exames-2'>Criação de grupo de exames</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exam_groups/new
+  <span class="se">\ </span>-d <span class="s2">"data.json"</span>
+</code></pre>
+<blockquote>
+<p>data.json</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"18:30"</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando parâmetros estão incorretos</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(Mensagem do SQL?)"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Cria um grupo de exames (isso mesmo, mesmo se criar apenas um exame, o que precisa ser criado é um examgroup)</p>
+<h3 id='parametros-15'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>form</td>
+<td>novo status do grupo de exame</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-dos-argumentos-2'>Informações dos argumentos</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>id do grupo de exames</td>
+</tr>
+<tr>
+<td>course_skus</td>
+<td>array</td>
+<td>cursos que usam como entrada esses exames</td>
+</tr>
+<tr>
+<td>addresses</td>
+<td>object array</td>
+<td>lista dos objetos dos endereços dos exames</td>
+</tr>
+<tr>
+<td>addresses[address]</td>
+<td>string</td>
+<td>endereço onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[number]</td>
+<td>string</td>
+<td>número de onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[neighborhood]</td>
+<td>string</td>
+<td>bairro onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[city]</td>
+<td>string</td>
+<td>cidade onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[state]</td>
+<td>string</td>
+<td>estado onde será feito o exame</td>
+</tr>
+<tr>
+<td>addresses[postal_code]</td>
+<td>string</td>
+<td>código postal de onde será feito o exame</td>
+</tr>
+<tr>
+<td>dates</td>
+<td>array</td>
+<td>lista das datas dos exames</td>
+</tr>
+<tr>
+<td>times</td>
+<td>array</td>
+<td>lista dos horários de aplicações dos exames</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>situação dos exames entre <code>active</code>, <code>inactive</code> e <code>partially_active</code></td>
+</tr>
+<tr>
+<td>kind</td>
+<td>string</td>
+<td>tipo dos exames referentes a esse grupo de exames</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-status-4'>Significado dos status</h3>
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>active</td>
+<td>Todas as combinações de exame neste grupo estão ativas para serem escolhidas</td>
+</tr>
+<tr>
+<td>inactive</td>
+<td>Nenhuma combinação de exame neste grupo está ativa para ser escolhida</td>
+</tr>
+<tr>
+<td>partially_active</td>
+<td>Algumas combinações de exame neste grupo não estão ativas para serem escolhidas</td>
+</tr>
+</tbody></table>
 <h1 id='notificacoes'>Notificações</h1>
 <p>Notificações utilizam uma rota única de callback, que deve ser fornecida pela faculdade, junto de uma combinação usuário/senha para autenticação via HTTP Basic.</p>
 
@@ -2427,7 +3439,7 @@ Status Code: 200 OK
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Indica que uma nova inscrição para vestibular foi feita</p>
-<h3 id='parametros-9'>Parametros</h3>
+<h3 id='parametros-16'>Parametros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
