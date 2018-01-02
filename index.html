@@ -2732,8 +2732,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exam_groups/new
-  <span class="se">\ </span>-d <span class="s2">"data.json"</span>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exam_groups/new <span class="se">\</span>
+  -d <span class="s2">"data.json"</span>
 </code></pre>
 <blockquote>
 <p>data.json</p>
@@ -2885,8 +2885,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl -X PUT --user secretary:password http://queroalunos.com/api/exam_groups/1234/status
-  <span class="se">\ </span>-d <span class="s1">'inactive'</span>
+<pre class="highlight shell"><code>curl -X PUT --user secretary:password http://queroalunos.com/api/exam_groups/1234/status <span class="se">\</span>
+  -d <span class="s2">"inactive"</span>
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -3297,8 +3297,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exam_groups/new
-  <span class="se">\ </span>-d <span class="s2">"data.json"</span>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exam_groups/new <span class="se">\</span>
+  -d <span class="s2">"data.json"</span>
 </code></pre>
 <blockquote>
 <p>data.json</p>
@@ -3429,8 +3429,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exam/suspend
-  <span class="se">\ </span>-d <span class="s2">"data.json"</span>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exam/suspend <span class="se">\</span>
+  -d <span class="s2">"data.json"</span>
 </code></pre>
 <blockquote>
 <p>data.json</p>
@@ -3551,8 +3551,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exams/456
-  <span class="se">\ </span>-d <span class="s1">'active'</span>
+<pre class="highlight shell"><code>curl --user secretary:password http://queroalunos.com/api/exams/456 <span class="se">\</span>
+  -d <span class="nv">status</span><span class="o">=</span><span class="s2">"active"</span>
 </code></pre>
 <blockquote>
 <p>Resposta</p>
