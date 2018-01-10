@@ -1216,7 +1216,37 @@ curl --user secretary:password http://queroalunos.com/api/exam_groups/new \
     "2016-11-01", "2016-11-01",
     "2016-11-01", "2016-11-01"
   ],
-  "times": [ "18:30", "19:30"],
+  "times": [ "18:30", "19:30" ],
+  "status": "active",
+  "kind": "scheduled"
+}
+```
+
+> Resposta
+
+```json
+{
+  "id": 1234,
+  "course_skus": [
+    "ADM-MANHA-SP",
+    "DIR-MANHA-SP",
+    "ADM-NOITE-RJ"
+  ],
+  "addresses": [
+    {
+      "address": "Rua Márcia",
+      "number": "4231",
+      "neighborhood": "Morro do Barreto",
+      "city": "São Roque",
+      "state": "SP",
+      "postal_code": "19110-000"
+    }
+  ],
+  "dates": [
+    "2016-11-01", "2016-11-01",
+    "2016-11-01", "2016-11-01"
+  ],
+  "times": [ "18:30", "19:30" ],
   "status": "active",
   "kind": "scheduled"
 }
@@ -1227,7 +1257,7 @@ curl --user secretary:password http://queroalunos.com/api/exam_groups/new \
 ```json
 {
   "error": true,
-  "message": "(Mensagem do SQL?)"
+  "message": "Situação fornecida não é válida."
 }
 ```
 
@@ -1522,12 +1552,35 @@ curl --user secretary:password http://queroalunos.com/api/exam_groups/new \
 }
 ```
 
+> Resposta
+
+```json
+{
+  "id": 1234,
+  "course_skus": [ "ADM-MANHA-SP" ],
+  "addresses": [
+    {
+      "address": "Rua Márcia",
+      "number": "4231",
+      "neighborhood": "Morro do Barreto",
+      "city": "São Roque",
+      "state": "SP",
+      "postal_code": "19110-000"
+    }
+  ],
+  "dates": [ "2016-11-01" ],
+  "times": [ "18:30" ],
+  "status": "active",
+  "kind": "scheduled"
+}
+```
+
 > Retorno quando parâmetros estão incorretos
 
 ```json
 {
   "error": true,
-  "message": "(Mensagem do SQL?)"
+  "message": "Situação fornecida não é válida"
 }
 ```
 
@@ -1597,7 +1650,7 @@ curl --user secretary:password http://queroalunos.com/api/exam/suspend \
 ```json
 {
   "error": true,
-  "message": "(Mensagem do SQL?)"
+  "message": "Situação fornecida não é válida."
 }
 ```
 
@@ -1844,12 +1897,33 @@ curl --user secretary:password http://queroalunos.com/api/enem_exam/new \
 }
 ```
 
+> Resposta
+
+```json
+{
+  "id": 789,
+  "course_skus": [
+    "ADM-MANHA-SP",
+    "DIR-MANHA-SP",
+    "ADM-NOITE-RJ"
+  ],
+  "minimum_grades": {
+    "redacao": 600.0,
+    "humanas": 600.0,
+    "natureza": 600.0,
+    "linguagens": 600.0,
+    "matematica": 600.0
+  },
+  "status": "active"
+}
+```
+
 > Resposta quando não encontra nenhum exame
 
 ```json
 {
   "error": true,
-  "message": "(Mensagem do SQL?)"
+  "message": "Situação fornecida não é válida."
 }
 ```
 
