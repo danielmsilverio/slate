@@ -1598,7 +1598,7 @@ Status Code: 200 OK
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Realiza atualização de um processo de admissão específico.</p>
+<p>Realiza atualização de um processo de admissão específico de um aluno. Para isso é preciso enviar a informação atual dele pelo parâmetro <code>status</code>.</p>
 <h3 id='parametros-5'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -2616,7 +2616,7 @@ Status Code: 200 OK
 <p>Requisição</p>
 </blockquote>
 <pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/applications/123456 <span class="se">\</span>
-  --data <span class="nv">status</span><span class="o">=</span><span class="s2">"approved"</span>
+  --data <span class="nv">result</span><span class="o">=</span><span class="s2">"approved"</span>
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -2699,20 +2699,16 @@ Status Code: 200 OK
 <tr>
 <td>result</td>
 <td>Form</td>
-<td>Situação do aluno entre <code>registered</code>, <code>approved</code>, <code>failed</code></td>
+<td>Situação do aluno entre <code>approved</code> e <code>failed</code></td>
 </tr>
 </tbody></table>
-<h3 id='possiveis-valores-para-o-parametro-status-2'>Possíveis valores para o parâmetro status</h3>
+<h3 id='possiveis-valores-para-o-parametro-result'>Possíveis valores para o parâmetro result</h3>
 <table><thead>
 <tr>
 <th>Status</th>
 <th>Descrição</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>registered</td>
-<td>Registrado para realizar vestibular</td>
-</tr>
 <tr>
 <td>approved</td>
 <td>Aprovado no vestibular</td>
@@ -3635,7 +3631,7 @@ Status Code: 200 OK
 <td>status a ser alterado</td>
 </tr>
 </tbody></table>
-<h3 id='possiveis-valores-para-o-parametro-status-3'>Possíveis valores para o parâmetro status</h3>
+<h3 id='possiveis-valores-para-o-parametro-status-2'>Possíveis valores para o parâmetro status</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -4298,7 +4294,7 @@ Status Code: 200 OK
 <td>status a ser alterado</td>
 </tr>
 </tbody></table>
-<h3 id='possiveis-valores-para-o-parametro-status-4'>Possíveis valores para o parâmetro status</h3>
+<h3 id='possiveis-valores-para-o-parametro-status-3'>Possíveis valores para o parâmetro status</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
