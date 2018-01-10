@@ -551,7 +551,7 @@ Status Code: 200 OK
 <td>status que se encontra o processo de matricula</td>
 </tr>
 </tbody></table>
-<h3 id='significado-dos-status'>Significado dos status</h3>
+<h3 id='significado-dos-valores-em-status'>Significado dos valores em status</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -564,19 +564,19 @@ Status Code: 200 OK
 </tr>
 <tr>
 <td>pre_registered</td>
-<td>Agendamento Solicitado</td>
+<td>Agendamento solicitado para exame vestibular</td>
 </tr>
 <tr>
 <td>registered</td>
-<td>Agendamento Confirmado</td>
+<td>Agendamento confirmado no exame vestibular</td>
 </tr>
 <tr>
 <td>failed</td>
-<td>Reprovado</td>
+<td>Reprovado no exame vestibular</td>
 </tr>
 <tr>
 <td>approved</td>
-<td>Aprovado</td>
+<td>Aprovado no exame vestibular</td>
 </tr>
 <tr>
 <td>pending_docs</td>
@@ -761,7 +761,7 @@ Status Code: 200 OK
 <td>status que se encontra o processo de matricula</td>
 </tr>
 </tbody></table>
-<h3 id='significado-dos-status-2'>Significado dos status</h3>
+<h3 id='significado-dos-valores-em-status-2'>Significado dos valores em status</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -774,19 +774,19 @@ Status Code: 200 OK
 </tr>
 <tr>
 <td>pre_registered</td>
-<td>Agendamento Solicitado</td>
+<td>Agendamento solicitado para exame vestibular</td>
 </tr>
 <tr>
 <td>registered</td>
-<td>Agendamento Confirmado</td>
+<td>Agendamento confirmado no exame vestibular</td>
 </tr>
 <tr>
 <td>failed</td>
-<td>Reprovado</td>
+<td>Reprovado no exame vestibular</td>
 </tr>
 <tr>
 <td>approved</td>
-<td>Aprovado</td>
+<td>Aprovado no exame vestibular</td>
 </tr>
 <tr>
 <td>pending_docs</td>
@@ -880,12 +880,13 @@ Status Code: 200 OK
       </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASAKDSaldlwp20"</span><span class="w">
+  </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"previous_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todas as admissões da faculdade.</p>
 
-<p>Admissões são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, retorna um valor <code>cursor</code> adicional que deve ser utilizado de parâmetro na próxima requisição para continuar.</p>
+<p>Admissões são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da pagina anterior.</p>
 <h3 id='parametros-3'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -895,9 +896,14 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>cursor</code></td>
+<td><code>next_page</code></td>
 <td>Query</td>
-<td>valor cursor utilizado para continuar uma paginação anterior</td>
+<td>valor utilizado para continuar uma paginação anterior</td>
+</tr>
+<tr>
+<td><code>previous_page</code></td>
+<td>Query</td>
+<td>valor utilizado para retornar na paginação anterior</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-3'>Informações de resultado</h3>
@@ -1084,9 +1090,90 @@ Status Code: 200 OK
 <td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
-<td>cursor</td>
+<td>next_page</td>
 <td>string</td>
 <td>código para pegar os próximos passos</td>
+</tr>
+<tr>
+<td>previous_page</td>
+<td>string</td>
+<td>código para pegar os passos anteriores</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-status-3'>Significado dos valores em status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento solicitado para exame vestibular</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento confirmado no exame vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-result'>Significado dos valores em result</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>null</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
 </tr>
 </tbody></table>
 <h2 id='dados-de-um-unico-processo-de-admissao'>Dados de um único processo de admissão</h2>
@@ -1357,6 +1444,82 @@ Status Code: 200 OK
 <td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 </tbody></table>
+<h3 id='significado-dos-valores-em-status-4'>Significado dos valores em status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento solicitado para exame vestibular</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento confirmado no exame vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-result-2'>Significado dos valores em result</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>null</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+</tbody></table>
 <h2 id='atualizar-processo-de-admissao'>Atualizar processo de admissão</h2>
 <blockquote>
 <p>Requisição</p>
@@ -1463,19 +1626,19 @@ Status Code: 200 OK
 </tr>
 <tr>
 <td>pre_registered</td>
-<td>Agendamento Solicitado</td>
+<td>Agendamento solicitado para exame vestibular</td>
 </tr>
 <tr>
 <td>registered</td>
-<td>Agendamento Confirmado</td>
+<td>Agendamento confirmado no exame vestibular</td>
 </tr>
 <tr>
 <td>failed</td>
-<td>Reprovado</td>
+<td>Reprovado no exame vestibular</td>
 </tr>
 <tr>
 <td>approved</td>
-<td>Aprovado</td>
+<td>Aprovado no exame vestibular</td>
 </tr>
 <tr>
 <td>pending_docs</td>
@@ -1678,6 +1841,82 @@ Status Code: 200 OK
 <td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 </tbody></table>
+<h3 id='significado-dos-valores-em-status-5'>Significado dos valores em status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento solicitado para exame vestibular</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento confirmado no exame vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-result-3'>Significado dos valores em result</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>null</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+</tbody></table>
 <h1 id='informacoes-de-inscricao-para-exame'>Informações de inscrição para exame</h1><h2 id='listar-todos-inscricao-para-exame'>Listar todos inscrição para exame</h2>
 <blockquote>
 <p>Requisição</p>
@@ -1739,12 +1978,13 @@ Status Code: 200 OK
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASAKDSaldlwp20"</span><span class="w">
+  </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"previous_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todas as inscrições de exame da faculdade.</p>
 
-<p>Inscrições são retornadas em lote de 10, ordenadas pela última atualização realizada em inscrição para exame. Se houver mais resultados, retorna um valor <code>cursor</code> adicional que deve ser utilizado de parâmetro na próxima requisição para continuar.</p>
+<p>Inscrições são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da pagina anterior.</p>
 <h3 id='parametros-6'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -1754,9 +1994,14 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>cursor</code></td>
+<td><code>next_page</code></td>
 <td>Query</td>
-<td>valor cursor utilizado para continuar uma paginação anterior</td>
+<td>valor utilizado para continuar uma paginação anterior</td>
+</tr>
+<tr>
+<td><code>previous_page</code></td>
+<td>Query</td>
+<td>valor utilizado para retornar na paginação anterior</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-6'>Informações de resultado</h3>
@@ -1943,9 +2188,90 @@ Status Code: 200 OK
 <td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
-<td>cursor</td>
+<td>next_page</td>
 <td>string</td>
 <td>código para pegar os próximos passos</td>
+</tr>
+<tr>
+<td>previous_page</td>
+<td>string</td>
+<td>código para pegar os passos anteriores</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-status-6'>Significado dos valores em status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento solicitado para exame vestibular</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento confirmado no exame vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-result-4'>Significado dos valores em result</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>null</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
 </tr>
 </tbody></table>
 <h2 id='dados-de-uma-unica-inscricao-para-exame'>Dados de uma única inscrição para exame</h2>
@@ -2207,6 +2533,82 @@ Status Code: 200 OK
 <td>type</td>
 <td>string</td>
 <td>tipo de exame vestibular (exam ou enem)</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-status-7'>Significado dos valores em status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento solicitado para exame vestibular</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento confirmado no exame vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-result-5'>Significado dos valores em result</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>null</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
 </tr>
 </tbody></table>
 <h2 id='atualizar-inscricao-para-exame'>Atualizar inscrição para exame</h2>
@@ -2499,6 +2901,82 @@ Status Code: 200 OK
 <td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 </tbody></table>
+<h3 id='significado-dos-valores-em-status-8'>Significado dos valores em status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento solicitado para exame vestibular</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento confirmado no exame vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-result-6'>Significado dos valores em result</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>null</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+</tbody></table>
 <h1 id='exames-em-lote'>Exames em lote</h1><h2 id='listar-todos-os-exames-em-lote'>Listar todos os exames em lote</h2>
 <blockquote>
 <p>Requisição</p>
@@ -2536,12 +3014,13 @@ Status Code: 200 OK
       </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASAKDSaldlwp20"</span><span class="w">
+  </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"previous_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todos os exames em lote.</p>
 
-<p>Exames em lote são retornados de 10 em 10, ordenadas pela última atualização realizada. Se houver mais resultados, retorna um valor <code>cursor</code> adicional que deve ser utilizado de parâmetro na próxima requisição para continuar.</p>
+<p>Exames em lote são retornados em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da pagina anterior.</p>
 <h3 id='parametros-9'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -2551,9 +3030,14 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>cursor</code></td>
+<td><code>next_page</code></td>
 <td>Query</td>
-<td>valor cursor utilizado para continuar uma paginação anterior</td>
+<td>valor utilizado para continuar uma paginação anterior</td>
+</tr>
+<tr>
+<td><code>previous_page</code></td>
+<td>Query</td>
+<td>valor utilizado para retornar na paginação anterior</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-9'>Informações de resultado</h3>
@@ -2630,12 +3114,17 @@ Status Code: 200 OK
 <td>tipo dos exames desse lote</td>
 </tr>
 <tr>
-<td>cursor</td>
+<td>next_page</td>
 <td>string</td>
 <td>código para pegar os próximos passos</td>
 </tr>
+<tr>
+<td>previous_page</td>
+<td>string</td>
+<td>código para pegar os passos anteriores</td>
+</tr>
 </tbody></table>
-<h3 id='significado-dos-status-3'>Significado dos status</h3>
+<h3 id='significado-dos-status'>Significado dos status</h3>
 <table><thead>
 <tr>
 <th>Status</th>
@@ -2783,7 +3272,7 @@ Status Code: 200 OK
 <td>tipo dos exames desse lote</td>
 </tr>
 </tbody></table>
-<h3 id='significado-dos-status-4'>Significado dos status</h3>
+<h3 id='significado-dos-status-2'>Significado dos status</h3>
 <table><thead>
 <tr>
 <th>Status</th>
@@ -2955,7 +3444,7 @@ Status Code: 200 OK
 <td>tipo dos exames desse lote</td>
 </tr>
 </tbody></table>
-<h3 id='significado-dos-status-5'>Significado dos status</h3>
+<h3 id='significado-dos-status-3'>Significado dos status</h3>
 <table><thead>
 <tr>
 <th>Status</th>
@@ -3284,12 +3773,13 @@ Status Code: 200 OK
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASAKDSaldlwp20"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"previous_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todos os exames (ativos e suspensos).</p>
 
-<p>Exames são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, retorna um valor <code>cursor</code> adicional que deve ser utilizado de parâmetro na próxima requisição para continuar.</p>
+<p>Exames são retornados em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da pagina anterior.</p>
 <h3 id='parametros-13'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -3299,9 +3789,14 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>cursor</code></td>
+<td><code>next_page</code></td>
 <td>Query</td>
-<td>valor cursor utilizado para continuar uma paginação anterior</td>
+<td>valor utilizado para continuar uma paginação anterior</td>
+</tr>
+<tr>
+<td><code>previous_page</code></td>
+<td>Query</td>
+<td>valor utilizado para retornar na paginação anterior</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-13'>Informações de resultado</h3>
@@ -3383,9 +3878,14 @@ Status Code: 200 OK
 <td>situação do exame entre <code>active</code> e <code>inactive</code></td>
 </tr>
 <tr>
-<td>cursor</td>
+<td>next_page</td>
 <td>string</td>
 <td>código para pegar os próximos passos</td>
+</tr>
+<tr>
+<td>previous_page</td>
+<td>string</td>
+<td>código para pegar os passos anteriores</td>
 </tr>
 </tbody></table>
 <h2 id='informacoes-de-um-unico-exame'>Informações de um único exame</h2>
@@ -3723,7 +4223,7 @@ Status Code: 200 OK
 <td>tipo dos exames desse lote</td>
 </tr>
 </tbody></table>
-<h3 id='significado-dos-status-6'>Significado dos status</h3>
+<h3 id='significado-dos-status-4'>Significado dos status</h3>
 <table><thead>
 <tr>
 <th>Status</th>
@@ -3916,12 +4416,13 @@ Status Code: 200 OK
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASAKDSaldlwp20"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"previous_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todos os exames de enem.</p>
 
-<p>Exames de enem são retornados de 10 em 10, ordenadas pela última atualização realizada. Se houver mais resultados, retorna um valor <code>cursor</code> adicional que deve ser utilizado de parâmetro na próxima requisição para continuar.</p>
+<p>Exames de ENEM são retornados em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da pagina anterior.</p>
 <h3 id='parametros-16'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -3931,9 +4432,14 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>cursor</code></td>
+<td><code>next_page</code></td>
 <td>Query</td>
-<td>valor cursor utilizado para continuar uma paginação anterior</td>
+<td>valor utilizado para continuar uma paginação anterior</td>
+</tr>
+<tr>
+<td><code>previous_page</code></td>
+<td>Query</td>
+<td>valor utilizado para retornar na paginação anterior</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-16'>Informações de resultado</h3>
@@ -3990,9 +4496,14 @@ Status Code: 200 OK
 <td>situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
 </tr>
 <tr>
-<td>cursor</td>
+<td>next_page</td>
 <td>string</td>
 <td>código para pegar os próximos passos</td>
+</tr>
+<tr>
+<td>previous_page</td>
+<td>string</td>
+<td>código para pegar os passos anteriores</td>
 </tr>
 </tbody></table>
 <h2 id='informacoes-de-um-unico-exame-de-enem'>Informações de um único exame de Enem</h2>
@@ -4482,7 +4993,7 @@ Status Code: 200 OK
     </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
       </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initiated"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">394932</span><span class="p">,</span><span class="w">
         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"José da Silva"</span><span class="p">,</span><span class="w">
@@ -4627,6 +5138,22 @@ Status Code: 200 OK
 <td>código postal onde aluno reside</td>
 </tr>
 </tbody></table>
+<h3 id='significado-dos-valores-em-status-9'>Significado dos valores em status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+</tbody></table>
 <h2 id='nova-quot-inscricao-de-exame-quot-vestibular'>Nova &quot;inscrição de exame&quot; (Vestibular)</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NewApplication"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-15T17:34:26.173"</span><span class="p">,</span><span class="w">
@@ -4742,7 +5269,7 @@ Status Code: 200 OK
 <tr>
 <td>[admission] status</td>
 <td>string</td>
-<td>status da admissão do aluno</td>
+<td>status da admissão do aluno (<em>neste evento o valor sempre será <code>pre-registered</code></em>)</td>
 </tr>
 <tr>
 <td>[admission] student</td>
@@ -4887,12 +5414,12 @@ Status Code: 200 OK
 <tr>
 <td>[application] result</td>
 <td>string</td>
-<td>resultado do exame vestibular</td>
+<td>resultado do exame vestibular (<em>neste evento o valor sempre será <code>null</code></em>)</td>
 </tr>
 <tr>
 <td>[application] type</td>
 <td>string</td>
-<td>tipo de exame vestibular (<em>neste caso, sempre será exam</em>)</td>
+<td>tipo de exame vestibular (<em>neste evento o valor sempre será <code>exam</code></em>)</td>
 </tr>
 </tbody></table>
 <h2 id='nova-quot-inscricao-de-exame-quot-enem'>Nova &quot;inscrição de exame&quot; (ENEM)</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -5016,7 +5543,7 @@ Status Code: 200 OK
 <tr>
 <td>[admission] status</td>
 <td>string</td>
-<td>status da admissão do aluno</td>
+<td>status da admissão do aluno (<em>neste evento o valor sempre será <code>pre-registered</code></em>)</td>
 </tr>
 <tr>
 <td>[admission] student</td>
@@ -5181,12 +5708,12 @@ Status Code: 200 OK
 <tr>
 <td>[application] result</td>
 <td>string</td>
-<td>resultado do exame vestibular</td>
+<td>resultado do exame vestibular (<em>neste evento o valor sempre será <code>null</code></em>)</td>
 </tr>
 <tr>
 <td>[application] type</td>
 <td>string</td>
-<td>tipo de exame vestibular (<em>neste caso, sempre será enem</em>)</td>
+<td>tipo de exame vestibular (<em>neste evento o valor sempre será <code>enem</code></em>)</td>
 </tr>
 </tbody></table>
 
