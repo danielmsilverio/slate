@@ -224,7 +224,7 @@
               </ul>
           </li>
           <li>
-            <a href="#autentificacao" class="toc-h1 toc-link" data-title="Autentificação">Autentificação</a>
+            <a href="#autenticacao" class="toc-h1 toc-link" data-title="Autenticação">Autenticação</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#requisicao-sem-token" class="toc-h2 toc-link" data-title="Requisição sem token">Requisição sem token</a>
@@ -266,13 +266,13 @@
               </ul>
           </li>
           <li>
-            <a href="#informacoes-de-inscricao-para-exame" class="toc-h1 toc-link" data-title="Informações de inscrição para exame">Informações de inscrição para exame</a>
+            <a href="#informacoes-de-inscricao-de-exame" class="toc-h1 toc-link" data-title="Informações de inscrição de exame">Informações de inscrição de exame</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#listar-todos-inscricao-para-exame" class="toc-h2 toc-link" data-title="Listar todos inscrição para exame">Listar todos inscrição para exame</a>
+                    <a href="#listar-todas-as-inscricoes-de-exame" class="toc-h2 toc-link" data-title="Listar todas as inscrições de exame">Listar todas as inscrições de exame</a>
                   </li>
                   <li>
-                    <a href="#dados-de-uma-unica-inscricao-para-exame" class="toc-h2 toc-link" data-title="Dados de uma única inscrição para exame">Dados de uma única inscrição para exame</a>
+                    <a href="#dados-de-uma-unica-inscricao-de-exame" class="toc-h2 toc-link" data-title="Dados de uma única inscrição de exame">Dados de uma única inscrição de exame</a>
                   </li>
                   <li>
                     <a href="#atualizar-inscricao-para-exame" class="toc-h2 toc-link" data-title="Atualizar inscrição para exame">Atualizar inscrição para exame</a>
@@ -356,19 +356,19 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='comecando-com-api-de-admissoes-do-quero-alunos'>Começando com API de Admissões do Quero Alunos</h1>
-<p>Bem vindo a documentação do Quero Alunos. Você encontrará guias e referências sobre como utilizar nossa API. Qualquer dúvida pode entrar em contato pelo email api-admissoes@quero.education.</p>
+<p>Bem-vindo à documentação da API de Admissões do Quero Alunos. Aqui você encontrará guias e referências sobre como utilizar nossa API. Qualquer dúvida, entre em contato pelo email api-admissoes@quero.education.</p>
 <h2 id='informacoes-basicas'>Informações básicas</h2>
 <p>Todas as respostas da API são feitas em JSON</p>
 
 <p>Endpoint utilizado</p>
 
 <p><code>https://queroalunos.com/api/{version}/</code></p>
-<h1 id='autentificacao'>Autentificação</h1><pre class="highlight plaintext"><code>POST https://queroalunos.com/api/v1/{action} HTTP/1.1
+<h1 id='autenticacao'>Autenticação</h1><pre class="highlight plaintext"><code>POST https://queroalunos.com/api/v1/{action} HTTP/1.1
 Content-Type: application/json
 authorization: Basic ••••••••••••
 </code></pre>
 <p>Todas as requisições são autenticadas por um token adicionado ao header.
-Caso não tenha o token solicite-o ao setor de desenvolvimento da QE.</p>
+Caso não tenha o token, solicite-o ao setor de desenvolvimento da Quero Educação.</p>
 <h2 id='requisicao-sem-token'>Requisição sem token</h2><pre class="highlight plaintext"><code>Ausência de Token
 Status Code: 401 UNAUTHORIZED
 www-authenticate: 'Basic realm="University Panel"'
@@ -388,16 +388,16 @@ Status Code: 200 OK
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
     </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid Permission"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You are not authorized to access this resource with this params"</span><span class="w">
+    </span><span class="s2">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You are not authorized to access this resource with these paramaters"</span><span class="w">
   </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Em caso de token válido mas sem permissão de acesso ao recurso especifico</p>
+<p>Em caso de token válido mas sem permissão de acesso ao recurso específico</p>
 <h1 id='informacoes-de-alunos'>Informações de alunos</h1><h2 id='busca-de-alunos-por-cpf'>Busca de alunos por CPF</h2>
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/students?cpf<span class="o">=</span>111.222.333-44
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/students?cpf<span class="o">=</span>111.222.333-44
 </code></pre>
 <blockquote>
 <p>Retorno</p>
@@ -440,9 +440,9 @@ Status Code: 200 OK
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPF não encontrado"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Encontra um ou mais alunos na base do QueroAlunos a partir de um dado CPF.</p>
+<p>Encontra um ou mais alunos a partir de um dado CPF.</p>
 
-<p>Somente busca por usuários que tenham pré-matrícula na faculdade pertencente ao usuário fazendo pesquisa.</p>
+<p>Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao usuário fazendo pesquisa.</p>
 <h3 id='parametros'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -611,7 +611,7 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/students/<span class="o">{</span>id<span class="o">}</span>
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/students/<span class="o">{</span>id<span class="o">}</span>
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -652,7 +652,7 @@ Status Code: 200 OK
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Somente busca por usuários que tenham pré-matrícula na faculdade pertencente ao usuário fazendo pesquisa.</p>
+<p>Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao usuário fazendo pesquisa.</p>
 <h3 id='parametros-2'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -821,7 +821,7 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/admissions
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/admissions
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -886,7 +886,7 @@ Status Code: 200 OK
 </span></code></pre>
 <p>Retorna todas as admissões da faculdade.</p>
 
-<p>Admissões são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da pagina anterior.</p>
+<p>Admissões são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da página anterior.</p>
 <h3 id='parametros-3'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -1180,7 +1180,7 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/admissions/12345
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/admissions/12345
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -1524,8 +1524,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/admissions/12345 <span class="se">\</span>
-  --data <span class="nv">status</span><span class="o">=</span><span class="s2">"enrolled"</span>
+<pre class="highlight shell"><code>curl -X PUT --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/admissions/12345 <span class="se">\</span>
+  --data <span class="s1">'{"status": "enrolled"}'</span>
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -1917,11 +1917,11 @@ Status Code: 200 OK
 <td>Aprovado no exame vestibular</td>
 </tr>
 </tbody></table>
-<h1 id='informacoes-de-inscricao-para-exame'>Informações de inscrição para exame</h1><h2 id='listar-todos-inscricao-para-exame'>Listar todos inscrição para exame</h2>
+<h1 id='informacoes-de-inscricao-de-exame'>Informações de inscrição de exame</h1><h2 id='listar-todas-as-inscricoes-de-exame'>Listar todas as inscrições de exame</h2>
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/applications
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/applications
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -1984,7 +1984,7 @@ Status Code: 200 OK
 </span></code></pre>
 <p>Retorna todas as inscrições de exame da faculdade.</p>
 
-<p>Inscrições são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da pagina anterior.</p>
+<p>Inscrições são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da página anterior.</p>
 <h3 id='parametros-6'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -2274,11 +2274,11 @@ Status Code: 200 OK
 <td>Aprovado no exame vestibular</td>
 </tr>
 </tbody></table>
-<h2 id='dados-de-uma-unica-inscricao-para-exame'>Dados de uma única inscrição para exame</h2>
+<h2 id='dados-de-uma-unica-inscricao-de-exame'>Dados de uma única inscrição de exame</h2>
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/applications/123456
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/applications/123456
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -2615,8 +2615,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/applications/123456 <span class="se">\</span>
-  --data <span class="nv">result</span><span class="o">=</span><span class="s2">"approved"</span>
+<pre class="highlight shell"><code>curl -X PUT --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/applications/123456 <span class="se">\</span>
+  --data <span class="s1">'{"result":"approved"}'</span>
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -2977,7 +2977,7 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/exam_groups
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/exam_groups
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -3016,7 +3016,7 @@ Status Code: 200 OK
 </span></code></pre>
 <p>Retorna todos os exames em lote.</p>
 
-<p>Exames em lote são retornados em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da pagina anterior.</p>
+<p>Exames em lote são retornados em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da página anterior.</p>
 <h3 id='parametros-9'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -3140,7 +3140,7 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/exam_groups/1234
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/exam_groups/1234
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -3288,8 +3288,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/exam_groups/new <span class="se">\</span>
-  --data <span class="s2">"data.json"</span>
+<pre class="highlight shell"><code>curl -X POST --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/exam_groups <span class="se">\</span>
+  --file <span class="s2">"data.json"</span>
 </code></pre>
 <blockquote>
 <p>estrutura de data.json</p>
@@ -3563,8 +3563,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl -X PUT --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/exam_groups/1234/status <span class="se">\</span>
-  --data <span class="s2">"active"</span>
+<pre class="highlight shell"><code>curl -X PUT --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/exam_groups/1234 <span class="se">\</span>
+  --data <span class="s1">'{"status": "active"}'</span>
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -3741,7 +3741,7 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/exams
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/exams
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -3775,7 +3775,7 @@ Status Code: 200 OK
 </span></code></pre>
 <p>Retorna todos os exames (ativos e suspensos).</p>
 
-<p>Exames são retornados em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da pagina anterior.</p>
+<p>Exames são retornados em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da página anterior.</p>
 <h3 id='parametros-13'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -3888,7 +3888,7 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/exams/456
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/exams/456
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -4015,8 +4015,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/exams/new <span class="se">\</span>
-  --data <span class="s2">"data.json"</span>
+<pre class="highlight shell"><code>curl -X POST --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/exams <span class="se">\</span>
+  --file <span class="s2">"data.json"</span>
 </code></pre>
 <blockquote>
 <p>estrutura de data.json</p>
@@ -4239,8 +4239,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/exams/456 <span class="se">\</span>
-  --data <span class="nv">status</span><span class="o">=</span><span class="s2">"active"</span>
+<pre class="highlight shell"><code>curl -X PUT --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/exams/456 <span class="se">\</span>
+  --data <span class="s1">'{"status":"active"}'</span>
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -4388,7 +4388,7 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/enem_exams
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/enem_exams
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -4506,7 +4506,7 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/enem_exams/789
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/enem_exams/789
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -4609,8 +4609,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/enem_exams/new <span class="se">\</span>
-  --data <span class="s2">"data.json"</span>
+<pre class="highlight shell"><code>curl -X POST --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/enem_exams <span class="se">\</span>
+  --file <span class="s2">"data.json"</span>
 </code></pre>
 <blockquote>
 <p>data.json</p>
@@ -4777,8 +4777,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/enem_exams/789/status <span class="se">\</span>
-  --data <span class="s2">"inactive"</span>
+<pre class="highlight shell"><code>curl -X PUT --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/enem_exams/789 <span class="se">\</span>
+  --data <span class="s1">'{"status":"inactive"}'</span>
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -4894,8 +4894,8 @@ Status Code: 200 OK
 <blockquote>
 <p>Requisição</p>
 </blockquote>
-<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> http://queroalunos.com/api/enem_exams/suspend <span class="se">\</span>
-  --data <span class="s2">"data.json"</span>
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Base ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/enem_exams/suspend <span class="se">\</span>
+  --file <span class="s2">"data.json"</span>
 </code></pre>
 <blockquote>
 <p>data.json</p>
@@ -5482,7 +5482,7 @@ Status Code: 200 OK
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Esta notificação informando uma nova inscrição para exame via ENEM.</p>
+<p>Esta notificação informa uma nova inscrição para exame via ENEM.</p>
 <h3 id='parametros-23'>Parâmetros</h3>
 <table><thead>
 <tr>
