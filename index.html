@@ -285,18 +285,18 @@ authorization: Token ••••••••••••
 <p>Todas as requisições são autenticadas por um token adicionado ao header.
 Caso não tenha o token, solicite-o ao setor de desenvolvimento da Quero Educação.</p>
 <h2 id='requisicao-sem-token'>Requisição sem token</h2><pre class="highlight plaintext"><code>Ausência de Token
-Status Code: 401 UNAUTHORIZED
+Status Code: 401 Unauthorized
 www-authenticate: 'Token realm="University Panel"'
 </code></pre>
-<p>Em caso de requisição sem o envio do token será retornado status 401 - UNAUTHORIZED.</p>
+<p>Em caso de requisição sem o envio do token será retornado status <code>401 - Unauthorized</code>.</p>
 <h2 id='requisicao-com-token-invalido'>Requisição com token inválido</h2><pre class="highlight plaintext"><code>Formato de token inválido
-Status Code: 400 NOT FOUND
+Status Code: 400 Bad Request
 </code></pre>
-<p>Em caso de token em formato inválido será retornado status 400 - NOT FOUND.</p>
+<p>Em caso de token em formato inválido será retornado status <code>400 - Bad Request</code>.</p>
 <h2 id='requisicao-com-token-nao-autorizado'>Requisição com token não autorizado</h2><pre class="highlight plaintext"><code>Não autorizado
 Status Code: 403 Forbidden
 </code></pre>
-<p>Em caso de token não autorizado será retornado erro 403 - Forbidden.</p>
+<p>Em caso de token não autorizado será retornado erro <code>403 - Forbidden</code>.</p>
 <h2 id='requisicao-com-token-sem-permissao'>Requisição com token sem permissão</h2><pre class="highlight plaintext"><code>Sem permissão
 Status Code: 200 OK
 </code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
