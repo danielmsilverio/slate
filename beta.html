@@ -266,13 +266,13 @@
               </ul>
           </li>
           <li>
-            <a href="#informacoes-de-inscricao-de-exame" class="toc-h1 toc-link" data-title="Informações de inscrição de exame">Informações de inscrição de exame</a>
+            <a href="#informacoes-de-inscricao-para-exame" class="toc-h1 toc-link" data-title="Informações de inscrição para exame">Informações de inscrição para exame</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#listar-todas-as-inscricoes-de-exame" class="toc-h2 toc-link" data-title="Listar todas as inscrições de exame">Listar todas as inscrições de exame</a>
                   </li>
                   <li>
-                    <a href="#dados-de-uma-unica-inscricao-de-exame" class="toc-h2 toc-link" data-title="Dados de uma única inscrição de exame">Dados de uma única inscrição de exame</a>
+                    <a href="#dados-de-uma-unica-inscricao-para-exame" class="toc-h2 toc-link" data-title="Dados de uma única inscrição para exame">Dados de uma única inscrição para exame</a>
                   </li>
                   <li>
                     <a href="#atualizar-inscricao-para-exame" class="toc-h2 toc-link" data-title="Atualizar inscrição para exame">Atualizar inscrição para exame</a>
@@ -343,10 +343,10 @@
                     <a href="#notificar-novo-processo-de-admissao" class="toc-h2 toc-link" data-title="Notificar novo processo de admissão">Notificar novo processo de admissão</a>
                   </li>
                   <li>
-                    <a href="#nova-quot-inscricao-de-exame-quot-vestibular" class="toc-h2 toc-link" data-title="Nova "inscrição de exame" (Vestibular)">Nova "inscrição de exame" (Vestibular)</a>
+                    <a href="#nova-quot-inscricao-para-exame-quot-vestibular" class="toc-h2 toc-link" data-title="Nova "inscrição para exame" (Vestibular)">Nova "inscrição para exame" (Vestibular)</a>
                   </li>
                   <li>
-                    <a href="#nova-quot-inscricao-de-exame-quot-enem" class="toc-h2 toc-link" data-title="Nova "inscrição de exame" (ENEM)">Nova "inscrição de exame" (ENEM)</a>
+                    <a href="#nova-quot-inscricao-para-exame-quot-enem" class="toc-h2 toc-link" data-title="Nova "inscrição para exame" (ENEM)">Nova "inscrição para exame" (ENEM)</a>
                   </li>
               </ul>
           </li>
@@ -437,7 +437,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPF não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPF not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any student by given CPF. Make sure you are following the pattern: xxx.xxx.xxx-xx"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Encontra um ou mais alunos a partir de um dado CPF.</p>
@@ -649,7 +650,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any student by given ID."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao usuário fazendo pesquisa.</p>
@@ -855,6 +857,7 @@ Status Code: 200 OK
       </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">456</span><span class="p">,</span><span class="w">
             </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -874,8 +877,7 @@ Status Code: 200 OK
             </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="w">
+          </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1010,6 +1012,11 @@ Status Code: 200 OK
 <td>id da inscrição para exame</td>
 </tr>
 <tr>
+<td>[application] type</td>
+<td>string</td>
+<td>tipo de exame vestibular (exam ou enem)</td>
+</tr>
+<tr>
 <td>[application] student</td>
 <td>object</td>
 <td>objeto com os dados do aluno referente a essa matrícula</td>
@@ -1083,11 +1090,6 @@ Status Code: 200 OK
 <td>[application] result</td>
 <td>string</td>
 <td>resultado do exame vestibular</td>
-</tr>
-<tr>
-<td>[application] type</td>
-<td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
 <td>next_page</td>
@@ -1212,6 +1214,7 @@ Status Code: 200 OK
   </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">456</span><span class="p">,</span><span class="w">
         </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1231,8 +1234,7 @@ Status Code: 200 OK
         </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1242,7 +1244,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any admission by given ID."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna uma admissão específica da faculdade.</p>
@@ -1364,6 +1367,11 @@ Status Code: 200 OK
 <td>id da inscrição para exame</td>
 </tr>
 <tr>
+<td>[application] type</td>
+<td>string</td>
+<td>tipo de exame vestibular (exam ou enem)</td>
+</tr>
+<tr>
 <td>[application] student</td>
 <td>object</td>
 <td>objeto com os dados do aluno referente a essa matrícula</td>
@@ -1437,11 +1445,6 @@ Status Code: 200 OK
 <td>[application] result</td>
 <td>string</td>
 <td>resultado do exame vestibular</td>
-</tr>
-<tr>
-<td>[application] type</td>
-<td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-4'>Significado dos valores em status</h3>
@@ -1557,6 +1560,7 @@ Status Code: 200 OK
   </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">456</span><span class="p">,</span><span class="w">
         </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1576,8 +1580,7 @@ Status Code: 200 OK
         </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1587,7 +1590,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Situação fornecida não é válida"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown status. Please check the API manual at http://docs.queroalunos.com/#atualizar-processo-de-admissao"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -1595,7 +1599,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any admission by given ID."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Realiza atualização de um processo de admissão específico de um aluno. Para isso é preciso enviar a informação atual dele pelo parâmetro <code>status</code>.</p>
@@ -1761,6 +1766,11 @@ Status Code: 200 OK
 <td>id da inscrição para exame</td>
 </tr>
 <tr>
+<td>[application] type</td>
+<td>string</td>
+<td>tipo de exame vestibular (exam ou enem)</td>
+</tr>
+<tr>
 <td>[application] student</td>
 <td>object</td>
 <td>objeto com os dados do aluno referente a essa matrícula</td>
@@ -1834,11 +1844,6 @@ Status Code: 200 OK
 <td>[application] result</td>
 <td>string</td>
 <td>resultado do exame vestibular</td>
-</tr>
-<tr>
-<td>[application] type</td>
-<td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-5'>Significado dos valores em status</h3>
@@ -1917,7 +1922,7 @@ Status Code: 200 OK
 <td>Aprovado no exame vestibular</td>
 </tr>
 </tbody></table>
-<h1 id='informacoes-de-inscricao-de-exame'>Informações de inscrição de exame</h1><h2 id='listar-todas-as-inscricoes-de-exame'>Listar todas as inscrições de exame</h2>
+<h1 id='informacoes-de-inscricao-para-exame'>Informações de inscrição para exame</h1><h2 id='listar-todas-as-inscricoes-de-exame'>Listar todas as inscrições de exame</h2>
 <blockquote>
 <p>Requisição</p>
 </blockquote>
@@ -1930,6 +1935,7 @@ Status Code: 200 OK
   </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
         </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
@@ -1974,8 +1980,7 @@ Status Code: 200 OK
         </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
@@ -2021,6 +2026,11 @@ Status Code: 200 OK
 <td>id</td>
 <td>number</td>
 <td>id da inscrição para exame</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
 <td>admission</td>
@@ -2183,11 +2193,6 @@ Status Code: 200 OK
 <td>resultado do exame vestibular</td>
 </tr>
 <tr>
-<td>type</td>
-<td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
-</tr>
-<tr>
 <td>next_page</td>
 <td>string</td>
 <td>código para pegar os próximos passos</td>
@@ -2274,7 +2279,7 @@ Status Code: 200 OK
 <td>Aprovado no exame vestibular</td>
 </tr>
 </tbody></table>
-<h2 id='dados-de-uma-unica-inscricao-de-exame'>Dados de uma única inscrição de exame</h2>
+<h2 id='dados-de-uma-unica-inscricao-para-exame'>Dados de uma única inscrição para exame</h2>
 <blockquote>
 <p>Requisição</p>
 </blockquote>
@@ -2285,6 +2290,7 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
     </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
@@ -2329,16 +2335,16 @@ Status Code: 200 OK
     </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Resposta quando não encontra nenhum aluno</p>
+<p>Resposta quando não encontra nenhuma inscrição para exame</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any application by given ID."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna uma inscrição específica na inscrição do exame da faculdade.</p>
@@ -2368,6 +2374,11 @@ Status Code: 200 OK
 <td>id</td>
 <td>number</td>
 <td>id da inscrição para exame</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
 <td>admission</td>
@@ -2528,11 +2539,6 @@ Status Code: 200 OK
 <td>result</td>
 <td>string</td>
 <td>resultado do exame vestibular</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-7'>Significado dos valores em status</h3>
@@ -2623,6 +2629,7 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
     </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
@@ -2667,8 +2674,7 @@ Status Code: 200 OK
     </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -2676,18 +2682,20 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Situação fornecida não é válida"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown result. Please check the API manual at http://docs.queroalunos.com/#atualizar-inscricao-para-exame"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Retorno quando não encontra o vestibular</p>
+<p>Retorno quando não encontra a inscrição para exame</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any application by given ID."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Atualiza a situação de agendamento ou resultado de uma inscrição de exame.</p>
+<p>Atualiza a situação de agendamento ou resultado de uma inscrição para exame.</p>
 <h3 id='parametros-8'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -2730,6 +2738,11 @@ Status Code: 200 OK
 <td>id</td>
 <td>number</td>
 <td>id da inscrição para exame</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
 <td>admission</td>
@@ -2890,11 +2903,6 @@ Status Code: 200 OK
 <td>result</td>
 <td>string</td>
 <td>resultado do exame vestibular</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-8'>Significado dos valores em status</h3>
@@ -3176,7 +3184,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam group by given ID."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna um lote de exames específico.</p>
@@ -3324,7 +3333,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Situação fornecida não é válida"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not validate json file. Make sure you are following the keys and values as described by the API manual on the link http://docs.queroalunos.com/#criacao-de-exames-em-lote"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Cria um lote de exames.</p>
@@ -3571,7 +3581,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Situação fornecida não é válida"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown status. Please check the API manual at http://docs.queroalunos.com/#suspender-ou-ativar-lote-de-exames"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -3579,7 +3590,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam group by given ID."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Suspende ou ativa um lote de exames.</p>
@@ -3890,7 +3902,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam by given ID."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna um exame específico.</p>
@@ -4015,7 +4028,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Situação fornecida não é válida"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not validate json file. Make sure you are following the keys and values as described by the API manual on the link http://docs.queroalunos.com/#criacao-de-exame"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Cria um novo exame.</p>
@@ -4238,11 +4252,21 @@ Status Code: 200 OK
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
+<p>Retorno quando parâmetros estão incorretos</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown status. Please check the API manual at http://docs.queroalunos.com/#suspender-ou-ativar-um-exame"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
 <p>Resposta quando não encontra nenhum exame</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam by given ID."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Suspende ou ativa um exame.</p>
@@ -4504,7 +4528,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any enem exam by given ID."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna um exame de enem específico.</p>
@@ -4584,7 +4609,7 @@ Status Code: 200 OK
   --file <span class="s2">"data.json"</span>
 </code></pre>
 <blockquote>
-<p>data.json</p>
+<p>estrutura de data.json</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -4603,11 +4628,12 @@ Status Code: 200 OK
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Resposta quando não encontra nenhum exame</p>
+<p>Retorno quando parâmetros estão incorretos</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Situação fornecida não é válida."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not validate json file. Make sure you are following the keys and values as described by the API manual on the link http://docs.queroalunos.com/#criacao-de-exame-de-enem"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Cria um exame de enem.</p>
@@ -4780,7 +4806,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Situação fornecida não é válida"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown status. Please check the API manual at http://docs.queroalunos.com/#suspender-um-exame-de-enem-inteiro"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -4788,7 +4815,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID não encontrado"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any enem exam by given ID."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Suspende um exame de Enem específico.</p>
@@ -4873,7 +4901,7 @@ Status Code: 200 OK
   --file <span class="s2">"data.json"</span>
 </code></pre>
 <blockquote>
-<p>data.json</p>
+<p>estrutura de data.json</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -4887,7 +4915,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Situação fornecida não é válida"</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not validate json file. Make sure you are following the keys and values as described by the API manual on the link http://docs.queroalunos.com/#suspender-um-exame-de-enem-parcialmente"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Suspende um exame de Enem específico.</p>
@@ -5125,13 +5154,14 @@ Status Code: 200 OK
 <td>Documentação Pendente</td>
 </tr>
 </tbody></table>
-<h2 id='nova-quot-inscricao-de-exame-quot-vestibular'>Nova &quot;inscrição de exame&quot; (Vestibular)</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h2 id='nova-quot-inscricao-para-exame-quot-vestibular'>Nova &quot;inscrição para exame&quot; (Vestibular)</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NewApplication"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-15T17:34:26.173"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"api_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
         </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
@@ -5177,8 +5207,7 @@ Status Code: 200 OK
         </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -5221,6 +5250,11 @@ Status Code: 200 OK
 <td>[application] id</td>
 <td>number</td>
 <td>id da inscrição para exame</td>
+</tr>
+<tr>
+<td>[application] type</td>
+<td>string</td>
+<td>tipo de exame vestibular (<em>neste evento o valor sempre será <code>exam</code></em>)</td>
 </tr>
 <tr>
 <td>[application] admission</td>
@@ -5387,19 +5421,15 @@ Status Code: 200 OK
 <td>string</td>
 <td>resultado do exame vestibular (<em>neste evento o valor sempre será <code>null</code></em>)</td>
 </tr>
-<tr>
-<td>[application] type</td>
-<td>string</td>
-<td>tipo de exame vestibular (<em>neste evento o valor sempre será <code>exam</code></em>)</td>
-</tr>
 </tbody></table>
-<h2 id='nova-quot-inscricao-de-exame-quot-enem'>Nova &quot;inscrição de exame&quot; (ENEM)</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h2 id='nova-quot-inscricao-para-exame-quot-enem'>Nova &quot;inscrição para exame&quot; (ENEM)</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NewApplication"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-15T17:34:26.173"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"api_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enem"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
         </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
@@ -5451,8 +5481,7 @@ Status Code: 200 OK
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre-registered"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam_enem"</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre-registered"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -5495,6 +5524,11 @@ Status Code: 200 OK
 <td>[application] id</td>
 <td>number</td>
 <td>id da inscrição para exame</td>
+</tr>
+<tr>
+<td>[application] type</td>
+<td>string</td>
+<td>tipo de exame vestibular (<em>neste evento o valor sempre será <code>enem</code></em>)</td>
 </tr>
 <tr>
 <td>[application] admission</td>
@@ -5680,11 +5714,6 @@ Status Code: 200 OK
 <td>[application] result</td>
 <td>string</td>
 <td>resultado do exame vestibular (<em>neste evento o valor sempre será <code>null</code></em>)</td>
-</tr>
-<tr>
-<td>[application] type</td>
-<td>string</td>
-<td>tipo de exame vestibular (<em>neste evento o valor sempre será <code>enem</code></em>)</td>
 </tr>
 </tbody></table>
 
