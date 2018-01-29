@@ -241,13 +241,27 @@
               </ul>
           </li>
           <li>
+            <a href="#paginacao" class="toc-h1 toc-link" data-title="Paginação">Paginação</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#exemplo-de-paginacao" class="toc-h2 toc-link" data-title="Exemplo de paginação">Exemplo de paginação</a>
+                  </li>
+                  <li>
+                    <a href="#uso-do-cursor-starting_after" class="toc-h2 toc-link" data-title="Uso do cursor starting_after">Uso do cursor starting_after</a>
+                  </li>
+                  <li>
+                    <a href="#uso-do-cursor-ending_before" class="toc-h2 toc-link" data-title="Uso do cursor ending_before">Uso do cursor ending_before</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#informacoes-de-alunos" class="toc-h1 toc-link" data-title="Informações de alunos">Informações de alunos</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#busca-de-alunos-por-cpf" class="toc-h2 toc-link" data-title="Busca de alunos por CPF">Busca de alunos por CPF</a>
                   </li>
                   <li>
-                    <a href="#busca-de-aluno-por-id" class="toc-h2 toc-link" data-title="Busca de aluno por ID">Busca de aluno por ID</a>
+                    <a href="#busca-de-aluno-por-id" class="toc-h2 toc-link" data-title="Busca de aluno por id">Busca de aluno por id</a>
                   </li>
               </ul>
           </li>
@@ -396,6 +410,215 @@ Status Code: 200 OK
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Em caso de token válido mas sem permissão de acesso ao recurso específico</p>
+<h1 id='paginacao'>Paginação</h1><h2 id='exemplo-de-paginacao'>Exemplo de paginação</h2>
+<blockquote>
+<p>Exemplo de requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/v1/admissions
+</code></pre>
+<blockquote>
+<p>Exemplo de retorno</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="p">,</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12369</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-RJ"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A API utiliza paginação baseada em cursor atráves dos parâmetros <code>starting_after</code> e <code>ending_before</code>. Ambos recebem um id de um dado existente e retorna uma lista com até 25 elementos no máximo.
+O parâmetro <code>ending_before</code> faz a requisição retornar elementos cujo id é maior que o indicado pelo parâmetro. Em contrapartida, o parâmetro <code>starting_after</code> faz a requisição retornar elementos listados após o dado cujo id foi indicado.
+O atributo <code>has_more</code> da resposta indica se há mais dados disponíveis depois dessa página. Se for <code>false</code>, significa que é o fim da lista e não há mais dados. Se for <code>true</code>, significa que há mais dados a serem resgatados. Após uma requisição utilizando o parâmetro <code>ending_before</code>, o atributo <code>has_more</code> se refere a possibilidade de retornar mais dados anteriores à página atual.</p>
+<h3 id='parametros-de-cursores'>Parâmetros de cursores</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starting_after</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados após o dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>ending_before</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-de-dados-com-paginacao'>Informações de resultado de dados com paginação</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>has_more</td>
+<td>boolean</td>
+<td>Indica se há mais elementos disponíveis antes ou após essa página</td>
+</tr>
+<tr>
+<td>items</td>
+<td>array</td>
+<td>Lista dos elementos retornados pela requisição</td>
+</tr>
+</tbody></table>
+<h2 id='uso-do-cursor-starting_after'>Uso do cursor starting_after</h2>
+<blockquote>
+<p>Exemplo de requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/v1/admissions?starting_after<span class="o">=</span>12369
+</code></pre>
+<blockquote>
+<p>Retorno</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12370</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="p">,</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12380</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-RJ"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>No exemplo acima, vimos que <code>has_more</code> retornou <code>true</code>, portanto existem mais dados a serem resgatados após essa página. Para poder consultá-los, na próxima requisição o parâmetro <code>starting_after</code> precisa ter o id do último elemento da lista <code>items</code>. A requisição e retorno ao lado são referentes ao exemplo <a href="#exemplo-de-paginacao">acima</a>.</p>
+<h3 id='parametros-de-cursores-2'>Parâmetros de cursores</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starting_after</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados após o dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>ending_before</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-de-dados-com-paginacao-2'>Informações de resultado de dados com paginação</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>has_more</td>
+<td>boolean</td>
+<td>Indica se há mais elementos disponíveis antes ou após essa página</td>
+</tr>
+<tr>
+<td>items</td>
+<td>array</td>
+<td>Lista dos elementos retornados pela requisição</td>
+</tr>
+</tbody></table>
+<h2 id='uso-do-cursor-ending_before'>Uso do cursor ending_before</h2>
+<blockquote>
+<p>Exemplo de requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/v1/admissions?ending_before<span class="o">=</span>12369
+</code></pre>
+<blockquote>
+<p>Retorno</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="p">,</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12369</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-RJ"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Assim como avançamos uma página, é possível facilmente retornar a dados anteriores à página atual. Para fazer isso, na próxima requisição o parâmetro <code>ending_before</code> precisa ter o id do primeiro elemento da lista <code>items</code>. A requisição e retorno ao lado são referentes ao exemplo <a href="#uso-do-cursor-starting_after">acima</a>.</p>
+<h3 id='parametros-de-cursores-3'>Parâmetros de cursores</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starting_after</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados após o dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>ending_before</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-de-dados-com-paginacao-3'>Informações de resultado de dados com paginação</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>has_more</td>
+<td>boolean</td>
+<td>Indica se há mais elementos disponíveis antes ou após essa página</td>
+</tr>
+<tr>
+<td>items</td>
+<td>array</td>
+<td>Lista dos elementos retornados pela requisição</td>
+</tr>
+</tbody></table>
 <h1 id='informacoes-de-alunos'>Informações de alunos</h1><h2 id='busca-de-alunos-por-cpf'>Busca de alunos por CPF</h2>
 <blockquote>
 <p>Requisição</p>
@@ -458,7 +681,7 @@ Status Code: 200 OK
 <tr>
 <td>cpf</td>
 <td>Query</td>
-<td>CPF do aluno procurado. Exige CPF completamente formatado (ex: 123.456.789-10).</td>
+<td>CPF do aluno procurado. Exige CPF completamente formatado (ex: 123.456.789-10)</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado'>Informações de resultado</h3>
@@ -472,87 +695,87 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do aluno.</td>
+<td>Id do aluno</td>
 </tr>
 <tr>
 <td>name</td>
 <td>string</td>
-<td>nome do aluno</td>
+<td>Nome do aluno</td>
 </tr>
 <tr>
 <td>cpf</td>
 <td>string</td>
-<td>cpf do aluno</td>
+<td>CPF do aluno</td>
 </tr>
 <tr>
 <td>birth_date</td>
 <td>string</td>
-<td>data de nascimento do aluno</td>
+<td>Data de nascimento do aluno</td>
 </tr>
 <tr>
 <td>emails</td>
 <td>array de string</td>
-<td>lista de emails do aluno</td>
+<td>Lista de emails do aluno</td>
 </tr>
 <tr>
 <td>phones</td>
 <td>array de string</td>
-<td>lista de telefones do aluno</td>
+<td>Lista de telefones do aluno</td>
 </tr>
 <tr>
 <td>address_information</td>
 <td>object</td>
-<td>objeto com dados onde aluno reside</td>
+<td>Objeto com dados onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] address</td>
 <td>string</td>
-<td>endereço onde aluno reside</td>
+<td>Endereço onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] number</td>
 <td>string</td>
-<td>número onde aluno reside</td>
+<td>Número onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] neighborhood</td>
 <td>string</td>
-<td>bairro onde aluno reside</td>
+<td>Bairro onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] city</td>
 <td>string</td>
-<td>cidade onde aluno reside</td>
+<td>Cidade onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] state</td>
 <td>string</td>
-<td>estado onde aluno reside</td>
+<td>Estado onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] postal_code</td>
 <td>string</td>
-<td>código postal onde aluno reside</td>
+<td>Código postal onde aluno reside</td>
 </tr>
 <tr>
 <td>admissions</td>
 <td>array</td>
-<td>lista de objeto com informações de processo de matricula</td>
+<td>Lista de objetos com informações de processo de matricula</td>
 </tr>
 <tr>
 <td>id (admissions)</td>
 <td>number</td>
-<td>id do processo de matricula</td>
+<td>Id do processo de matricula</td>
 </tr>
 <tr>
 <td>course_sku (admissions)</td>
 <td>string</td>
-<td>código do curso fornecido pela universidade</td>
+<td>Código do curso fornecido pela universidade</td>
 </tr>
 <tr>
 <td>status (admissions)</td>
 <td>string</td>
-<td>status que se encontra o processo de matricula</td>
+<td>Status que se encontra o processo de matricula</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status'>Significado dos valores em status</h3>
@@ -611,7 +834,7 @@ Status Code: 200 OK
 <td>Desistência confirmada</td>
 </tr>
 </tbody></table>
-<h2 id='busca-de-aluno-por-id'>Busca de aluno por ID</h2>
+<h2 id='busca-de-aluno-por-id'>Busca de aluno por id</h2>
 <blockquote>
 <p>Requisição</p>
 </blockquote>
@@ -653,8 +876,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any student by given ID."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any student by given id."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao usuário fazendo pesquisa.</p>
@@ -669,7 +892,7 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>Path</td>
-<td>ID do aluno procurado.</td>
+<td>Id do aluno procurado</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-2'>Informações de resultado</h3>
@@ -683,87 +906,87 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do aluno.</td>
+<td>Id do aluno</td>
 </tr>
 <tr>
 <td>name</td>
 <td>string</td>
-<td>nome do aluno</td>
+<td>Nome do aluno</td>
 </tr>
 <tr>
 <td>cpf</td>
 <td>string</td>
-<td>cpf do aluno</td>
+<td>CPF do aluno</td>
 </tr>
 <tr>
 <td>birth_date</td>
 <td>string</td>
-<td>data de nascimento do aluno</td>
+<td>Data de nascimento do aluno</td>
 </tr>
 <tr>
 <td>emails</td>
 <td>array de string</td>
-<td>lista de emails do aluno</td>
+<td>Lista de emails do aluno</td>
 </tr>
 <tr>
 <td>phones</td>
 <td>array de string</td>
-<td>lista de telefones do aluno</td>
+<td>Lista de telefones do aluno</td>
 </tr>
 <tr>
 <td>address_information</td>
 <td>object</td>
-<td>objeto com dados onde aluno reside</td>
+<td>Objeto com dados onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] address</td>
 <td>string</td>
-<td>endereço onde aluno reside</td>
+<td>Endereço onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] number</td>
 <td>string</td>
-<td>número onde aluno reside</td>
+<td>Número onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] neighborhood</td>
 <td>string</td>
-<td>bairro onde aluno reside</td>
+<td>Bairro onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] city</td>
 <td>string</td>
-<td>cidade onde aluno reside</td>
+<td>Cidade onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] state</td>
 <td>string</td>
-<td>estado onde aluno reside</td>
+<td>Estado onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] postal_code</td>
 <td>string</td>
-<td>código postal onde aluno reside</td>
+<td>Código postal onde aluno reside</td>
 </tr>
 <tr>
 <td>admissions</td>
 <td>array</td>
-<td>lista de objetos com informações de processo de matricula</td>
+<td>Lista de objetos com informações de processo de matricula</td>
 </tr>
 <tr>
 <td>[admissions] id</td>
 <td>number</td>
-<td>id do processo de matricula</td>
+<td>Id do processo de matricula</td>
 </tr>
 <tr>
 <td>[admissions] course_sku</td>
 <td>string</td>
-<td>código do curso fornecido pela universidade</td>
+<td>Código do curso fornecido pela universidade</td>
 </tr>
 <tr>
 <td>[admissions] status</td>
 <td>string</td>
-<td>status que se encontra o processo de matricula</td>
+<td>Status que se encontra o processo de matricula</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-2'>Significado dos valores em status</h3>
@@ -832,6 +1055,7 @@ Status Code: 200 OK
 <p>Resposta</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
@@ -883,15 +1107,15 @@ Status Code: 200 OK
           </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"previous_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todas as admissões da faculdade.</p>
 
-<p>Admissões são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da página anterior.</p>
+<p>Admissões são retornadas em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar objetos antecessores à lista atual. Para mais informações, consulte a sessão de <a href="#paginacao">paginação</a>.</p>
 <h3 id='parametros-3'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -901,14 +1125,14 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>next_page</code></td>
-<td>Query</td>
-<td>valor utilizado para continuar uma paginação anterior</td>
+<td>starting_after</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados após o dado cujo id foi indicado</td>
 </tr>
 <tr>
-<td><code>previous_page</code></td>
-<td>Query</td>
-<td>valor utilizado para retornar na paginação anterior</td>
+<td>ending_before</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-3'>Informações de resultado</h3>
@@ -920,189 +1144,184 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
+<td>has_more</td>
+<td>boolean</td>
+<td>Indica se há mais elementos disponíveis antes ou após essa página</td>
+</tr>
+<tr>
 <td>items</td>
 <td>array</td>
-<td>lista de objetos com dados de inscrições de vestibular</td>
+<td>Lista de elementos com dados de inscrições de vestibular</td>
 </tr>
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id da admissão</td>
+<td>Id da admissão</td>
 </tr>
 <tr>
 <td>course_sku</td>
 <td>string</td>
-<td>código do curso referente a essa matrícula</td>
+<td>Código do curso referente a essa matrícula</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>status da admissão do aluno</td>
+<td>Status da admissão do aluno</td>
 </tr>
 <tr>
 <td>[student] id</td>
 <td>number</td>
-<td>id do aluno</td>
+<td>Id do aluno</td>
 </tr>
 <tr>
 <td>[student] name</td>
 <td>string</td>
-<td>nome do aluno</td>
+<td>Nome do aluno</td>
 </tr>
 <tr>
 <td>[student] cpf</td>
 <td>string</td>
-<td>cpf do aluno</td>
+<td>CPF do aluno</td>
 </tr>
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>data de nascimento do aluno</td>
+<td>Data de nascimento do aluno</td>
 </tr>
 <tr>
 <td>[student] emails</td>
 <td>array de string</td>
-<td>lista de emails do aluno</td>
+<td>Lista de emails do aluno</td>
 </tr>
 <tr>
 <td>[student] phones</td>
 <td>array de string</td>
-<td>lista de telefones do aluno</td>
+<td>Lista de telefones do aluno</td>
 </tr>
 <tr>
 <td>[student] address_information</td>
 <td>object</td>
-<td>objeto com dados onde aluno reside</td>
+<td>Objeto com dados onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] address</td>
 <td>string</td>
-<td>endereço onde aluno reside</td>
+<td>Endereço onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] number</td>
 <td>string</td>
-<td>número onde aluno reside</td>
+<td>Número onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] neighborhood</td>
 <td>string</td>
-<td>bairro onde aluno reside</td>
+<td>Bairro onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] city</td>
 <td>string</td>
-<td>cidade onde aluno reside</td>
+<td>Cidade onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] state</td>
 <td>string</td>
-<td>estado onde aluno reside</td>
+<td>Estado onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] postal_code</td>
 <td>string</td>
-<td>código postal onde aluno reside</td>
+<td>Código postal onde aluno reside</td>
 </tr>
 <tr>
 <td>application</td>
 <td>array</td>
-<td>lista de objetos de inscrições de exame (pode estar vazio)</td>
+<td>Lista de objetos de inscrições de exame (pode estar vazio)</td>
 </tr>
 <tr>
 <td>[application] id</td>
 <td>number</td>
-<td>id da inscrição para exame</td>
+<td>Id da inscrição para exame</td>
 </tr>
 <tr>
 <td>[application] type</td>
 <td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
+<td>Tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
 <td>[application] student</td>
 <td>object</td>
-<td>objeto com os dados do aluno referente a essa matrícula</td>
+<td>Objeto com os dados do aluno referente a essa matrícula</td>
 </tr>
 <tr>
 <td>exam</td>
 <td>object</td>
-<td>objeto com informações do exame referente a essa matrícula</td>
+<td>Objeto com informações do exame referente a essa matrícula</td>
 </tr>
 <tr>
 <td>[exam] id</td>
 <td>number</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] course_skus</td>
 <td>array</td>
-<td>lista com os cursos pertencentes a este exame vestibular</td>
+<td>Lista com os cursos pertencentes a este exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] local</td>
 <td>object</td>
-<td>objeto com dados do local do exame vestibular</td>
+<td>Objeto com dados do local do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] address</td>
 <td>string</td>
-<td>endereço da localização do exame vestibular</td>
+<td>Endereço da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número da localização do exame vestibular</td>
+<td>Número da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro da localização do exame vestibular</td>
+<td>Bairro da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade da localização do exame vestibular</td>
+<td>Cidade da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado da localização do exame vestibular</td>
+<td>Estado da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal da localização do exame vestibular</td>
+<td>Código postal da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] dates</td>
 <td>string</td>
-<td>data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] times</td>
 <td>string</td>
-<td>hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] status</td>
 <td>string</td>
-<td>status do exame vestibular</td>
+<td>Status do exame vestibular</td>
 </tr>
 <tr>
 <td>[application] result</td>
 <td>string</td>
-<td>resultado do exame vestibular</td>
-</tr>
-<tr>
-<td>next_page</td>
-<td>string</td>
-<td>código para pegar os próximos passos</td>
-</tr>
-<tr>
-<td>previous_page</td>
-<td>string</td>
-<td>código para pegar os passos anteriores</td>
+<td>Resultado do exame vestibular</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-3'>Significado dos valores em status</h3>
@@ -1247,8 +1466,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any admission by given ID."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any admission by given id."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna uma admissão específica da faculdade.</p>
@@ -1263,7 +1482,7 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>path</td>
-<td>id da admissão</td>
+<td>Id da admissão</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-4'>Informações de resultado</h3>
@@ -1275,179 +1494,174 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td>items</td>
-<td>array</td>
-<td>lista de objetos com dados de inscrições de vestibular</td>
-</tr>
-<tr>
 <td>id</td>
 <td>number</td>
-<td>id da admissão</td>
+<td>Id da admissão</td>
 </tr>
 <tr>
 <td>course_sku</td>
 <td>string</td>
-<td>código do curso referente a essa matrícula</td>
+<td>Código do curso referente a essa matrícula</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>status da admissão do aluno</td>
+<td>Status da admissão do aluno</td>
 </tr>
 <tr>
 <td>[student] id</td>
 <td>number</td>
-<td>id do aluno</td>
+<td>Id do aluno</td>
 </tr>
 <tr>
 <td>[student] name</td>
 <td>string</td>
-<td>nome do aluno</td>
+<td>Nome do aluno</td>
 </tr>
 <tr>
 <td>[student] cpf</td>
 <td>string</td>
-<td>cpf do aluno</td>
+<td>CPF do aluno</td>
 </tr>
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>data de nascimento do aluno</td>
+<td>Data de nascimento do aluno</td>
 </tr>
 <tr>
 <td>[student] emails</td>
 <td>array de string</td>
-<td>lista de emails do aluno</td>
+<td>Lista de emails do aluno</td>
 </tr>
 <tr>
 <td>[student] phones</td>
 <td>array de string</td>
-<td>lista de telefones do aluno</td>
+<td>Lista de telefones do aluno</td>
 </tr>
 <tr>
 <td>[student] address_information</td>
 <td>object</td>
-<td>objeto com dados onde aluno reside</td>
+<td>Objeto com dados onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] address</td>
 <td>string</td>
-<td>endereço onde aluno reside</td>
+<td>Endereço onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] number</td>
 <td>string</td>
-<td>número onde aluno reside</td>
+<td>Número onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] neighborhood</td>
 <td>string</td>
-<td>bairro onde aluno reside</td>
+<td>Bairro onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] city</td>
 <td>string</td>
-<td>cidade onde aluno reside</td>
+<td>Cidade onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] state</td>
 <td>string</td>
-<td>estado onde aluno reside</td>
+<td>Estado onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] postal_code</td>
 <td>string</td>
-<td>código postal onde aluno reside</td>
+<td>Código postal onde aluno reside</td>
 </tr>
 <tr>
 <td>application</td>
 <td>array</td>
-<td>lista de objetos de inscrição para exame (pode estar vazio)</td>
+<td>Lista de objetos de inscrição para exame (pode estar vazio)</td>
 </tr>
 <tr>
 <td>[application] id</td>
 <td>number</td>
-<td>id da inscrição para exame</td>
+<td>Id da inscrição para exame</td>
 </tr>
 <tr>
 <td>[application] type</td>
 <td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
+<td>Tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
 <td>[application] student</td>
 <td>object</td>
-<td>objeto com os dados do aluno referente a essa matrícula</td>
+<td>Objeto com os dados do aluno referente a essa matrícula</td>
 </tr>
 <tr>
 <td>exam</td>
 <td>object</td>
-<td>objeto com informações do exame referente a essa matrícula</td>
+<td>Objeto com informações do exame referente a essa matrícula</td>
 </tr>
 <tr>
 <td>[exam] id</td>
 <td>number</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] course_skus</td>
 <td>array</td>
-<td>lista com os cursos pertencentes a este exame vestibular</td>
+<td>Lista com os cursos pertencentes a este exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] local</td>
 <td>object</td>
-<td>objeto com dados do local do exame vestibular</td>
+<td>Objeto com dados do local do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] address</td>
 <td>string</td>
-<td>endereço da localização do exame vestibular</td>
+<td>Endereço da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número da localização do exame vestibular</td>
+<td>Número da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro da localização do exame vestibular</td>
+<td>Bairro da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade da localização do exame vestibular</td>
+<td>Cidade da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado da localização do exame vestibular</td>
+<td>Estado da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal da localização do exame vestibular</td>
+<td>Código postal da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] dates</td>
 <td>string</td>
-<td>data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] times</td>
 <td>string</td>
-<td>hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] status</td>
 <td>string</td>
-<td>status do exame vestibular</td>
+<td>Status do exame vestibular</td>
 </tr>
 <tr>
 <td>[application] result</td>
 <td>string</td>
-<td>resultado do exame vestibular</td>
+<td>Resultado do exame vestibular</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-4'>Significado dos valores em status</h3>
@@ -1602,8 +1816,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any admission by given ID."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any admission by given id."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Realiza atualização de um processo de admissão específico de um aluno. Para isso é preciso enviar a informação atual dele pelo parâmetro <code>status</code>.</p>
@@ -1674,179 +1888,174 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td>items</td>
-<td>array</td>
-<td>lista de objetos com dados de inscrições de vestibular</td>
-</tr>
-<tr>
 <td>id</td>
 <td>number</td>
-<td>id da admissão</td>
+<td>Id da admissão</td>
 </tr>
 <tr>
 <td>course_sku</td>
 <td>string</td>
-<td>código do curso referente a essa matrícula</td>
+<td>Código do curso referente a essa matrícula</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>status da admissão do aluno</td>
+<td>Status da admissão do aluno</td>
 </tr>
 <tr>
 <td>[student] id</td>
 <td>number</td>
-<td>id do aluno</td>
+<td>Id do aluno</td>
 </tr>
 <tr>
 <td>[student] name</td>
 <td>string</td>
-<td>nome do aluno</td>
+<td>Nome do aluno</td>
 </tr>
 <tr>
 <td>[student] cpf</td>
 <td>string</td>
-<td>cpf do aluno</td>
+<td>CPF do aluno</td>
 </tr>
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>data de nascimento do aluno</td>
+<td>Data de nascimento do aluno</td>
 </tr>
 <tr>
 <td>[student] emails</td>
 <td>array de string</td>
-<td>lista de emails do aluno</td>
+<td>Lista de emails do aluno</td>
 </tr>
 <tr>
 <td>[student] phones</td>
 <td>array de string</td>
-<td>lista de telefones do aluno</td>
+<td>Lista de telefones do aluno</td>
 </tr>
 <tr>
 <td>[student] address_information</td>
 <td>object</td>
-<td>objeto com dados onde aluno reside</td>
+<td>Objeto com dados onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] address</td>
 <td>string</td>
-<td>endereço onde aluno reside</td>
+<td>Endereço onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] number</td>
 <td>string</td>
-<td>número onde aluno reside</td>
+<td>Número onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] neighborhood</td>
 <td>string</td>
-<td>bairro onde aluno reside</td>
+<td>Bairro onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] city</td>
 <td>string</td>
-<td>cidade onde aluno reside</td>
+<td>Cidade onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] state</td>
 <td>string</td>
-<td>estado onde aluno reside</td>
+<td>Estado onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] postal_code</td>
 <td>string</td>
-<td>código postal onde aluno reside</td>
+<td>Código postal onde aluno reside</td>
 </tr>
 <tr>
 <td>application</td>
 <td>array</td>
-<td>lista de objetos de inscrição para exame (pode estar vazio)</td>
+<td>Lista de objetos de inscrição para exame (pode estar vazio)</td>
 </tr>
 <tr>
 <td>[application] id</td>
 <td>number</td>
-<td>id da inscrição para exame</td>
+<td>Id da inscrição para exame</td>
 </tr>
 <tr>
 <td>[application] type</td>
 <td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
+<td>Tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
 <td>[application] student</td>
 <td>object</td>
-<td>objeto com os dados do aluno referente a essa matrícula</td>
+<td>Objeto com os dados do aluno referente a essa matrícula</td>
 </tr>
 <tr>
 <td>exam</td>
 <td>object</td>
-<td>objeto com informações do exame referente a essa matrícula</td>
+<td>Objeto com informações do exame referente a essa matrícula</td>
 </tr>
 <tr>
 <td>[exam] id</td>
 <td>number</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] course_skus</td>
 <td>array</td>
-<td>lista com os cursos pertencentes a este exame vestibular</td>
+<td>Lista com os cursos pertencentes a este exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] local</td>
 <td>object</td>
-<td>objeto com dados do local do exame vestibular</td>
+<td>Objeto com dados do local do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] address</td>
 <td>string</td>
-<td>endereço da localização do exame vestibular</td>
+<td>Endereço da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número da localização do exame vestibular</td>
+<td>Número da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro da localização do exame vestibular</td>
+<td>Bairro da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade da localização do exame vestibular</td>
+<td>Cidade da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado da localização do exame vestibular</td>
+<td>Estado da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal da localização do exame vestibular</td>
+<td>Código postal da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] dates</td>
 <td>string</td>
-<td>data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] times</td>
 <td>string</td>
-<td>hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] status</td>
 <td>string</td>
-<td>status do exame vestibular</td>
+<td>Status do exame vestibular</td>
 </tr>
 <tr>
 <td>[application] result</td>
 <td>string</td>
-<td>resultado do exame vestibular</td>
+<td>Resultado do exame vestibular</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-5'>Significado dos valores em status</h3>
@@ -1935,6 +2144,7 @@ Status Code: 200 OK
 <p>Resposta</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
@@ -1985,14 +2195,12 @@ Status Code: 200 OK
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"previous_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todas as inscrições de exame da faculdade.</p>
 
-<p>Inscrições são retornadas em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da página anterior.</p>
+<p>Inscrições são retornadas em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar objetos antecessores à lista atual. Para mais informações, consulte a sessão de <a href="#paginacao">paginação</a>.</p>
 <h3 id='parametros-6'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -2002,14 +2210,14 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>next_page</code></td>
-<td>Query</td>
-<td>valor utilizado para continuar uma paginação anterior</td>
+<td>starting_after</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados após o dado cujo id foi indicado</td>
 </tr>
 <tr>
-<td><code>previous_page</code></td>
-<td>Query</td>
-<td>valor utilizado para retornar na paginação anterior</td>
+<td>ending_before</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-6'>Informações de resultado</h3>
@@ -2021,189 +2229,184 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
+<td>has_more</td>
+<td>boolean</td>
+<td>Indica se há mais elementos disponíveis antes ou após essa página</td>
+</tr>
+<tr>
 <td>items</td>
 <td>array</td>
-<td>lista de objetos com dados de inscrições de vestibular</td>
+<td>Lista de elementos com dados de inscrições de vestibular</td>
 </tr>
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id da inscrição para exame</td>
+<td>Id da inscrição para exame</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
+<td>Tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
 <td>admission</td>
 <td>object</td>
-<td>objeto com dados do processo de admissão do aluno</td>
+<td>Objeto com dados do processo de admissão do aluno</td>
 </tr>
 <tr>
 <td>[admission] id</td>
 <td>number</td>
-<td>id do processo de admissão</td>
+<td>Id do processo de admissão</td>
 </tr>
 <tr>
 <td>[admission] course_sku</td>
 <td>string</td>
-<td>código do curso referente a essa matrícula</td>
+<td>Código do curso referente a essa matrícula</td>
 </tr>
 <tr>
 <td>[admission] status</td>
 <td>string</td>
-<td>status da admissão do aluno</td>
+<td>Status da admissão do aluno</td>
 </tr>
 <tr>
 <td>[admission] student</td>
 <td>object</td>
-<td>objeto com dados do aluno</td>
+<td>Objeto com dados do aluno</td>
 </tr>
 <tr>
 <td>[student] id</td>
 <td>number</td>
-<td>id do aluno</td>
+<td>Id do aluno</td>
 </tr>
 <tr>
 <td>[student] name</td>
 <td>string</td>
-<td>nome do aluno</td>
+<td>Nome do aluno</td>
 </tr>
 <tr>
 <td>[student] cpf</td>
 <td>string</td>
-<td>cpf do aluno</td>
+<td>CPF do aluno</td>
 </tr>
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>data de nascimento do aluno</td>
+<td>Data de nascimento do aluno</td>
 </tr>
 <tr>
 <td>[student] emails</td>
 <td>array de string</td>
-<td>lista de emails do aluno</td>
+<td>Lista de emails do aluno</td>
 </tr>
 <tr>
 <td>[student] phones</td>
 <td>array de string</td>
-<td>lista de telefones do aluno</td>
+<td>Lista de telefones do aluno</td>
 </tr>
 <tr>
 <td>[student] address_information</td>
 <td>object</td>
-<td>objeto com dados onde aluno reside</td>
+<td>Objeto com dados onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] address</td>
 <td>string</td>
-<td>endereço onde aluno reside</td>
+<td>Endereço onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] number</td>
 <td>string</td>
-<td>número onde aluno reside</td>
+<td>Número onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] neighborhood</td>
 <td>string</td>
-<td>bairro onde aluno reside</td>
+<td>Bairro onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] city</td>
 <td>string</td>
-<td>cidade onde aluno reside</td>
+<td>Cidade onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] state</td>
 <td>string</td>
-<td>estado onde aluno reside</td>
+<td>Estado onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] postal_code</td>
 <td>string</td>
-<td>código postal onde aluno reside</td>
+<td>Código postal onde aluno reside</td>
 </tr>
 <tr>
 <td>exam</td>
 <td>object</td>
-<td>objeto com informações do exame vestibular</td>
+<td>Objeto com informações do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] id</td>
 <td>number</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] course_skus</td>
 <td>array</td>
-<td>lista com os cursos pertencentes a este exame vestibular</td>
+<td>Lista com os cursos pertencentes a este exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] local</td>
 <td>object</td>
-<td>objeto com dados do exame vestibular</td>
+<td>Objeto com dados do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] address</td>
 <td>string</td>
-<td>endereço da localização do exame vestibular</td>
+<td>Endereço da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número da localização do exame vestibular</td>
+<td>Número da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro da localização do exame vestibular</td>
+<td>Bairro da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade da localização do exame vestibular</td>
+<td>Cidade da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado da localização do exame vestibular</td>
+<td>Estado da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal da localização do exame vestibular</td>
+<td>Código postal da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] date</td>
 <td>string</td>
-<td>data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] time</td>
 <td>string</td>
-<td>hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] status</td>
 <td>string</td>
-<td>status do exame vestibular</td>
+<td>Status do exame vestibular</td>
 </tr>
 <tr>
 <td>result</td>
 <td>string</td>
-<td>resultado do exame vestibular</td>
-</tr>
-<tr>
-<td>next_page</td>
-<td>string</td>
-<td>código para pegar os próximos passos</td>
-</tr>
-<tr>
-<td>previous_page</td>
-<td>string</td>
-<td>código para pegar os passos anteriores</td>
+<td>Resultado do exame vestibular</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-6'>Significado dos valores em status</h3>
@@ -2346,8 +2549,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any application by given ID."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any application by given id."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna uma inscrição específica na inscrição do exame da faculdade.</p>
@@ -2362,7 +2565,7 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>Path</td>
-<td>id da inscrição para exame</td>
+<td>Id da inscrição para exame</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-7'>Informações de resultado</h3>
@@ -2376,172 +2579,172 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id da inscrição para exame</td>
+<td>Id da inscrição para exame</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
+<td>Tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
 <td>admission</td>
 <td>object</td>
-<td>objeto com dados do processo de admissão do aluno</td>
+<td>Objeto com dados do processo de admissão do aluno</td>
 </tr>
 <tr>
 <td>[admission] id</td>
 <td>number</td>
-<td>id do processo de admissão</td>
+<td>Id do processo de admissão</td>
 </tr>
 <tr>
 <td>[admission] course_sku</td>
 <td>string</td>
-<td>código do curso referente a essa matrícula</td>
+<td>Código do curso referente a essa matrícula</td>
 </tr>
 <tr>
 <td>[admission] status</td>
 <td>string</td>
-<td>status da admissão do aluno</td>
+<td>Status da admissão do aluno</td>
 </tr>
 <tr>
 <td>[admission] student</td>
 <td>object</td>
-<td>objeto com dados do aluno</td>
+<td>Objeto com dados do aluno</td>
 </tr>
 <tr>
 <td>[student] id</td>
 <td>number</td>
-<td>id do aluno</td>
+<td>Id do aluno</td>
 </tr>
 <tr>
 <td>[student] name</td>
 <td>string</td>
-<td>nome do aluno</td>
+<td>Nome do aluno</td>
 </tr>
 <tr>
 <td>[student] cpf</td>
 <td>string</td>
-<td>cpf do aluno</td>
+<td>CPF do aluno</td>
 </tr>
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>data de nascimento do aluno</td>
+<td>Data de nascimento do aluno</td>
 </tr>
 <tr>
 <td>[student] emails</td>
 <td>array de string</td>
-<td>lista de emails do aluno</td>
+<td>Lista de emails do aluno</td>
 </tr>
 <tr>
 <td>[student] phones</td>
 <td>array de string</td>
-<td>lista de telefones do aluno</td>
+<td>Lista de telefones do aluno</td>
 </tr>
 <tr>
 <td>[student] address_information</td>
 <td>object</td>
-<td>objeto com dados onde aluno reside</td>
+<td>Objeto com dados onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] address</td>
 <td>string</td>
-<td>endereço onde aluno reside</td>
+<td>Endereço onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] number</td>
 <td>string</td>
-<td>número onde aluno reside</td>
+<td>Número onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] neighborhood</td>
 <td>string</td>
-<td>bairro onde aluno reside</td>
+<td>Bairro onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] city</td>
 <td>string</td>
-<td>cidade onde aluno reside</td>
+<td>Cidade onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] state</td>
 <td>string</td>
-<td>estado onde aluno reside</td>
+<td>Estado onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] postal_code</td>
 <td>string</td>
-<td>código postal onde aluno reside</td>
+<td>Código postal onde aluno reside</td>
 </tr>
 <tr>
 <td>exam</td>
 <td>object</td>
-<td>objeto com informações do exame vestibular</td>
+<td>Objeto com informações do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] id</td>
 <td>number</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] course_skus</td>
 <td>array</td>
-<td>lista com os cursos pertencentes a este exame vestibular</td>
+<td>Lista com os cursos pertencentes a este exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] exam_location</td>
 <td>object</td>
-<td>objeto com dados do exame vestibular</td>
+<td>Objeto com dados do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] address</td>
 <td>string</td>
-<td>endereço da localização do exame vestibular</td>
+<td>Endereço da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número da localização do exame vestibular</td>
+<td>Número da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro da localização do exame vestibular</td>
+<td>Bairro da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade da localização do exame vestibular</td>
+<td>Cidade da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado da localização do exame vestibular</td>
+<td>Estado da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal da localização do exame vestibular</td>
+<td>Código postal da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] date</td>
 <td>string</td>
-<td>data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] time</td>
 <td>string</td>
-<td>hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] status</td>
 <td>string</td>
-<td>status do exame vestibular</td>
+<td>Status do exame vestibular</td>
 </tr>
 <tr>
 <td>result</td>
 <td>string</td>
-<td>resultado do exame vestibular</td>
+<td>Resultado do exame vestibular</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-7'>Significado dos valores em status</h3>
@@ -2694,8 +2897,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any application by given ID."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any application by given id."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Atualiza a situação de agendamento ou resultado de uma inscrição para exame.</p>
@@ -2740,172 +2943,172 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id da inscrição para exame</td>
+<td>Id da inscrição para exame</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
-<td>tipo de exame vestibular (exam ou enem)</td>
+<td>Tipo de exame vestibular (exam ou enem)</td>
 </tr>
 <tr>
 <td>admission</td>
 <td>object</td>
-<td>objeto com dados do processo de admissão do aluno</td>
+<td>Objeto com dados do processo de admissão do aluno</td>
 </tr>
 <tr>
 <td>[admission] id</td>
 <td>number</td>
-<td>id do processo de admissão</td>
+<td>Id do processo de admissão</td>
 </tr>
 <tr>
 <td>[admission] course_sku</td>
 <td>string</td>
-<td>código do curso referente a essa matrícula</td>
+<td>Código do curso referente a essa matrícula</td>
 </tr>
 <tr>
 <td>[admission] status</td>
 <td>string</td>
-<td>status da admissão do aluno</td>
+<td>Status da admissão do aluno</td>
 </tr>
 <tr>
 <td>[admission] student</td>
 <td>object</td>
-<td>objeto com dados do aluno</td>
+<td>Objeto com dados do aluno</td>
 </tr>
 <tr>
 <td>[student] id</td>
 <td>number</td>
-<td>id do aluno</td>
+<td>Id do aluno</td>
 </tr>
 <tr>
 <td>[student] name</td>
 <td>string</td>
-<td>nome do aluno</td>
+<td>Nome do aluno</td>
 </tr>
 <tr>
 <td>[student] cpf</td>
 <td>string</td>
-<td>cpf do aluno</td>
+<td>CPF do aluno</td>
 </tr>
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>data de nascimento do aluno</td>
+<td>Data de nascimento do aluno</td>
 </tr>
 <tr>
 <td>[student] emails</td>
 <td>array de string</td>
-<td>lista de emails do aluno</td>
+<td>Lista de emails do aluno</td>
 </tr>
 <tr>
 <td>[student] phones</td>
 <td>array de string</td>
-<td>lista de telefones do aluno</td>
+<td>Lista de telefones do aluno</td>
 </tr>
 <tr>
 <td>[student] address_information</td>
 <td>object</td>
-<td>objeto com dados onde aluno reside</td>
+<td>Objeto com dados onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] address</td>
 <td>string</td>
-<td>endereço onde aluno reside</td>
+<td>Endereço onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] number</td>
 <td>string</td>
-<td>número onde aluno reside</td>
+<td>Número onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] neighborhood</td>
 <td>string</td>
-<td>bairro onde aluno reside</td>
+<td>Bairro onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] city</td>
 <td>string</td>
-<td>cidade onde aluno reside</td>
+<td>Cidade onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] state</td>
 <td>string</td>
-<td>estado onde aluno reside</td>
+<td>Estado onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] postal_code</td>
 <td>string</td>
-<td>código postal onde aluno reside</td>
+<td>Código postal onde aluno reside</td>
 </tr>
 <tr>
 <td>exam</td>
 <td>object</td>
-<td>objeto com informações do exame vestibular</td>
+<td>Objeto com informações do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] id</td>
 <td>number</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] course_skus</td>
 <td>array</td>
-<td>lista com os cursos pertencentes a este exame vestibular</td>
+<td>Lista com os cursos pertencentes a este exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] local</td>
 <td>object</td>
-<td>objeto com dados do exame vestibular</td>
+<td>Objeto com dados do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] exam_location</td>
 <td>string</td>
-<td>endereço da localização do exame vestibular</td>
+<td>Endereço da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número da localização do exame vestibular</td>
+<td>Número da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro da localização do exame vestibular</td>
+<td>Bairro da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade da localização do exame vestibular</td>
+<td>Cidade da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado da localização do exame vestibular</td>
+<td>Estado da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal da localização do exame vestibular</td>
+<td>Código postal da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] date</td>
 <td>string</td>
-<td>data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] time</td>
 <td>string</td>
-<td>hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] status</td>
 <td>string</td>
-<td>status do exame vestibular</td>
+<td>Status do exame vestibular</td>
 </tr>
 <tr>
 <td>result</td>
 <td>string</td>
-<td>resultado do exame vestibular</td>
+<td>Resultado do exame vestibular</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-8'>Significado dos valores em status</h3>
@@ -2994,6 +3197,7 @@ Status Code: 200 OK
 <p>Resposta</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
@@ -3020,14 +3224,12 @@ Status Code: 200 OK
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"previous_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todos os exames em lote.</p>
 
-<p>Exames em lote são retornados em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da página anterior.</p>
+<p>Exames em lote são retornados em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar dados antecessores à lista atual. Para mais informações, consulte a sessão de <a href="#paginacao">paginação</a>.</p>
 <h3 id='parametros-9'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -3037,14 +3239,14 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>next_page</code></td>
-<td>Query</td>
-<td>valor utilizado para continuar uma paginação anterior</td>
+<td>starting_after</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados após o dado cujo id foi indicado</td>
 </tr>
 <tr>
-<td><code>previous_page</code></td>
-<td>Query</td>
-<td>valor utilizado para retornar na paginação anterior</td>
+<td>ending_before</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-9'>Informações de resultado</h3>
@@ -3056,79 +3258,79 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
+<td>has_more</td>
+<td>boolean</td>
+<td>Indica se há mais elementos disponíveis antes ou após essa página</td>
+</tr>
+<tr>
+<td>items</td>
+<td>array</td>
+<td>Lista de elementos com dados de inscrições de vestibular</td>
+</tr>
+<tr>
 <td>id</td>
 <td>number</td>
-<td>id do lote de exames</td>
+<td>Id do lote de exames</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada algum exame desse lote</td>
+<td>Cursos que usam como entrada algum exame desse lote</td>
 </tr>
 <tr>
 <td>exam_locations</td>
-<td>array de objects</td>
-<td>lista dos objetos dos endereços dos exames desse lote</td>
+<td>array</td>
+<td>Lista dos objetos dos endereços dos exames desse lote</td>
 </tr>
 <tr>
 <td>[exam_locations] address</td>
 <td>string</td>
-<td>endereço onde será feito o exame vestibular</td>
+<td>Endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] number</td>
 <td>string</td>
-<td>número de onde será feito o exame vestibular</td>
+<td>Número de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] neighborhood</td>
 <td>string</td>
-<td>bairro onde será feito o exame vestibular</td>
+<td>Bairro onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] city</td>
 <td>string</td>
-<td>cidade onde será feito o exame vestibular</td>
+<td>Cidade onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] state</td>
 <td>string</td>
-<td>estado onde será feito o exame vestibular</td>
+<td>Estado onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] postal_code</td>
 <td>string</td>
-<td>código postal de onde será feito o exame vestibular</td>
+<td>Código postal de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>dates</td>
 <td>array</td>
-<td>lista das datas dos exames</td>
+<td>Lista das datas dos exames</td>
 </tr>
 <tr>
 <td>times</td>
 <td>array</td>
-<td>lista dos horários de aplicações dos exames</td>
+<td>Lista dos horários de aplicações dos exames</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação dos exames entre <code>active</code> e <code>inactive</code></td>
+<td>Situação dos exames entre <code>active</code> e <code>inactive</code></td>
 </tr>
 <tr>
 <td>kind</td>
 <td>string</td>
-<td>tipo dos exames desse lote</td>
-</tr>
-<tr>
-<td>next_page</td>
-<td>string</td>
-<td>código para pegar os próximos passos</td>
-</tr>
-<tr>
-<td>previous_page</td>
-<td>string</td>
-<td>código para pegar os passos anteriores</td>
+<td>Tipo dos exames desse lote</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-status'>Significado dos status</h3>
@@ -3187,8 +3389,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam group by given ID."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam group by given id."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna um lote de exames específico.</p>
@@ -3203,7 +3405,7 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>path</td>
-<td>id do lote de exames</td>
+<td>Id do lote de exames</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-10'>Informações de resultado</h3>
@@ -3217,67 +3419,67 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do lote de exames</td>
+<td>Id do lote de exames</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada algum exame desse lote</td>
+<td>Cursos que usam como entrada algum exame desse lote</td>
 </tr>
 <tr>
 <td>exam_locations</td>
-<td>array de objects</td>
-<td>lista dos objetos dos endereços dos exames desse lote</td>
+<td>array</td>
+<td>Lista dos objetos dos endereços dos exames desse lote</td>
 </tr>
 <tr>
 <td>[exam_locations] address</td>
 <td>string</td>
-<td>endereço onde será feito o exame vestibular</td>
+<td>Endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] number</td>
 <td>string</td>
-<td>número de onde será feito o exame vestibular</td>
+<td>Número de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] neighborhood</td>
 <td>string</td>
-<td>bairro onde será feito o exame vestibular</td>
+<td>Bairro onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] city</td>
 <td>string</td>
-<td>cidade onde será feito o exame vestibular</td>
+<td>Cidade onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] state</td>
 <td>string</td>
-<td>estado onde será feito o exame vestibular</td>
+<td>Estado onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] postal_code</td>
 <td>string</td>
-<td>código postal de onde será feito o exame vestibular</td>
+<td>Código postal de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>dates</td>
 <td>array</td>
-<td>lista das datas dos exames</td>
+<td>Lista das datas dos exames</td>
 </tr>
 <tr>
 <td>times</td>
 <td>array</td>
-<td>lista dos horários de aplicações dos exames</td>
+<td>Lista dos horários de aplicações dos exames</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação dos exames entre <code>active</code> e <code>inactive</code></td>
+<td>Situação dos exames entre <code>active</code> e <code>inactive</code></td>
 </tr>
 <tr>
 <td>kind</td>
 <td>string</td>
-<td>tipo dos exames desse lote</td>
+<td>Tipo dos exames desse lote</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-status-2'>Significado dos status</h3>
@@ -3352,7 +3554,7 @@ Status Code: 200 OK
 <tr>
 <td>*.json</td>
 <td>json</td>
-<td>arquivo json com as informações do lote de exames</td>
+<td>Arquivo json com as informações do lote de exames</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-dos-argumentos'>Informações dos argumentos</h3>
@@ -3366,62 +3568,62 @@ Status Code: 200 OK
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada algum exame desse lote</td>
+<td>Cursos que usam como entrada algum exame desse lote</td>
 </tr>
 <tr>
 <td>exam_locations</td>
-<td>array de objects</td>
-<td>lista dos objetos dos endereços dos exames desse lote</td>
+<td>array</td>
+<td>Lista dos objetos dos endereços dos exames desse lote</td>
 </tr>
 <tr>
 <td>[exam_locations] address</td>
 <td>string</td>
-<td>endereço onde será feito o exame vestibular</td>
+<td>Endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] number</td>
 <td>string</td>
-<td>número de onde será feito o exame vestibular</td>
+<td>Número de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] neighborhood</td>
 <td>string</td>
-<td>bairro onde será feito o exame vestibular</td>
+<td>Bairro onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] city</td>
 <td>string</td>
-<td>cidade onde será feito o exame vestibular</td>
+<td>Cidade onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] state</td>
 <td>string</td>
-<td>estado onde será feito o exame vestibular</td>
+<td>Estado onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] postal_code</td>
 <td>string</td>
-<td>código postal de onde será feito o exame vestibular</td>
+<td>Código postal de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>dates</td>
 <td>array</td>
-<td>lista das datas dos exames</td>
+<td>Lista das datas dos exames</td>
 </tr>
 <tr>
 <td>times</td>
 <td>array</td>
-<td>lista dos horários de aplicações dos exames</td>
+<td>Lista dos horários de aplicações dos exames</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação dos exames entre <code>active</code> e <code>inactive</code></td>
+<td>Situação dos exames entre <code>active</code> e <code>inactive</code></td>
 </tr>
 <tr>
 <td>kind</td>
 <td>string</td>
-<td>tipo dos exames desse lote</td>
+<td>Tipo dos exames desse lote</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-status-3'>Significado dos status</h3>
@@ -3480,67 +3682,67 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do lote de exames</td>
+<td>Id do lote de exames</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada algum exame desse lote</td>
+<td>Cursos que usam como entrada algum exame desse lote</td>
 </tr>
 <tr>
 <td>exam_locations</td>
-<td>array de objects</td>
-<td>lista dos objetos dos endereços dos exames desse lote</td>
+<td>array</td>
+<td>Lista dos objetos dos endereços dos exames desse lote</td>
 </tr>
 <tr>
 <td>[exam_locations] address</td>
 <td>string</td>
-<td>endereço onde será feito o exame vestibular</td>
+<td>Endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] number</td>
 <td>string</td>
-<td>número de onde será feito o exame vestibular</td>
+<td>Número de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] neighborhood</td>
 <td>string</td>
-<td>bairro onde será feito o exame vestibular</td>
+<td>Bairro onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] city</td>
 <td>string</td>
-<td>cidade onde será feito o exame vestibular</td>
+<td>Cidade onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] state</td>
 <td>string</td>
-<td>estado onde será feito o exame vestibular</td>
+<td>Estado onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] postal_code</td>
 <td>string</td>
-<td>código postal de onde será feito o exame vestibular</td>
+<td>Código postal de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>dates</td>
 <td>array</td>
-<td>lista das datas dos exames</td>
+<td>Lista das datas dos exames</td>
 </tr>
 <tr>
 <td>times</td>
 <td>array</td>
-<td>lista dos horários de aplicações dos exames</td>
+<td>Lista dos horários de aplicações dos exames</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação dos exames entre <code>active</code> e <code>inactive</code></td>
+<td>Situação dos exames entre <code>active</code> e <code>inactive</code></td>
 </tr>
 <tr>
 <td>kind</td>
 <td>string</td>
-<td>tipo dos exames desse lote</td>
+<td>Tipo dos exames desse lote</td>
 </tr>
 </tbody></table>
 <h2 id='suspender-ou-ativar-lote-de-exames'>Suspender ou ativar lote de exames</h2>
@@ -3593,8 +3795,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam group by given ID."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam group by given id."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Suspende ou ativa um lote de exames.</p>
@@ -3609,7 +3811,7 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>path</td>
-<td>id do grupo de exame vestibular</td>
+<td>Id do grupo de exame vestibular</td>
 </tr>
 <tr>
 <td>status</td>
@@ -3644,67 +3846,67 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do lote de exames</td>
+<td>Id do lote de exames</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada algum exame desse lote</td>
+<td>Cursos que usam como entrada algum exame desse lote</td>
 </tr>
 <tr>
 <td>exam_locations</td>
-<td>array de objects</td>
-<td>lista dos objetos dos endereços dos exames desse lote</td>
+<td>array</td>
+<td>Lista dos objetos dos endereços dos exames desse lote</td>
 </tr>
 <tr>
 <td>[exam_locations] address</td>
 <td>string</td>
-<td>endereço onde será feito o exame vestibular</td>
+<td>Endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] number</td>
 <td>string</td>
-<td>número de onde será feito o exame vestibular</td>
+<td>Número de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] neighborhood</td>
 <td>string</td>
-<td>bairro onde será feito o exame vestibular</td>
+<td>Bairro onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] city</td>
 <td>string</td>
-<td>cidade onde será feito o exame vestibular</td>
+<td>Cidade onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] state</td>
 <td>string</td>
-<td>estado onde será feito o exame vestibular</td>
+<td>Estado onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_locations] postal_code</td>
 <td>string</td>
-<td>código postal de onde será feito o exame vestibular</td>
+<td>Código postal de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>dates</td>
 <td>array</td>
-<td>lista das datas dos exames</td>
+<td>Lista das datas dos exames</td>
 </tr>
 <tr>
 <td>times</td>
 <td>array</td>
-<td>lista dos horários de aplicações dos exames</td>
+<td>Lista dos horários de aplicações dos exames</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação dos exames entre <code>active</code> e <code>inactive</code></td>
+<td>Situação dos exames entre <code>active</code> e <code>inactive</code></td>
 </tr>
 <tr>
 <td>kind</td>
 <td>string</td>
-<td>tipo dos exames desse lote</td>
+<td>Tipo dos exames desse lote</td>
 </tr>
 </tbody></table>
 <h3 id='significado-do-retorno-de-status'>Significado do retorno de status</h3>
@@ -3733,6 +3935,7 @@ Status Code: 200 OK
 <p>Resposta</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
@@ -3754,14 +3957,12 @@ Status Code: 200 OK
       </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"previous_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todos os exames (ativos e suspensos).</p>
 
-<p>Exames são retornados em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da página anterior.</p>
+<p>Exames são retornados em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar dados antecessores à lista atual. Para mais informações, consulte a sessão de <a href="#paginacao">paginação</a>.</p>
 <h3 id='parametros-13'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -3771,14 +3972,14 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>next_page</code></td>
-<td>Query</td>
-<td>valor utilizado para continuar uma paginação anterior</td>
+<td>starting_after</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados após o dado cujo id foi indicado</td>
 </tr>
 <tr>
-<td><code>previous_page</code></td>
-<td>Query</td>
-<td>valor utilizado para retornar na paginação anterior</td>
+<td>ending_before</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-13'>Informações de resultado</h3>
@@ -3790,84 +3991,79 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
+<td>has_more</td>
+<td>boolean</td>
+<td>Indica se há mais elementos disponíveis antes ou após essa página</td>
+</tr>
+<tr>
 <td>items</td>
 <td>array</td>
-<td>lista de objetos dos exames</td>
+<td>Lista de elementos com dados dos exames</td>
 </tr>
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>exam_group_id</td>
 <td>number</td>
-<td>id referente ao grupo de exame pertencente</td>
+<td>Id referente ao grupo de exame pertencente</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada esse exame vestibular</td>
+<td>Cursos que usam como entrada esse exame vestibular</td>
 </tr>
 <tr>
 <td>exam_location</td>
 <td>object</td>
-<td>objeto do endereço onde será feito o exame vestibular</td>
+<td>Objeto do endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] address</td>
 <td>string</td>
-<td>endereço onde será feito o exame vestibular</td>
+<td>Endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número de onde será feito o exame vestibular</td>
+<td>Número de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro onde será feito o exame vestibular</td>
+<td>Bairro onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade onde será feito o exame vestibular</td>
+<td>Cidade onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado onde será feito o exame vestibular</td>
+<td>Estado onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal de onde será feito o exame vestibular</td>
+<td>Código postal de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>date</td>
 <td>string</td>
-<td>data do exame vestibular</td>
+<td>Data do exame vestibular</td>
 </tr>
 <tr>
 <td>time</td>
 <td>string</td>
-<td>horário do exame vestibular</td>
+<td>Horário do exame vestibular</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação do exame entre <code>active</code> e <code>inactive</code></td>
-</tr>
-<tr>
-<td>next_page</td>
-<td>string</td>
-<td>código para pegar os próximos passos</td>
-</tr>
-<tr>
-<td>previous_page</td>
-<td>string</td>
-<td>código para pegar os passos anteriores</td>
+<td>Situação do exame entre <code>active</code> e <code>inactive</code></td>
 </tr>
 </tbody></table>
 <h2 id='informacoes-de-um-unico-exame'>Informações de um único exame</h2>
@@ -3905,8 +4101,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam by given ID."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam by given id."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna um exame específico.</p>
@@ -3921,7 +4117,7 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>path</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-14'>Informações de resultado</h3>
@@ -3935,67 +4131,67 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>exam_group_id</td>
 <td>number</td>
-<td>id referente ao grupo de exame pertencente</td>
+<td>Id referente ao grupo de exame pertencente</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada esse exame vestibular</td>
+<td>Cursos que usam como entrada esse exame vestibular</td>
 </tr>
 <tr>
 <td>exam_location</td>
 <td>object</td>
-<td>objeto do endereço onde será feito o exame vestibular</td>
+<td>Objeto do endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] address</td>
 <td>string</td>
-<td>endereço onde será feito o exame vestibular</td>
+<td>Endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número de onde será feito o exame vestibular</td>
+<td>Número de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro onde será feito o exame vestibular</td>
+<td>Bairro onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade onde será feito o exame vestibular</td>
+<td>Cidade onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado onde será feito o exame vestibular</td>
+<td>Estado onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal de onde será feito o exame vestibular</td>
+<td>Código postal de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>date</td>
 <td>string</td>
-<td>data do exame vestibular</td>
+<td>Data do exame vestibular</td>
 </tr>
 <tr>
 <td>time</td>
 <td>string</td>
-<td>horário do exame vestibular</td>
+<td>Horário do exame vestibular</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação do exame entre <code>active</code> e <code>inactive</code></td>
+<td>Situação do exame entre <code>active</code> e <code>inactive</code></td>
 </tr>
 </tbody></table>
 <h2 id='criacao-de-exame'>Criação de exame</h2>
@@ -4047,62 +4243,62 @@ Status Code: 200 OK
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada algum exame desse lote</td>
+<td>Cursos que usam como entrada algum exame desse lote</td>
 </tr>
 <tr>
 <td>exam_location</td>
-<td>array de objects</td>
-<td>lista dos objetos dos endereços dos exames desse lote</td>
+<td>array</td>
+<td>Lista dos objetos dos endereços dos exames desse lote</td>
 </tr>
 <tr>
 <td>[exam_location] address</td>
 <td>string</td>
-<td>endereço onde será feito o exame vestibular</td>
+<td>Endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número de onde será feito o exame vestibular</td>
+<td>Número de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro onde será feito o exame vestibular</td>
+<td>Bairro onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade onde será feito o exame vestibular</td>
+<td>Cidade onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado onde será feito o exame vestibular</td>
+<td>Estado onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal de onde será feito o exame vestibular</td>
+<td>Código postal de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>date</td>
 <td>string</td>
-<td>data do exame vestibular</td>
+<td>Data do exame vestibular</td>
 </tr>
 <tr>
 <td>time</td>
 <td>string</td>
-<td>horário do exame vestibular</td>
+<td>Horário do exame vestibular</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação dos exames entre <code>active</code> ou <code>inactive</code></td>
+<td>Situação dos exames entre <code>active</code> ou <code>inactive</code></td>
 </tr>
 <tr>
 <td>kind</td>
 <td>string</td>
-<td>tipo dos exames desse lote</td>
+<td>Tipo dos exames desse lote</td>
 </tr>
 </tbody></table>
 
@@ -4139,72 +4335,72 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do lote de exames</td>
+<td>Id do lote de exames</td>
 </tr>
 <tr>
 <td>exam_group_id</td>
 <td>number</td>
-<td>id referente ao grupo de exame pertencente</td>
+<td>Id referente ao grupo de exame pertencente</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada algum exame desse lote</td>
+<td>Cursos que usam como entrada algum exame desse lote</td>
 </tr>
 <tr>
 <td>exam_location</td>
-<td>array de objects</td>
-<td>lista dos objetos dos endereços dos exames desse lote</td>
+<td>array</td>
+<td>Lista dos objetos dos endereços dos exames desse lote</td>
 </tr>
 <tr>
 <td>[exam_location] address</td>
 <td>string</td>
-<td>endereço onde será feito o exame vestibular</td>
+<td>Endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número de onde será feito o exame vestibular</td>
+<td>Número de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro onde será feito o exame vestibular</td>
+<td>Bairro onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade onde será feito o exame vestibular</td>
+<td>Cidade onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado onde será feito o exame vestibular</td>
+<td>Estado onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal de onde será feito o exame vestibular</td>
+<td>Código postal de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>date</td>
 <td>string</td>
-<td>data do exame vestibular</td>
+<td>Data do exame vestibular</td>
 </tr>
 <tr>
 <td>time</td>
 <td>string</td>
-<td>horário do exame vestibular</td>
+<td>Horário do exame vestibular</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação dos exames entre <code>active</code> ou <code>inactive</code></td>
+<td>Situação dos exames entre <code>active</code> ou <code>inactive</code></td>
 </tr>
 <tr>
 <td>kind</td>
 <td>string</td>
-<td>tipo dos exames desse lote</td>
+<td>Tipo dos exames desse lote</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-status-4'>Significado dos status</h3>
@@ -4268,8 +4464,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam by given ID."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any exam by given id."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Suspende ou ativa um exame.</p>
@@ -4284,7 +4480,7 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>path</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>status</td>
@@ -4319,67 +4515,67 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>exam_group_id</td>
 <td>number</td>
-<td>id referente ao grupo de exame pertencente</td>
+<td>Id referente ao grupo de exame pertencente</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada esse exame vestibular</td>
+<td>Cursos que usam como entrada esse exame vestibular</td>
 </tr>
 <tr>
 <td>exam_location</td>
 <td>object</td>
-<td>objeto do endereço onde será feito o exame vestibular</td>
+<td>Objeto do endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] address</td>
 <td>string</td>
-<td>endereço onde será feito o exame vestibular</td>
+<td>Endereço onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número de onde será feito o exame vestibular</td>
+<td>Número de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro onde será feito o exame vestibular</td>
+<td>Bairro onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade onde será feito o exame vestibular</td>
+<td>Cidade onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado onde será feito o exame vestibular</td>
+<td>Estado onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal de onde será feito o exame vestibular</td>
+<td>Código postal de onde será feito o exame vestibular</td>
 </tr>
 <tr>
 <td>date</td>
 <td>string</td>
-<td>data do exame vestibular</td>
+<td>Data do exame vestibular</td>
 </tr>
 <tr>
 <td>time</td>
 <td>string</td>
-<td>horário do exame vestibular</td>
+<td>Horário do exame vestibular</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação do exame entre <code>active</code> e <code>inactive</code></td>
+<td>Situação do exame entre <code>active</code> e <code>inactive</code></td>
 </tr>
 </tbody></table>
 <h1 id='exame-de-enem'>Exame de Enem</h1><h2 id='listar-todos-os-exames-de-enem'>Listar todos os exames de Enem</h2>
@@ -4392,6 +4588,7 @@ Status Code: 200 OK
 <p>Resposta</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">789</span><span class="p">,</span><span class="w">
@@ -4409,14 +4606,12 @@ Status Code: 200 OK
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"previous_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todos os exames de enem.</p>
 
-<p>Exames de ENEM são retornados em lote de 10, ordenadas pela última atualização realizada. Se houver mais resultados, <code>next_page</code> retorna preenchido para ser utilizado como parâmetro na próxima requisição para continuar. O parâmetro <code>previous_page</code> será preenchido com o primeiro id quando utilizado <code>next_page</code>, que serve para pegar as informações da pagina anterior.</p>
+<p>Exames de ENEM são retornados em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar dados antecessores à lista atual. Para mais informações, consulte a sessão de <a href="#paginacao">paginação</a>.</p>
 <h3 id='parametros-16'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -4426,14 +4621,14 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
-<td><code>next_page</code></td>
-<td>Query</td>
-<td>valor utilizado para continuar uma paginação anterior</td>
+<td>starting_after</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados após o dado cujo id foi indicado</td>
 </tr>
 <tr>
-<td><code>previous_page</code></td>
-<td>Query</td>
-<td>valor utilizado para retornar na paginação anterior</td>
+<td>ending_before</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-16'>Informações de resultado</h3>
@@ -4445,59 +4640,59 @@ Status Code: 200 OK
 </tr>
 </thead><tbody>
 <tr>
+<td>has_more</td>
+<td>boolean</td>
+<td>Indica se há mais elementos disponíveis antes ou após essa página</td>
+</tr>
+<tr>
+<td>items</td>
+<td>array</td>
+<td>Lista de elementos com dados de inscrições de vestibular</td>
+</tr>
+<tr>
 <td>id</td>
 <td>number</td>
-<td>id do exame de enem</td>
+<td>Id do exame de enem</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada esse exame de enem</td>
+<td>Cursos que usam como entrada esse exame de enem</td>
 </tr>
 <tr>
 <td>minimum_grades</td>
 <td>object</td>
-<td>objeto com informações de nota mínima exigida pela faculdade</td>
+<td>Objeto com informações de nota mínima exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] redacao</td>
 <td>float</td>
-<td>nota mínima de redação exigida pela faculdade</td>
+<td>Nota mínima de redação exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] humanas</td>
 <td>float</td>
-<td>nota mínima de humanas exigida pela faculdade</td>
+<td>Nota mínima de humanas exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] natureza</td>
 <td>float</td>
-<td>nota mínima de natureza exigida pela faculdade</td>
+<td>Nota mínima de natureza exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] linguagens</td>
 <td>float</td>
-<td>nota mínima de linguagens exigida pela faculdade</td>
+<td>Nota mínima de linguagens exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] matematica</td>
 <td>float</td>
-<td>nota mínima de matemática exigida pela faculdade</td>
+<td>Nota mínima de matemática exigida pela faculdade</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
-</tr>
-<tr>
-<td>next_page</td>
-<td>string</td>
-<td>código para pegar os próximos passos</td>
-</tr>
-<tr>
-<td>previous_page</td>
-<td>string</td>
-<td>código para pegar os passos anteriores</td>
+<td>Situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
 </tr>
 </tbody></table>
 <h2 id='informacoes-de-um-unico-exame-de-enem'>Informações de um único exame de Enem</h2>
@@ -4531,8 +4726,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any enem exam by given ID."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any enem exam by given id."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna um exame de enem específico.</p>
@@ -4547,7 +4742,7 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do exame de enem</td>
+<td>Id do exame de enem</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-17'>Informações de resultado</h3>
@@ -4561,47 +4756,47 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do exame de enem</td>
+<td>Id do exame de enem</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada esse exame de enem</td>
+<td>Cursos que usam como entrada esse exame de enem</td>
 </tr>
 <tr>
 <td>minimum_grades</td>
 <td>object</td>
-<td>objeto com informações de nota mínima exigida pela faculdade</td>
+<td>Objeto com informações de nota mínima exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] redacao</td>
 <td>float</td>
-<td>nota mínima de redação exigida pela faculdade</td>
+<td>Nota mínima de redação exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] humanas</td>
 <td>float</td>
-<td>nota mínima de humanas exigida pela faculdade</td>
+<td>Nota mínima de humanas exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] natureza</td>
 <td>float</td>
-<td>nota mínima de natureza exigida pela faculdade</td>
+<td>Nota mínima de natureza exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] linguagens</td>
 <td>float</td>
-<td>nota mínima de linguagens exigida pela faculdade</td>
+<td>Nota mínima de linguagens exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] matematica</td>
 <td>float</td>
-<td>nota mínima de matemática exigida pela faculdade</td>
+<td>Nota mínima de matemática exigida pela faculdade</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
+<td>Situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
 </tr>
 </tbody></table>
 <h2 id='criacao-de-exame-de-enem'>Criação de exame de Enem</h2>
@@ -4651,7 +4846,7 @@ Status Code: 200 OK
 <tr>
 <td>*.json</td>
 <td>json</td>
-<td>arquivo json com as informações do exame de enem</td>
+<td>Arquivo json com as informações do exame de enem</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-dos-argumentos-3'>Informações dos argumentos</h3>
@@ -4665,42 +4860,42 @@ Status Code: 200 OK
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada esse exame de enem</td>
+<td>Cursos que usam como entrada esse exame de enem</td>
 </tr>
 <tr>
 <td>minimum_grades</td>
 <td>object</td>
-<td>objeto com informações de nota mínima exigida pela faculdade</td>
+<td>Objeto com informações de nota mínima exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] redacao</td>
 <td>float</td>
-<td>nota mínima de redação exigida pela faculdade</td>
+<td>Nota mínima de redação exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] humanas</td>
 <td>float</td>
-<td>nota mínima de humanas exigida pela faculdade</td>
+<td>Nota mínima de humanas exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] natureza</td>
 <td>float</td>
-<td>nota mínima de natureza exigida pela faculdade</td>
+<td>Nota mínima de natureza exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] linguagens</td>
 <td>float</td>
-<td>nota mínima de linguagens exigida pela faculdade</td>
+<td>Nota mínima de linguagens exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] matematica</td>
 <td>float</td>
-<td>nota mínima de matemática exigida pela faculdade</td>
+<td>Nota mínima de matemática exigida pela faculdade</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
+<td>Situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
 </tr>
 </tbody></table>
 
@@ -4734,47 +4929,47 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do exame de enem</td>
+<td>Id do exame de enem</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada esse exame de enem</td>
+<td>Cursos que usam como entrada esse exame de enem</td>
 </tr>
 <tr>
 <td>minimum_grades</td>
 <td>object</td>
-<td>objeto com informações de nota mínima exigida pela faculdade</td>
+<td>Objeto com informações de nota mínima exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] redacao</td>
 <td>float</td>
-<td>nota mínima de redação exigida pela faculdade</td>
+<td>Nota mínima de redação exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] humanas</td>
 <td>float</td>
-<td>nota mínima de humanas exigida pela faculdade</td>
+<td>Nota mínima de humanas exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] natureza</td>
 <td>float</td>
-<td>nota mínima de natureza exigida pela faculdade</td>
+<td>Nota mínima de natureza exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] linguagens</td>
 <td>float</td>
-<td>nota mínima de linguagens exigida pela faculdade</td>
+<td>Nota mínima de linguagens exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] matematica</td>
 <td>float</td>
-<td>nota mínima de matemática exigida pela faculdade</td>
+<td>Nota mínima de matemática exigida pela faculdade</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
+<td>Situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
 </tr>
 </tbody></table>
 <h2 id='suspender-um-exame-de-enem-inteiro'>Suspender um exame de Enem inteiro</h2>
@@ -4818,8 +5013,8 @@ Status Code: 200 OK
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any enem exam by given ID."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any enem exam by given id."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Suspende um exame de Enem específico.</p>
@@ -4834,12 +5029,12 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do exame de enem</td>
+<td>Id do exame de enem</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação do exame de enem</td>
+<td>Situação do exame de enem</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-do-resultado'>Informações do resultado</h3>
@@ -4853,47 +5048,47 @@ Status Code: 200 OK
 <tr>
 <td>id</td>
 <td>number</td>
-<td>id do exame de enem</td>
+<td>Id do exame de enem</td>
 </tr>
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada esse exame de enem</td>
+<td>Cursos que usam como entrada esse exame de enem</td>
 </tr>
 <tr>
 <td>minimum_grades</td>
 <td>object</td>
-<td>objeto com informações de nota mínima exigida pela faculdade</td>
+<td>Objeto com informações de nota mínima exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] redacao</td>
 <td>float</td>
-<td>nota mínima de redação exigida pela faculdade</td>
+<td>Nota mínima de redação exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] humanas</td>
 <td>float</td>
-<td>nota mínima de humanas exigida pela faculdade</td>
+<td>Nota mínima de humanas exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] natureza</td>
 <td>float</td>
-<td>nota mínima de natureza exigida pela faculdade</td>
+<td>Nota mínima de natureza exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] linguagens</td>
 <td>float</td>
-<td>nota mínima de linguagens exigida pela faculdade</td>
+<td>Nota mínima de linguagens exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] matematica</td>
 <td>float</td>
-<td>nota mínima de matemática exigida pela faculdade</td>
+<td>Nota mínima de matemática exigida pela faculdade</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
+<td>Situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
 </tr>
 </tbody></table>
 <h2 id='suspender-um-exame-de-enem-parcialmente'>Suspender um exame de Enem parcialmente</h2>
@@ -4934,7 +5129,7 @@ Status Code: 200 OK
 <tr>
 <td>*.json</td>
 <td>json</td>
-<td>id do exame de enem</td>
+<td>Id do exame de enem</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-dos-argumentos-4'>Informações dos argumentos</h3>
@@ -4948,7 +5143,7 @@ Status Code: 200 OK
 <tr>
 <td>course_skus</td>
 <td>array</td>
-<td>cursos que usam como entrada esse exame de enem</td>
+<td>Cursos que usam como entrada esse exame de enem</td>
 </tr>
 </tbody></table>
 <h1 id='notificacoes'>Notificações</h1>
@@ -4970,17 +5165,17 @@ Status Code: 200 OK
 <tr>
 <td>created</td>
 <td>string</td>
-<td>data que foi criado o evento (timestamp UTC)</td>
+<td>Data que foi criado o evento (timestamp UTC)</td>
 </tr>
 <tr>
 <td>api_version</td>
 <td>string</td>
-<td>informação da versão atual da API</td>
+<td>Informação da versão atual da API</td>
 </tr>
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>tipo de evento</td>
+<td>Tipo de evento</td>
 </tr>
 <tr>
 <td>data</td>
@@ -5033,112 +5228,112 @@ Status Code: 200 OK
 <tr>
 <td>created</td>
 <td>string</td>
-<td>data que foi criado o evento (timestamp UTC)</td>
+<td>Data que foi criado o evento (timestamp UTC)</td>
 </tr>
 <tr>
 <td>api_version</td>
 <td>string</td>
-<td>informação da versão atual da API</td>
+<td>Informação da versão atual da API</td>
 </tr>
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>tipo de evento, no caso <code>NewAdmission</code></td>
+<td>Tipo de evento, no caso <code>NewAdmission</code></td>
 </tr>
 <tr>
 <td>data</td>
 <td>object</td>
-<td>objeto com informações de acordo com o tipo de evento</td>
+<td>Objeto com informações de acordo com o tipo de evento</td>
 </tr>
 <tr>
 <td>admission</td>
 <td>object</td>
-<td>objeto com dados do processo de admissão do aluno</td>
+<td>Objeto com dados do processo de admissão do aluno</td>
 </tr>
 <tr>
 <td>[admission] id</td>
 <td>number</td>
-<td>id do processo de admissão</td>
+<td>Id do processo de admissão</td>
 </tr>
 <tr>
 <td>[admission] course_sku</td>
 <td>string</td>
-<td>código do curso referente a essa matrícula</td>
+<td>Código do curso referente a essa matrícula</td>
 </tr>
 <tr>
 <td>[admission] status</td>
 <td>string</td>
-<td>status da admissão do aluno</td>
+<td>Status da admissão do aluno</td>
 </tr>
 <tr>
 <td>[admission] student</td>
 <td>object</td>
-<td>objeto com dados do aluno</td>
+<td>Objeto com dados do aluno</td>
 </tr>
 <tr>
 <td>[student] id</td>
 <td>number</td>
-<td>id do aluno</td>
+<td>Id do aluno</td>
 </tr>
 <tr>
 <td>[student] name</td>
 <td>string</td>
-<td>nome do aluno</td>
+<td>Nome do aluno</td>
 </tr>
 <tr>
 <td>[student] cpf</td>
 <td>string</td>
-<td>cpf do aluno</td>
+<td>CPF do aluno</td>
 </tr>
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>data de nascimento do aluno</td>
+<td>Data de nascimento do aluno</td>
 </tr>
 <tr>
 <td>[student] emails</td>
 <td>array de string</td>
-<td>lista de emails do aluno</td>
+<td>Lista de emails do aluno</td>
 </tr>
 <tr>
 <td>[student] phones</td>
 <td>array de string</td>
-<td>lista de telefones do aluno</td>
+<td>Lista de telefones do aluno</td>
 </tr>
 <tr>
 <td>[student] address_information</td>
 <td>object</td>
-<td>objeto com dados onde aluno reside</td>
+<td>Objeto com dados onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] address</td>
 <td>string</td>
-<td>endereço onde aluno reside</td>
+<td>Endereço onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] number</td>
 <td>string</td>
-<td>número onde aluno reside</td>
+<td>Número onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] neighborhood</td>
 <td>string</td>
-<td>bairro onde aluno reside</td>
+<td>Bairro onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] city</td>
 <td>string</td>
-<td>cidade onde aluno reside</td>
+<td>Cidade onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] state</td>
 <td>string</td>
-<td>estado onde aluno reside</td>
+<td>Estado onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] postal_code</td>
 <td>string</td>
-<td>código postal onde aluno reside</td>
+<td>Código postal onde aluno reside</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-9'>Significado dos valores em status</h3>
@@ -5227,202 +5422,202 @@ Status Code: 200 OK
 <tr>
 <td>created</td>
 <td>string</td>
-<td>data que foi criado o evento (timestamp UTC)</td>
+<td>Data que foi criado o evento (timestamp UTC)</td>
 </tr>
 <tr>
 <td>api_version</td>
 <td>string</td>
-<td>informação da versão atual da API</td>
+<td>Informação da versão atual da API</td>
 </tr>
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>tipo de evento, no caso <code>NewApplication</code></td>
+<td>Tipo de evento, no caso <code>NewApplication</code></td>
 </tr>
 <tr>
 <td>data</td>
 <td>object</td>
-<td>objeto com informações de acordo com o tipo de evento</td>
+<td>Objeto com informações de acordo com o tipo de evento</td>
 </tr>
 <tr>
 <td>application</td>
 <td>object</td>
-<td>objeto com informações do vestibular</td>
+<td>Objeto com informações do vestibular</td>
 </tr>
 <tr>
 <td>[application] id</td>
 <td>number</td>
-<td>id da inscrição para exame</td>
+<td>Id da inscrição para exame</td>
 </tr>
 <tr>
 <td>[application] type</td>
 <td>string</td>
-<td>tipo de exame vestibular (<em>neste evento o valor sempre será <code>exam</code></em>)</td>
+<td>Tipo de exame vestibular (<em>neste evento o valor sempre será <code>exam</code></em>)</td>
 </tr>
 <tr>
 <td>[application] admission</td>
 <td>object</td>
-<td>objeto com dados do processo de admissão do aluno</td>
+<td>Objeto com dados do processo de admissão do aluno</td>
 </tr>
 <tr>
 <td>[admission] id</td>
 <td>number</td>
-<td>id do processo de admissão</td>
+<td>Id do processo de admissão</td>
 </tr>
 <tr>
 <td>[admission] course_sku</td>
 <td>string</td>
-<td>código do curso referente a essa matrícula</td>
+<td>Código do curso referente a essa matrícula</td>
 </tr>
 <tr>
 <td>[admission] status</td>
 <td>string</td>
-<td>status da admissão do aluno (<em>neste evento o valor sempre será <code>pre-registered</code></em>)</td>
+<td>Status da admissão do aluno (<em>neste evento o valor sempre será <code>pre-registered</code></em>)</td>
 </tr>
 <tr>
 <td>[admission] student</td>
 <td>object</td>
-<td>objeto com dados do aluno</td>
+<td>Objeto com dados do aluno</td>
 </tr>
 <tr>
 <td>[student] id</td>
 <td>number</td>
-<td>id do aluno</td>
+<td>Id do aluno</td>
 </tr>
 <tr>
 <td>[student] name</td>
 <td>string</td>
-<td>nome do aluno</td>
+<td>Nome do aluno</td>
 </tr>
 <tr>
 <td>[student] cpf</td>
 <td>string</td>
-<td>cpf do aluno</td>
+<td>CPF do aluno</td>
 </tr>
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>data de nascimento do aluno</td>
+<td>Data de nascimento do aluno</td>
 </tr>
 <tr>
 <td>[student] emails</td>
 <td>array de string</td>
-<td>lista de emails do aluno</td>
+<td>Lista de emails do aluno</td>
 </tr>
 <tr>
 <td>[student] phones</td>
 <td>array de string</td>
-<td>lista de telefones do aluno</td>
+<td>Lista de telefones do aluno</td>
 </tr>
 <tr>
 <td>[student] address_information</td>
 <td>object</td>
-<td>objeto com dados onde aluno reside</td>
+<td>Objeto com dados onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] address</td>
 <td>string</td>
-<td>endereço onde aluno reside</td>
+<td>Endereço onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] number</td>
 <td>string</td>
-<td>número onde aluno reside</td>
+<td>Número onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] neighborhood</td>
 <td>string</td>
-<td>bairro onde aluno reside</td>
+<td>Bairro onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] city</td>
 <td>string</td>
-<td>cidade onde aluno reside</td>
+<td>Cidade onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] state</td>
 <td>string</td>
-<td>estado onde aluno reside</td>
+<td>Estado onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] postal_code</td>
 <td>string</td>
-<td>código postal onde aluno reside</td>
+<td>Código postal onde aluno reside</td>
 </tr>
 <tr>
 <td>[application] exam</td>
 <td>object</td>
-<td>objeto com informações do exame vestibular</td>
+<td>Objeto com informações do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] id</td>
 <td>number</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] exam_group_id</td>
 <td>number</td>
-<td>id referente ao grupo de exame pertencente</td>
+<td>Id referente ao grupo de exame pertencente</td>
 </tr>
 <tr>
 <td>[exam] course_skus</td>
 <td>array</td>
-<td>lista com os cursos pertencentes a este exame vestibular</td>
+<td>Lista com os cursos pertencentes a este exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] exam_location</td>
 <td>object</td>
-<td>objeto com dados do exame vestibular</td>
+<td>Objeto com dados do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] address</td>
 <td>string</td>
-<td>endereço da localização do exame vestibular</td>
+<td>Endereço da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] number</td>
 <td>string</td>
-<td>número da localização do exame vestibular</td>
+<td>Número da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] neighborhood</td>
 <td>string</td>
-<td>bairro da localização do exame vestibular</td>
+<td>Bairro da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] city</td>
 <td>string</td>
-<td>cidade da localização do exame vestibular</td>
+<td>Cidade da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] state</td>
 <td>string</td>
-<td>estado da localização do exame vestibular</td>
+<td>Estado da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam_location] postal_code</td>
 <td>string</td>
-<td>código postal da localização do exame vestibular</td>
+<td>Código postal da localização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] date</td>
 <td>string</td>
-<td>data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] time</td>
 <td>string</td>
-<td>hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] status</td>
 <td>string</td>
-<td>status do exame vestibular</td>
+<td>Status do exame vestibular</td>
 </tr>
 <tr>
 <td>[application] result</td>
 <td>string</td>
-<td>resultado do exame vestibular (<em>neste evento o valor sempre será <code>null</code></em>)</td>
+<td>Resultado do exame vestibular (<em>neste evento o valor sempre será <code>null</code></em>)</td>
 </tr>
 </tbody></table>
 <h2 id='nova-quot-inscricao-para-exame-quot-enem'>Nova &quot;inscrição para exame&quot; (ENEM)</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -5501,222 +5696,222 @@ Status Code: 200 OK
 <tr>
 <td>created</td>
 <td>string</td>
-<td>data que foi criado o evento (timestamp UTC)</td>
+<td>Data que foi criado o evento (timestamp UTC)</td>
 </tr>
 <tr>
 <td>api_version</td>
 <td>string</td>
-<td>informação da versão atual da API</td>
+<td>Informação da versão atual da API</td>
 </tr>
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>tipo de evento, no caso <code>NewApplication</code></td>
+<td>Tipo de evento, no caso <code>NewApplication</code></td>
 </tr>
 <tr>
 <td>data</td>
 <td>object</td>
-<td>objeto com informações de acordo com o tipo de evento</td>
+<td>Objeto com informações de acordo com o tipo de evento</td>
 </tr>
 <tr>
 <td>application</td>
 <td>object</td>
-<td>objeto com informações do vestibular</td>
+<td>Objeto com informações do vestibular</td>
 </tr>
 <tr>
 <td>[application] id</td>
 <td>number</td>
-<td>id da inscrição para exame</td>
+<td>Id da inscrição para exame</td>
 </tr>
 <tr>
 <td>[application] type</td>
 <td>string</td>
-<td>tipo de exame vestibular (<em>neste evento o valor sempre será <code>enem</code></em>)</td>
+<td>Tipo de exame vestibular (<em>neste evento o valor sempre será <code>enem</code></em>)</td>
 </tr>
 <tr>
 <td>[application] admission</td>
 <td>object</td>
-<td>objeto com dados do processo de admissão do aluno</td>
+<td>Objeto com dados do processo de admissão do aluno</td>
 </tr>
 <tr>
 <td>[admission] id</td>
 <td>number</td>
-<td>id do processo de admissão</td>
+<td>Id do processo de admissão</td>
 </tr>
 <tr>
 <td>[admission] course_sku</td>
 <td>string</td>
-<td>código do curso referente a essa matrícula</td>
+<td>Código do curso referente a essa matrícula</td>
 </tr>
 <tr>
 <td>[admission] status</td>
 <td>string</td>
-<td>status da admissão do aluno (<em>neste evento o valor sempre será <code>pre-registered</code></em>)</td>
+<td>Status da admissão do aluno (<em>neste evento o valor sempre será <code>pre-registered</code></em>)</td>
 </tr>
 <tr>
 <td>[admission] student</td>
 <td>object</td>
-<td>objeto com dados do aluno</td>
+<td>Objeto com dados do aluno</td>
 </tr>
 <tr>
 <td>[student] id</td>
 <td>number</td>
-<td>id do aluno</td>
+<td>Id do aluno</td>
 </tr>
 <tr>
 <td>[student] name</td>
 <td>string</td>
-<td>nome do aluno</td>
+<td>Nome do aluno</td>
 </tr>
 <tr>
 <td>[student] cpf</td>
 <td>string</td>
-<td>cpf do aluno</td>
+<td>CPF do aluno</td>
 </tr>
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>data de nascimento do aluno</td>
+<td>Data de nascimento do aluno</td>
 </tr>
 <tr>
 <td>[student] emails</td>
 <td>array de string</td>
-<td>lista de emails do aluno</td>
+<td>Lista de emails do aluno</td>
 </tr>
 <tr>
 <td>[student] phones</td>
 <td>array de string</td>
-<td>lista de telefones do aluno</td>
+<td>Lista de telefones do aluno</td>
 </tr>
 <tr>
 <td>[student] address_information</td>
 <td>object</td>
-<td>objeto com dados onde aluno reside</td>
+<td>Objeto com dados onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] address</td>
 <td>string</td>
-<td>endereço onde aluno reside</td>
+<td>Endereço onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] number</td>
 <td>string</td>
-<td>número onde aluno reside</td>
+<td>Número onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] neighborhood</td>
 <td>string</td>
-<td>bairro onde aluno reside</td>
+<td>Bairro onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] city</td>
 <td>string</td>
-<td>cidade onde aluno reside</td>
+<td>Cidade onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] state</td>
 <td>string</td>
-<td>estado onde aluno reside</td>
+<td>Estado onde aluno reside</td>
 </tr>
 <tr>
 <td>[address_information] postal_code</td>
 <td>string</td>
-<td>código postal onde aluno reside</td>
+<td>Código postal onde aluno reside</td>
 </tr>
 <tr>
 <td>[application] exam_application_info</td>
 <td>object</td>
-<td>objeto com informações da grade de notas obtida pelo aluno no enem</td>
+<td>Objeto com informações da grade de notas obtida pelo aluno no enem</td>
 </tr>
 <tr>
 <td>[exam_application_info] grades</td>
 <td>object</td>
-<td>objeto com informações de notas obtida pelo aluno no enem</td>
+<td>Objeto com informações de notas obtida pelo aluno no enem</td>
 </tr>
 <tr>
 <td>[grades] redacao</td>
 <td>float</td>
-<td>nota obtida pelo aluno na redação</td>
+<td>Nota obtida pelo aluno na redação</td>
 </tr>
 <tr>
 <td>[grades] humanas</td>
 <td>float</td>
-<td>nota obtida pelo aluno em humanas</td>
+<td>Nota obtida pelo aluno em humanas</td>
 </tr>
 <tr>
 <td>[grades] natureza</td>
 <td>float</td>
-<td>nota obtida pelo aluno em natureza</td>
+<td>Nota obtida pelo aluno em natureza</td>
 </tr>
 <tr>
 <td>[grades] linguagens</td>
 <td>float</td>
-<td>nota obtida pelo aluno em linguagens</td>
+<td>Nota obtida pelo aluno em linguagens</td>
 </tr>
 <tr>
 <td>[grades] matematica</td>
 <td>float</td>
-<td>nota obtida pelo aluno em matemática</td>
+<td>Nota obtida pelo aluno em matemática</td>
 </tr>
 <tr>
 <td>[application] exam</td>
 <td>object</td>
-<td>objeto com informações do exame vestibular</td>
+<td>Objeto com informações do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] id</td>
 <td>number</td>
-<td>id do exame vestibular</td>
+<td>Id do exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] exam_group_id</td>
 <td>number</td>
-<td>id referente ao grupo de exame pertencente</td>
+<td>Id referente ao grupo de exame pertencente</td>
 </tr>
 <tr>
 <td>[exam] course_skus</td>
 <td>array</td>
-<td>lista com os cursos pertencentes a este exame vestibular</td>
+<td>Lista com os cursos pertencentes a este exame vestibular</td>
 </tr>
 <tr>
 <td>[exam] minimum_grades</td>
 <td>object</td>
-<td>objeto com informações de nota mínima exigida pela faculdade</td>
+<td>Objeto com informações de nota mínima exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] redacao</td>
 <td>float</td>
-<td>nota mínima de redação exigida pela faculdade</td>
+<td>Nota mínima de redação exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] humanas</td>
 <td>float</td>
-<td>nota mínima de humanas exigida pela faculdade</td>
+<td>Nota mínima de humanas exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] natureza</td>
 <td>float</td>
-<td>nota mínima de natureza exigida pela faculdade</td>
+<td>Nota mínima de natureza exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] linguagens</td>
 <td>float</td>
-<td>nota mínima de linguagens exigida pela faculdade</td>
+<td>Nota mínima de linguagens exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[minimum_grades] matematica</td>
 <td>float</td>
-<td>nota mínima de matemática exigida pela faculdade</td>
+<td>Nota mínima de matemática exigida pela faculdade</td>
 </tr>
 <tr>
 <td>[exam] status</td>
 <td>string</td>
-<td>status do exame vestibular</td>
+<td>Status do exame vestibular</td>
 </tr>
 <tr>
 <td>[application] result</td>
 <td>string</td>
-<td>resultado do exame vestibular (<em>neste evento o valor sempre será <code>null</code></em>)</td>
+<td>Resultado do exame vestibular (<em>neste evento o valor sempre será <code>null</code></em>)</td>
 </tr>
 </tbody></table>
 <h2 id='listagem-de-notificacoes'>Listagem de notificações</h2>
