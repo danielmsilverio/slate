@@ -252,6 +252,12 @@
                   <li>
                     <a href="#uso-do-cursor-ending_before" class="toc-h2 toc-link" data-title="Uso do cursor ending_before">Uso do cursor ending_before</a>
                   </li>
+                  <li>
+                    <a href="#uso-do-filtro-start_date" class="toc-h2 toc-link" data-title="Uso do filtro start_date">Uso do filtro start_date</a>
+                  </li>
+                  <li>
+                    <a href="#uso-do-filtro-end_date" class="toc-h2 toc-link" data-title="Uso do filtro end_date">Uso do filtro end_date</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -405,7 +411,7 @@ Status Code: 200 OK
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
     </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid Permission"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You are not authorized to access this resource with these paramaters"</span><span class="w">
+    </span><span class="s2">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You are not authorized to access this resource with these parameters"</span><span class="w">
   </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -427,7 +433,8 @@ Status Code: 200 OK
       </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="p">,</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -435,7 +442,8 @@ Status Code: 200 OK
       </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-RJ"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -443,7 +451,7 @@ Status Code: 200 OK
 <p>A API utiliza paginação baseada em cursor atráves dos parâmetros <code>starting_after</code> e <code>ending_before</code>. Ambos recebem um id de um dado existente e retorna uma lista com até 25 elementos no máximo.
 O parâmetro <code>ending_before</code> faz a requisição retornar elementos cujo id é maior que o indicado pelo parâmetro. Em contrapartida, o parâmetro <code>starting_after</code> faz a requisição retornar elementos listados após o dado cujo id foi indicado.
 O atributo <code>has_more</code> da resposta indica se há mais dados disponíveis depois dessa página. Se for <code>false</code>, significa que é o fim da lista e não há mais dados. Se for <code>true</code>, significa que há mais dados a serem resgatados. Após uma requisição utilizando o parâmetro <code>ending_before</code>, o atributo <code>has_more</code> se refere a possibilidade de retornar mais dados anteriores à página atual.</p>
-<h3 id='parametros-de-cursores'>Parâmetros de cursores</h3>
+<h3 id='parametros-de-paginacao'>Parâmetros de paginação</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -460,6 +468,16 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>ending_before</td>
 <td>cursor</td>
 <td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-de-dados-com-paginacao'>Informações de resultado de dados com paginação</h3>
@@ -498,7 +516,8 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-16T03:15Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="p">,</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -506,13 +525,14 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-RJ"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-20T03:15Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>No exemplo acima, vimos que <code>has_more</code> retornou <code>true</code>, portanto existem mais dados a serem resgatados após essa página. Para poder consultá-los, na próxima requisição o parâmetro <code>starting_after</code> precisa ter o id do último elemento da lista <code>items</code>. A requisição e retorno ao lado são referentes ao exemplo <a href="#exemplo-de-paginacao">acima</a>.</p>
-<h3 id='parametros-de-cursores-2'>Parâmetros de cursores</h3>
+<h3 id='parametros-de-paginacao-2'>Parâmetros de paginação</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -529,6 +549,16 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>ending_before</td>
 <td>cursor</td>
 <td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-de-dados-com-paginacao-2'>Informações de resultado de dados com paginação</h3>
@@ -567,7 +597,8 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="p">,</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -575,13 +606,14 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-RJ"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Assim como avançamos uma página, é possível facilmente retornar a dados anteriores à página atual. Para fazer isso, na próxima requisição o parâmetro <code>ending_before</code> precisa ter o id do primeiro elemento da lista <code>items</code>. A requisição e retorno ao lado são referentes ao exemplo <a href="#uso-do-cursor-starting_after">acima</a>.</p>
-<h3 id='parametros-de-cursores-3'>Parâmetros de cursores</h3>
+<h3 id='parametros-de-paginacao-3'>Parâmetros de paginação</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -599,8 +631,180 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>cursor</td>
 <td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
 </tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+</tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-de-dados-com-paginacao-3'>Informações de resultado de dados com paginação</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>has_more</td>
+<td>boolean</td>
+<td>Indica se há mais elementos disponíveis antes ou após essa página</td>
+</tr>
+<tr>
+<td>items</td>
+<td>array</td>
+<td>Lista dos elementos retornados pela requisição</td>
+</tr>
+</tbody></table>
+<h2 id='uso-do-filtro-start_date'>Uso do filtro start_date</h2>
+<blockquote>
+<p>Exemplo de requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/v1/admissions?start_date<span class="o">=</span>15/10/2016
+</code></pre>
+<blockquote>
+<p>Retorno</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12369</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-RJ"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="p">,</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12380</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-RJ"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-20T03:15Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>É possível listar os elementos baseado na data de criação. Usando o parâmetro <code>start_date</code>, apenas os elementos criados após esta data serão listados. O parâmetro deve estar no formato <code>dd/mm/aaaa</code>. Esse filtro poderá ser verificado pelo atributo <code>created_at</code> da lista <code>items</code>, que segue o formato <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a>.</p>
+<h3 id='parametros-de-paginacao-4'>Parâmetros de paginação</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starting_after</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados após o dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>ending_before</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-de-dados-com-paginacao-4'>Informações de resultado de dados com paginação</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>has_more</td>
+<td>boolean</td>
+<td>Indica se há mais elementos disponíveis antes ou após essa página</td>
+</tr>
+<tr>
+<td>items</td>
+<td>array</td>
+<td>Lista dos elementos retornados pela requisição</td>
+</tr>
+</tbody></table>
+<h2 id='uso-do-filtro-end_date'>Uso do filtro end_date</h2>
+<blockquote>
+<p>Exemplo de requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/v1/admissions?end_date<span class="o">=</span>15/10/2016
+</code></pre>
+<blockquote>
+<p>Retorno</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="p">,</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12369</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-RJ"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>É possível listar os elementos baseado na data de criação. Usando o parâmetro <code>end_date</code>, apenas os elementos criados antes dessa data serão listados. O parâmetro deve estar no formato <code>dd/mm/aaaa</code>. Esse filtro poderá ser verificado pelo atributo <code>created_at</code> da lista <code>items</code>, que segue o formato <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a>.</p>
+<h3 id='parametros-de-paginacao-5'>Parâmetros de paginação</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starting_after</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados após o dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>ending_before</td>
+<td>cursor</td>
+<td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-de-dados-com-paginacao-5'>Informações de resultado de dados com paginação</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -652,7 +856,8 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
         </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-EAD"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -760,22 +965,27 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>admissions</td>
 <td>array</td>
-<td>Lista de objetos com informações de processo de matricula</td>
+<td>Lista de objetos com informações de processo de matrícula</td>
 </tr>
 <tr>
-<td>id (admissions)</td>
+<td>[admissions] id</td>
 <td>number</td>
-<td>Id do processo de matricula</td>
+<td>Id do processo de matrícula</td>
 </tr>
 <tr>
-<td>course_sku (admissions)</td>
+<td>[admissions] course_sku</td>
 <td>string</td>
 <td>Código do curso fornecido pela universidade</td>
 </tr>
 <tr>
-<td>status (admissions)</td>
+<td>[admissions] status</td>
 <td>string</td>
-<td>Status que se encontra o processo de matricula</td>
+<td>Status que se encontra o processo de matrícula</td>
+</tr>
+<tr>
+<td>[admissions] created_at</td>
+<td>string</td>
+<td>Data da criação do processo de matrícula</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status'>Significado dos valores em status</h3>
@@ -866,7 +1076,8 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
       </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-EAD"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -971,12 +1182,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>admissions</td>
 <td>array</td>
-<td>Lista de objetos com informações de processo de matricula</td>
+<td>Lista de objetos com informações de processo de matrícula</td>
 </tr>
 <tr>
 <td>[admissions] id</td>
 <td>number</td>
-<td>Id do processo de matricula</td>
+<td>Id do processo de matrícula</td>
 </tr>
 <tr>
 <td>[admissions] course_sku</td>
@@ -986,7 +1197,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[admissions] status</td>
 <td>string</td>
-<td>Status que se encontra o processo de matricula</td>
+<td>Status que se encontra o processo de matrícula</td>
+</tr>
+<tr>
+<td>[admissions] created_at</td>
+<td>string</td>
+<td>Data da criação do processo de matrícula</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-2'>Significado dos valores em status</h3>
@@ -1102,20 +1318,21 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
+          </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todas as admissões da faculdade.</p>
 
-<p>Admissões são retornadas em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar objetos antecessores à lista atual. Para mais informações, consulte a sessão de <a href="#paginacao">paginação</a>.</p>
+<p>Admissões são retornadas em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar objetos antecessores à lista atual. Para mais informações, consulte a seção de <a href="#paginacao">paginação</a>.</p>
 <h3 id='parametros-3'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -1133,6 +1350,16 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>ending_before</td>
 <td>cursor</td>
 <td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-3'>Informações de resultado</h3>
@@ -1319,9 +1546,24 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Status do exame vestibular</td>
 </tr>
 <tr>
+<td>[exam] created_at</td>
+<td>string</td>
+<td>Data da criação do exame vestibular</td>
+</tr>
+<tr>
 <td>[application] result</td>
 <td>string</td>
 <td>Resultado do exame vestibular</td>
+</tr>
+<tr>
+<td>[application] created_at</td>
+<td>string</td>
+<td>Data de criação da inscrição para exame</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação da admissão</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-3'>Significado dos valores em status</h3>
@@ -1454,11 +1696,14 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -1659,9 +1904,24 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Status do exame vestibular</td>
 </tr>
 <tr>
+<td>[exam] created_at</td>
+<td>string</td>
+<td>Data da criação do exame vestibular</td>
+</tr>
+<tr>
 <td>[application] result</td>
 <td>string</td>
 <td>Resultado do exame vestibular</td>
+</tr>
+<tr>
+<td>[application] created_at</td>
+<td>string</td>
+<td>Data de criação da inscrição para exame</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação da admissão</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-4'>Significado dos valores em status</h3>
@@ -1795,11 +2055,14 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -2053,9 +2316,24 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Status do exame vestibular</td>
 </tr>
 <tr>
+<td>[exam] created_at</td>
+<td>string</td>
+<td>Data da criação do exame vestibular</td>
+</tr>
+<tr>
 <td>[application] result</td>
 <td>string</td>
 <td>Resultado do exame vestibular</td>
+</tr>
+<tr>
+<td>[application] created_at</td>
+<td>string</td>
+<td>Data de criação da inscrição para exame</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação da admissão</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-5'>Significado dos valores em status</h3>
@@ -2173,6 +2451,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
             </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">456</span><span class="p">,</span><span class="w">
@@ -2191,16 +2470,18 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todas as inscrições de exame da faculdade.</p>
 
-<p>Inscrições são retornadas em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar objetos antecessores à lista atual. Para mais informações, consulte a sessão de <a href="#paginacao">paginação</a>.</p>
+<p>Inscrições são retornadas em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar objetos antecessores à lista atual. Para mais informações, consulte a seção de <a href="#paginacao">paginação</a>.</p>
 <h3 id='parametros-6'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -2218,6 +2499,16 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>ending_before</td>
 <td>cursor</td>
 <td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-6'>Informações de resultado</h3>
@@ -2339,6 +2630,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Código postal onde aluno reside</td>
 </tr>
 <tr>
+<td>[admission] created_at</td>
+<td>string</td>
+<td>Data de criação da admissão</td>
+</tr>
+<tr>
 <td>exam</td>
 <td>object</td>
 <td>Objeto com informações do exame vestibular</td>
@@ -2354,7 +2650,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Lista com os cursos pertencentes a este exame vestibular</td>
 </tr>
 <tr>
-<td>[exam] local</td>
+<td>[exam] exam_location</td>
 <td>object</td>
 <td>Objeto com dados do exame vestibular</td>
 </tr>
@@ -2404,9 +2700,19 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Status do exame vestibular</td>
 </tr>
 <tr>
+<td>[exam] created_at</td>
+<td>string</td>
+<td>Data da criação do exame vestibular</td>
+</tr>
+<tr>
 <td>result</td>
 <td>string</td>
 <td>Resultado do exame vestibular</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação da inscrição para exame</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-6'>Significado dos valores em status</h3>
@@ -2521,6 +2827,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
@@ -2539,9 +2846,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -2677,6 +2986,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Código postal onde aluno reside</td>
 </tr>
 <tr>
+<td>[admission] created_at</td>
+<td>string</td>
+<td>Data de criação da admissão</td>
+</tr>
+<tr>
 <td>exam</td>
 <td>object</td>
 <td>Objeto com informações do exame vestibular</td>
@@ -2742,9 +3056,19 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Status do exame vestibular</td>
 </tr>
 <tr>
+<td>[exam] created_at</td>
+<td>string</td>
+<td>Data da criação do exame vestibular</td>
+</tr>
+<tr>
 <td>result</td>
 <td>string</td>
 <td>Resultado do exame vestibular</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação da inscrição para exame</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-7'>Significado dos valores em status</h3>
@@ -2860,6 +3184,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
@@ -2878,9 +3203,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -3041,6 +3368,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Código postal onde aluno reside</td>
 </tr>
 <tr>
+<td>[admission] created_at</td>
+<td>string</td>
+<td>Data de criação da admissão</td>
+</tr>
+<tr>
 <td>exam</td>
 <td>object</td>
 <td>Objeto com informações do exame vestibular</td>
@@ -3056,12 +3388,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Lista com os cursos pertencentes a este exame vestibular</td>
 </tr>
 <tr>
-<td>[exam] local</td>
+<td>[exam] exam_location</td>
 <td>object</td>
 <td>Objeto com dados do exame vestibular</td>
 </tr>
 <tr>
-<td>[exam] exam_location</td>
+<td>[exam_location] address</td>
 <td>string</td>
 <td>Endereço da localização do exame vestibular</td>
 </tr>
@@ -3106,9 +3438,19 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Status do exame vestibular</td>
 </tr>
 <tr>
+<td>[exam] created_at</td>
+<td>string</td>
+<td>Data da criação do exame vestibular</td>
+</tr>
+<tr>
 <td>result</td>
 <td>string</td>
 <td>Resultado do exame vestibular</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação da inscrição para exame</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-8'>Significado dos valores em status</h3>
@@ -3222,14 +3564,15 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="p">],</span><span class="w">
       </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"19:30"</span><span class="p">],</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
+      </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todos os exames em lote.</p>
 
-<p>Exames em lote são retornados em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar dados antecessores à lista atual. Para mais informações, consulte a sessão de <a href="#paginacao">paginação</a>.</p>
+<p>Exames em lote são retornados em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar dados antecessores à lista atual. Para mais informações, consulte a seção de <a href="#paginacao">paginação</a>.</p>
 <h3 id='parametros-9'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -3247,6 +3590,16 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>ending_before</td>
 <td>cursor</td>
 <td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-9'>Informações de resultado</h3>
@@ -3332,6 +3685,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>string</td>
 <td>Tipo dos exames desse lote</td>
 </tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação do lote de exames</td>
+</tr>
 </tbody></table>
 <h3 id='significado-dos-status'>Significado dos status</h3>
 <table><thead>
@@ -3381,7 +3739,8 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"19:30"</span><span class="p">],</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
+  </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -3480,6 +3839,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>kind</td>
 <td>string</td>
 <td>Tipo dos exames desse lote</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação do lote de exames</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-status-2'>Significado dos status</h3>
@@ -3778,7 +4142,8 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"19:30"</span><span class="p">],</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
+  </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -3908,6 +4273,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>string</td>
 <td>Tipo dos exames desse lote</td>
 </tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação do lote de exames</td>
+</tr>
 </tbody></table>
 <h3 id='significado-do-retorno-de-status'>Significado do retorno de status</h3>
 <table><thead>
@@ -3955,14 +4325,15 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todos os exames (ativos e suspensos).</p>
 
-<p>Exames são retornados em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar dados antecessores à lista atual. Para mais informações, consulte a sessão de <a href="#paginacao">paginação</a>.</p>
+<p>Exames são retornados em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar dados antecessores à lista atual. Para mais informações, consulte a seção de <a href="#paginacao">paginação</a>.</p>
 <h3 id='parametros-13'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -3980,6 +4351,16 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>ending_before</td>
 <td>cursor</td>
 <td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-13'>Informações de resultado</h3>
@@ -4065,6 +4446,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>string</td>
 <td>Situação do exame entre <code>active</code> e <code>inactive</code></td>
 </tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação do exame</td>
+</tr>
 </tbody></table>
 <h2 id='informacoes-de-um-unico-exame'>Informações de um único exame</h2>
 <blockquote>
@@ -4093,7 +4479,8 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -4192,6 +4579,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>status</td>
 <td>string</td>
 <td>Situação do exame entre <code>active</code> e <code>inactive</code></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação do exame</td>
 </tr>
 </tbody></table>
 <h2 id='criacao-de-exame'>Criação de exame</h2>
@@ -4447,7 +4839,8 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -4577,6 +4970,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>string</td>
 <td>Situação do exame entre <code>active</code> e <code>inactive</code></td>
 </tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação do exame</td>
+</tr>
 </tbody></table>
 <h1 id='exame-de-enem'>Exame de Enem</h1><h2 id='listar-todos-os-exames-de-enem'>Listar todos os exames de Enem</h2>
 <blockquote>
@@ -4604,14 +5002,15 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="s2">"linguagens"</span><span class="p">:</span><span class="w"> </span><span class="mf">600.0</span><span class="p">,</span><span class="w">
         </span><span class="s2">"matematica"</span><span class="p">:</span><span class="w"> </span><span class="mf">600.0</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna todos os exames de enem.</p>
 
-<p>Exames de ENEM são retornados em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar dados antecessores à lista atual. Para mais informações, consulte a sessão de <a href="#paginacao">paginação</a>.</p>
+<p>Exames de ENEM são retornados em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar dados antecessores à lista atual. Para mais informações, consulte a seção de <a href="#paginacao">paginação</a>.</p>
 <h3 id='parametros-16'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -4629,6 +5028,16 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>ending_before</td>
 <td>cursor</td>
 <td>Cursor para uso em paginação. Retorna elementos listados antes do dado cujo id foi indicado</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-16'>Informações de resultado</h3>
@@ -4694,6 +5103,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>string</td>
 <td>Situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
 </tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação do exame de enem</td>
+</tr>
 </tbody></table>
 <h2 id='informacoes-de-um-unico-exame-de-enem'>Informações de um único exame de Enem</h2>
 <blockquote>
@@ -4718,7 +5132,8 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
     </span><span class="s2">"linguagens"</span><span class="p">:</span><span class="w"> </span><span class="mf">600.0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"matematica"</span><span class="p">:</span><span class="w"> </span><span class="mf">600.0</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -4797,6 +5212,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>status</td>
 <td>string</td>
 <td>Situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação do exame de enem</td>
 </tr>
 </tbody></table>
 <h2 id='criacao-de-exame-de-enem'>Criação de exame de Enem</h2>
@@ -4996,7 +5416,8 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
     </span><span class="s2">"linguagens"</span><span class="p">:</span><span class="w"> </span><span class="mf">600.0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"matematica"</span><span class="p">:</span><span class="w"> </span><span class="mf">600.0</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inactive"</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inactive"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -5089,6 +5510,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>status</td>
 <td>string</td>
 <td>Situação do exame de enem entre <code>active</code> e <code>inactive</code></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação do exame de enem</td>
 </tr>
 </tbody></table>
 <h2 id='suspender-um-exame-de-enem-parcialmente'>Suspender um exame de Enem parcialmente</h2>
@@ -5955,7 +6381,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>starting_after</td>
 <td>string</td>
-<td>Cursor para a proxima página</td>
+<td>Cursor para a próxima página</td>
 <td></td>
 </tr>
 <tr>
@@ -5976,7 +6402,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>has_more</td>
 <td>boolean</td>
-<td>indica a existência de outras paginas</td>
+<td>indica a existência de outras páginas</td>
 </tr>
 <tr>
 <td>items</td>
