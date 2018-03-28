@@ -216,7 +216,7 @@
         <ul class="search-results"></ul>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#comecando-com-api-de-admissoes-do-quero-alunos" class="toc-h1 toc-link" data-title="Começando com API de Admissões do Quero Alunos">Começando com API de Admissões do Quero Alunos</a>
+            <a href="#api-de-admissoes-do-quero-alunos" class="toc-h1 toc-link" data-title="API de Admissões do Quero Alunos">API de Admissões do Quero Alunos</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#informacoes-basicas" class="toc-h2 toc-link" data-title="Informações básicas">Informações básicas</a>
@@ -378,7 +378,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='comecando-com-api-de-admissoes-do-quero-alunos'>Começando com API de Admissões do Quero Alunos</h1>
+        <h1 id='api-de-admissoes-do-quero-alunos'>API de Admissões do Quero Alunos</h1>
 <p>Bem-vindo à documentação da API de Admissões do Quero Alunos. Aqui você encontrará guias e referências sobre como utilizar nossa API. Qualquer dúvida, entre em contato pelo email api-admissoes@quero.education.</p>
 <h2 id='informacoes-basicas'>Informações básicas</h2>
 <p>Todas as respostas da API são feitas em JSON</p>
@@ -434,7 +434,7 @@ Status Code: 200 OK
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
       </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T02:01:44Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="p">,</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -443,7 +443,7 @@ Status Code: 200 OK
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
       </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -472,12 +472,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>start_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>end_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-de-dados-com-paginacao'>Informações de resultado de dados com paginação</h3>
@@ -517,7 +517,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
       </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-16T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-16T03:15:44Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="p">,</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -526,7 +526,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
       </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-20T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-20T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -553,12 +553,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>start_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>end_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-de-dados-com-paginacao-2'>Informações de resultado de dados com paginação</h3>
@@ -598,7 +598,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
       </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="p">,</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -607,7 +607,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
       </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -634,12 +634,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>start_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>end_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-de-dados-com-paginacao-3'>Informações de resultado de dados com paginação</h3>
@@ -679,7 +679,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
       </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15:44Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="p">,</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -688,7 +688,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
       </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-20T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-20T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -715,12 +715,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>start_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>end_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-de-dados-com-paginacao-4'>Informações de resultado de dados com paginação</h3>
@@ -760,7 +760,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
       </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="p">,</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -769,7 +769,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pre_registered"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
       </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-15T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -796,12 +796,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>start_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>end_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-de-dados-com-paginacao-5'>Informações de resultado de dados com paginação</h3>
@@ -857,7 +857,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
         </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-EAD"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -915,7 +915,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>birth_date</td>
 <td>string</td>
-<td>Data de nascimento do aluno</td>
+<td>Data de nascimento do aluno no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>emails</td>
@@ -985,7 +985,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[admissions] created_at</td>
 <td>string</td>
-<td>Data da criação do processo de matrícula</td>
+<td>Data da criação do processo de matrícula no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status'>Significado dos valores em status</h3>
@@ -1077,7 +1077,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
       </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-NOITE-EAD"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1202,7 +1202,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[admissions] created_at</td>
 <td>string</td>
-<td>Data da criação do processo de matrícula</td>
+<td>Data da criação do processo de matrícula no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-2'>Significado dos valores em status</h3>
@@ -1319,13 +1319,13 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
             </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+          </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1354,12 +1354,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>start_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>end_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-3'>Informações de resultado</h3>
@@ -1413,7 +1413,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>Data de nascimento do aluno</td>
+<td>Data de nascimento do aluno no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[student] emails</td>
@@ -1533,12 +1533,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] dates</td>
 <td>string</td>
-<td>Data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] times</td>
 <td>string</td>
-<td>Hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] status</td>
@@ -1548,7 +1548,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] created_at</td>
 <td>string</td>
-<td>Data da criação do exame vestibular</td>
+<td>Data da criação do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[application] result</td>
@@ -1558,12 +1558,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[application] created_at</td>
 <td>string</td>
-<td>Data de criação da inscrição para exame</td>
+<td>Data de criação da inscrição para exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação da admissão</td>
+<td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-3'>Significado dos valores em status</h3>
@@ -1697,13 +1697,13 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -1771,7 +1771,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>Data de nascimento do aluno</td>
+<td>Data de nascimento do aluno no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[student] emails</td>
@@ -1891,12 +1891,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] dates</td>
 <td>string</td>
-<td>Data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] times</td>
 <td>string</td>
-<td>Hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] status</td>
@@ -1906,7 +1906,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] created_at</td>
 <td>string</td>
-<td>Data da criação do exame vestibular</td>
+<td>Data da criação do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[application] result</td>
@@ -1916,12 +1916,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[application] created_at</td>
 <td>string</td>
-<td>Data de criação da inscrição para exame</td>
+<td>Data de criação da inscrição para exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação da admissão</td>
+<td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-4'>Significado dos valores em status</h3>
@@ -2056,13 +2056,13 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -2183,7 +2183,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>Data de nascimento do aluno</td>
+<td>Data de nascimento do aluno no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[student] emails</td>
@@ -2303,12 +2303,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] dates</td>
 <td>string</td>
-<td>Data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] times</td>
 <td>string</td>
-<td>Hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] status</td>
@@ -2318,7 +2318,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] created_at</td>
 <td>string</td>
-<td>Data da criação do exame vestibular</td>
+<td>Data da criação do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[application] result</td>
@@ -2328,12 +2328,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[application] created_at</td>
 <td>string</td>
-<td>Data de criação da inscrição para exame</td>
+<td>Data de criação da inscrição para exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação da admissão</td>
+<td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-5'>Significado dos valores em status</h3>
@@ -2451,7 +2451,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
             </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">456</span><span class="p">,</span><span class="w">
@@ -2471,10 +2471,10 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2503,12 +2503,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>start_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>end_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-6'>Informações de resultado</h3>
@@ -2582,7 +2582,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>Data de nascimento do aluno</td>
+<td>Data de nascimento do aluno no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[student] emails</td>
@@ -2632,7 +2632,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[admission] created_at</td>
 <td>string</td>
-<td>Data de criação da admissão</td>
+<td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>exam</td>
@@ -2687,12 +2687,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] date</td>
 <td>string</td>
-<td>Data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] time</td>
 <td>string</td>
-<td>Hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] status</td>
@@ -2702,7 +2702,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] created_at</td>
 <td>string</td>
-<td>Data da criação do exame vestibular</td>
+<td>Data da criação do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>result</td>
@@ -2712,7 +2712,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação da inscrição para exame</td>
+<td>Data de criação da inscrição para exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-6'>Significado dos valores em status</h3>
@@ -2827,7 +2827,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
@@ -2847,10 +2847,10 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
     </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -2938,7 +2938,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>Data de nascimento do aluno</td>
+<td>Data de nascimento do aluno no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[student] emails</td>
@@ -2988,7 +2988,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[admission] created_at</td>
 <td>string</td>
-<td>Data de criação da admissão</td>
+<td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>exam</td>
@@ -3043,12 +3043,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] date</td>
 <td>string</td>
-<td>Data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] time</td>
 <td>string</td>
-<td>Hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] status</td>
@@ -3058,7 +3058,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] created_at</td>
 <td>string</td>
-<td>Data da criação do exame vestibular</td>
+<td>Data da criação do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>result</td>
@@ -3068,7 +3068,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação da inscrição para exame</td>
+<td>Data de criação da inscrição para exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-7'>Significado dos valores em status</h3>
@@ -3184,7 +3184,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
@@ -3204,10 +3204,10 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
     </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -3320,7 +3320,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>Data de nascimento do aluno</td>
+<td>Data de nascimento do aluno no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[student] emails</td>
@@ -3370,7 +3370,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[admission] created_at</td>
 <td>string</td>
-<td>Data de criação da admissão</td>
+<td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>exam</td>
@@ -3425,12 +3425,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] date</td>
 <td>string</td>
-<td>Data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] time</td>
 <td>string</td>
-<td>Hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] status</td>
@@ -3440,7 +3440,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] created_at</td>
 <td>string</td>
-<td>Data da criação do exame vestibular</td>
+<td>Data da criação do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>result</td>
@@ -3450,7 +3450,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação da inscrição para exame</td>
+<td>Data de criação da inscrição para exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-8'>Significado dos valores em status</h3>
@@ -3565,7 +3565,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"19:30"</span><span class="p">],</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -3594,12 +3594,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>start_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>end_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-9'>Informações de resultado</h3>
@@ -3668,12 +3668,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>dates</td>
 <td>array</td>
-<td>Lista das datas dos exames</td>
+<td>Lista das datas dos exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>times</td>
 <td>array</td>
-<td>Lista dos horários de aplicações dos exames</td>
+<td>Lista dos horários de aplicações dos exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>status</td>
@@ -3688,7 +3688,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação do lote de exames</td>
+<td>Data de criação do lote de exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-status'>Significado dos status</h3>
@@ -3740,7 +3740,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
   </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"19:30"</span><span class="p">],</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -3823,12 +3823,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>dates</td>
 <td>array</td>
-<td>Lista das datas dos exames</td>
+<td>Lista das datas dos exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>times</td>
 <td>array</td>
-<td>Lista dos horários de aplicações dos exames</td>
+<td>Lista dos horários de aplicações dos exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>status</td>
@@ -3843,7 +3843,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação do lote de exames</td>
+<td>Data de criação do lote de exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-status-2'>Significado dos status</h3>
@@ -3972,12 +3972,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>dates</td>
 <td>array</td>
-<td>Lista das datas dos exames</td>
+<td>Lista das datas dos exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>times</td>
 <td>array</td>
-<td>Lista dos horários de aplicações dos exames</td>
+<td>Lista dos horários de aplicações dos exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>status</td>
@@ -4091,12 +4091,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>dates</td>
 <td>array</td>
-<td>Lista das datas dos exames</td>
+<td>Lista das datas dos exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>times</td>
 <td>array</td>
-<td>Lista dos horários de aplicações dos exames</td>
+<td>Lista dos horários de aplicações dos exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>status</td>
@@ -4143,7 +4143,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
   </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"19:30"</span><span class="p">],</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -4256,12 +4256,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>dates</td>
 <td>array</td>
-<td>Lista das datas dos exames</td>
+<td>Lista das datas dos exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>times</td>
 <td>array</td>
-<td>Lista dos horários de aplicações dos exames</td>
+<td>Lista dos horários de aplicações dos exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>status</td>
@@ -4276,7 +4276,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação do lote de exames</td>
+<td>Data de criação do lote de exames no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='significado-do-retorno-de-status'>Significado do retorno de status</h3>
@@ -4326,7 +4326,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -4355,12 +4355,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>start_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>end_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-13'>Informações de resultado</h3>
@@ -4434,12 +4434,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>date</td>
 <td>string</td>
-<td>Data do exame vestibular</td>
+<td>Data do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>time</td>
 <td>string</td>
-<td>Horário do exame vestibular</td>
+<td>Horário do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>status</td>
@@ -4449,7 +4449,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação do exame</td>
+<td>Data de criação do exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h2 id='informacoes-de-um-unico-exame'>Informações de um único exame</h2>
@@ -4480,7 +4480,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -4568,12 +4568,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>date</td>
 <td>string</td>
-<td>Data do exame vestibular</td>
+<td>Data do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>time</td>
 <td>string</td>
-<td>Horário do exame vestibular</td>
+<td>Horário do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>status</td>
@@ -4583,7 +4583,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação do exame</td>
+<td>Data de criação do exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h2 id='criacao-de-exame'>Criação de exame</h2>
@@ -4675,12 +4675,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>date</td>
 <td>string</td>
-<td>Data do exame vestibular</td>
+<td>Data do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>time</td>
 <td>string</td>
-<td>Horário do exame vestibular</td>
+<td>Horário do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>status</td>
@@ -4777,12 +4777,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>date</td>
 <td>string</td>
-<td>Data do exame vestibular</td>
+<td>Data do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>time</td>
 <td>string</td>
-<td>Horário do exame vestibular</td>
+<td>Horário do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>status</td>
@@ -4840,7 +4840,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -4958,12 +4958,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>date</td>
 <td>string</td>
-<td>Data do exame vestibular</td>
+<td>Data do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>time</td>
 <td>string</td>
-<td>Horário do exame vestibular</td>
+<td>Horário do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>status</td>
@@ -4973,7 +4973,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação do exame</td>
+<td>Data de criação do exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h1 id='exame-de-enem'>Exame de Enem</h1><h2 id='listar-todos-os-exames-de-enem'>Listar todos os exames de Enem</h2>
@@ -5003,7 +5003,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="s2">"matematica"</span><span class="p">:</span><span class="w"> </span><span class="mf">600.0</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -5032,12 +5032,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>start_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados a partir da data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>end_date</td>
 <td>string</td>
-<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada</td>
+<td>Data para filtrar a listagem de elementos. Lista apenas elementos criados até a data indicada no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-16'>Informações de resultado</h3>
@@ -5106,7 +5106,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação do exame de enem</td>
+<td>Data de criação do exame de enem no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h2 id='informacoes-de-um-unico-exame-de-enem'>Informações de um único exame de Enem</h2>
@@ -5133,7 +5133,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
     </span><span class="s2">"matematica"</span><span class="p">:</span><span class="w"> </span><span class="mf">600.0</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -5216,7 +5216,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação do exame de enem</td>
+<td>Data de criação do exame de enem no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h2 id='criacao-de-exame-de-enem'>Criação de exame de Enem</h2>
@@ -5417,7 +5417,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
     </span><span class="s2">"matematica"</span><span class="p">:</span><span class="w"> </span><span class="mf">600.0</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inactive"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -5514,7 +5514,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Data de criação do exame de enem</td>
+<td>Data de criação do exame de enem no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 </tbody></table>
 <h2 id='suspender-um-exame-de-enem-parcialmente'>Suspender um exame de Enem parcialmente</h2>
@@ -5591,7 +5591,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created</td>
 <td>string</td>
-<td>Data que foi criado o evento (timestamp UTC)</td>
+<td>Data que foi criado o evento no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>api_version</td>
@@ -5616,7 +5616,10 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"course_sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"discount_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mf">25.00</span><span class="w">
+      </span><span class="p">},</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initiated"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">394932</span><span class="p">,</span><span class="w">
@@ -5654,7 +5657,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created</td>
 <td>string</td>
-<td>Data que foi criado o evento (timestamp UTC)</td>
+<td>Data que foi criado o evento no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>api_version</td>
@@ -5682,14 +5685,24 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Id do processo de admissão</td>
 </tr>
 <tr>
-<td>[admission] course_sku</td>
+<td>[admission] course</td>
+<td>object</td>
+<td>Objeto com dados do curso referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[course] id</td>
 <td>string</td>
 <td>Código do curso referente a essa matrícula</td>
 </tr>
 <tr>
+<td>[course] discount_percentage</td>
+<td>number</td>
+<td>Porcentagem de desconto do curso referente a essa matrícula</td>
+</tr>
+<tr>
 <td>[admission] status</td>
 <td>string</td>
-<td>Status da admissão do aluno</td>
+<td>Status da admissão do aluno (<em>neste evento o valor sempre será <code>pre-registered</code></em>)</td>
 </tr>
 <tr>
 <td>[admission] student</td>
@@ -5714,7 +5727,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>Data de nascimento do aluno</td>
+<td>Data de nascimento do aluno no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[student] emails</td>
@@ -5848,7 +5861,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created</td>
 <td>string</td>
-<td>Data que foi criado o evento (timestamp UTC)</td>
+<td>Data que foi criado o evento no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>api_version</td>
@@ -5923,7 +5936,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>Data de nascimento do aluno</td>
+<td>Data de nascimento do aluno no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[student] emails</td>
@@ -6028,12 +6041,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[exam] date</td>
 <td>string</td>
-<td>Data da realização do exame vestibular</td>
+<td>Data da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] time</td>
 <td>string</td>
-<td>Hora da realização do exame vestibular</td>
+<td>Hora da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[exam] status</td>
@@ -6048,7 +6061,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </tbody></table>
 <h2 id='nova-quot-inscricao-para-exame-quot-enem'>Nova &quot;inscrição para exame&quot; (ENEM)</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NewApplication"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-15T17:34:26.173"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-15T17:34:26:44Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"api_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -6122,7 +6135,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>created</td>
 <td>string</td>
-<td>Data que foi criado o evento (timestamp UTC)</td>
+<td>Data que foi criado o evento no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>api_version</td>
@@ -6197,7 +6210,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <tr>
 <td>[student] birth_date</td>
 <td>string</td>
-<td>Data de nascimento do aluno</td>
+<td>Data de nascimento do aluno no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>[student] emails</td>
@@ -6363,32 +6376,27 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <th>Nome</th>
 <th>Tipo</th>
 <th>Descrição</th>
-<th>Formato</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>start_date</td>
 <td>string</td>
-<td>Data inicial do filtro</td>
-<td>DD/MM/AAAA</td>
+<td>Data inicial do filtro no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>end_date</td>
 <td>string</td>
-<td>Data final do filtro</td>
-<td>DD/MM/AAAA</td>
+<td>Data final do filtro no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
 <tr>
 <td>starting_after</td>
 <td>string</td>
 <td>Cursor para a próxima página</td>
-<td></td>
 </tr>
 <tr>
 <td>ending_before</td>
 <td>string</td>
 <td>Cursor para a página anterior</td>
-<td></td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-retorno'>Informações de retorno</h3>
