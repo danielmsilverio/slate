@@ -309,6 +309,9 @@
                     <a href="#notificar-novo-processo-de-admissao" class="toc-h2 toc-link" data-title="Notificar novo processo de admissão">Notificar novo processo de admissão</a>
                   </li>
                   <li>
+                    <a href="#notificar-nova-submissao-de-documento-de-admissao" class="toc-h2 toc-link" data-title="Notificar nova submissão de documento de admissão">Notificar nova submissão de documento de admissão</a>
+                  </li>
+                  <li>
                     <a href="#listagem-de-notificacoes" class="toc-h2 toc-link" data-title="Listagem de notificações">Listagem de notificações</a>
                   </li>
               </ul>
@@ -2156,7 +2159,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown status. Please check the API manual at http://docs.queroalunos.com/#atualizar-processo-de-admissao"</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown status. Please check the API manual at https://docs.queroalunos.com/#atualizar-processo-de-admissao"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -3201,7 +3204,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown result. Please check the API manual at http://docs.queroalunos.com/#atualizar-inscricao-para-exame"</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown result. Please check the API manual at https://docs.queroalunos.com/#atualizar-inscricao-para-exame"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -3549,7 +3552,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Esta notificação informando uma novo aluno para o processo de admissão na universidade.</p>
+<p>Esta notificação informa o início de um processo de admissão.</p>
 <h3 id='parametros-9'>Parâmetros</h3>
 <table><thead>
 <tr>
@@ -3635,6 +3638,192 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Documentação Pendente</td>
 </tr>
 </tbody></table>
+<h2 id='notificar-nova-submissao-de-documento-de-admissao'>Notificar nova submissão de documento de admissão</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"document.submitted"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-15T17:34:26.173"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"api_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"document"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"primary_id"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3-example.amazonaws.com/example.png"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initiated"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"course"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Esta notificação informa a submissão de um documento do processo de admissão.</p>
+<h3 id='parametros-10'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>created</td>
+<td>string</td>
+<td>Data que foi criado o evento no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>api_version</td>
+<td>string</td>
+<td>Informação da versão atual da API</td>
+</tr>
+<tr>
+<td>event_type</td>
+<td>string</td>
+<td>Tipo de evento, no caso <code>document.submitted</code></td>
+</tr>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>Objeto com informações de acordo com o tipo de evento</td>
+</tr>
+<tr>
+<td>document</td>
+<td>object</td>
+<td>Objeto com dados do documento de admissão do aluno</td>
+</tr>
+<tr>
+<td>[document] id</td>
+<td>number</td>
+<td>Id do documento de admissão</td>
+</tr>
+<tr>
+<td>[document] type</td>
+<td>string</td>
+<td>Tipo do documento</td>
+</tr>
+<tr>
+<td>ref(type)</td>
+<td>object</td>
+<td>Objeto contendo dados de documento (a chave desse objeto é o valor de type)</td>
+</tr>
+<tr>
+<td>ref(type)</td>
+<td>category</td>
+<td>string</td>
+</tr>
+<tr>
+<td>ref(type)</td>
+<td>url</td>
+<td>string</td>
+</tr>
+<tr>
+<td>[document] admission</td>
+<td>object</td>
+<td>Objeto com dados da admissão</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-type'>Significado dos valores em type</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rg</td>
+<td>RG</td>
+</tr>
+<tr>
+<td>cpf</td>
+<td>CPF</td>
+</tr>
+<tr>
+<td>cnh</td>
+<td>CNH</td>
+</tr>
+<tr>
+<td>rg_do_guardiao</td>
+<td>RG do guardião do menor de idade</td>
+</tr>
+<tr>
+<td>cpf_do_guardiao</td>
+<td>CPF do guardião do menor de idade</td>
+</tr>
+<tr>
+<td>cnh_do_guardiao</td>
+<td>CNH do guardião do menor de idade</td>
+</tr>
+<tr>
+<td>certificado_de_reservista</td>
+<td>Certificado de Reservista (se maior de 18 anos e do sexo masculino)</td>
+</tr>
+<tr>
+<td>titulo_de_eleitor</td>
+<td>Título de Eleitor (se maior de 18 anos)</td>
+</tr>
+<tr>
+<td>historico_escolar</td>
+<td>Histórico Escolar</td>
+</tr>
+<tr>
+<td>diploma</td>
+<td>Diploma de Graduação</td>
+</tr>
+<tr>
+<td>comprovante_de_residencia</td>
+<td>Comprovante de Residência</td>
+</tr>
+<tr>
+<td>comprovante_de_residencia_do_guardiao</td>
+<td>Comprovante de Residência do guardião (se menor de idade)</td>
+</tr>
+<tr>
+<td>comprovante_de_voto</td>
+<td>Comprovante de Voto</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-category'>Significado dos valores em category</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>primary_id</td>
+<td>Documento de Bolso</td>
+</tr>
+<tr>
+<td>guardian_primary_id</td>
+<td>Documento de Bolso do guardião do menor de idade</td>
+</tr>
+<tr>
+<td>government_issued</td>
+<td>Documento homologado por instituição governamental</td>
+</tr>
+<tr>
+<td>academic_history</td>
+<td>Documento de Histórico Escolar</td>
+</tr>
+<tr>
+<td>financial_history</td>
+<td>Documento de Histórico Financeiro</td>
+</tr>
+<tr>
+<td>guardian_financial_history</td>
+<td>Documento de Histórico Financeiro do guardião do menor de idade</td>
+</tr>
+<tr>
+<td>social_history</td>
+<td>Documento de Histório Social</td>
+</tr>
+</tbody></table>
 <h2 id='listagem-de-notificacoes'>Listagem de notificações</h2>
 <blockquote>
 <p>Requisição</p>
@@ -3652,7 +3841,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Lista eventos enviados</p>
-<h3 id='parametros-10'>Parâmetros</h3>
+<h3 id='parametros-11'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
