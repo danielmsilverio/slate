@@ -301,6 +301,14 @@
               </ul>
           </li>
           <li>
+            <a href="#informacoes-de-documentos-de-um-processo-de-admissao" class="toc-h1 toc-link" data-title="Informações de documentos de um processo de admissão">Informações de documentos de um processo de admissão</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#dados-de-um-unico-documento-de-um-processo-de-admissao" class="toc-h2 toc-link" data-title="Dados de um único documento de um processo de admissão">Dados de um único documento de um processo de admissão</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#notificacoes" class="toc-h1 toc-link" data-title="Notificações">Notificações</a>
               <ul class="toc-list-h2">
                   <li>
@@ -3471,6 +3479,113 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Aprovado no exame vestibular</td>
 </tr>
 </tbody></table>
+<h1 id='informacoes-de-documentos-de-um-processo-de-admissao'>Informações de documentos de um processo de admissão</h1><h2 id='dados-de-um-unico-documento-de-um-processo-de-admissao'>Dados de um único documento de um processo de admissão</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/v1/admissions/456/documents/12345
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3-example.amazonaws.com/example.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"submitted_docs"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"course"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Resposta quando não encontra nenhuma admissão</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Admission not found"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No admission associated with this ID was found"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Resposta quando não encontra nenhum documento associado à admissão</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Document not found"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No document associated with this ID was found"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Retorna um documento específico para um processo de admissão.</p>
+<h3 id='parametros-9'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Path</td>
+<td>Id da admissão</td>
+</tr>
+<tr>
+<td>document_id</td>
+<td>Path</td>
+<td>Id do documento referente à admissão</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-9'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Id do documento de admissão</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Tipo do documento</td>
+</tr>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>URL que aponta para a imagem do documento</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de submissão do documento no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[admission]</td>
+<td>object</td>
+<td>Objeto que identifica o processo de admissão a que o documento de refere</td>
+</tr>
+</tbody></table>
 <h1 id='notificacoes'>Notificações</h1>
 <p>Notificações utilizam uma rota única de callback, que deve ser fornecida pela faculdade, de um token para autenticação via HTTP Basic.</p>
 
@@ -3557,7 +3672,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Esta notificação informa o início de um processo de admissão.</p>
-<h3 id='parametros-9'>Parâmetros</h3>
+<h3 id='parametros-10'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -3638,8 +3753,48 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Inscrição para exame Pendente</td>
 </tr>
 <tr>
+<td>pre_registered</td>
+<td>Agendamento solicitado para exame vestibular</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento confirmado no exame vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+<tr>
 <td>pending_docs</td>
 <td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
 </tr>
 </tbody></table>
 <h2 id='notificar-novo-exame'>Notificar novo exame</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -3668,6 +3823,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="s2">"total_score"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initiated"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"course"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
@@ -3680,8 +3836,8 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Esta notificação informa o a realização do vestibular do processo de admissão.</p>
-<h3 id='parametros-10'>Parâmetros</h3>
+<p>Esta notificação informa a realização do vestibular (via Exame Quero Bolsa ou Nota do Enem) do processo de admissão.</p>
+<h3 id='parametros-11'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -3808,12 +3964,9 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
     </span><span class="s2">"document"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"rg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"primary_id"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3-example.amazonaws.com/example.png"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
       </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initiated"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"submitted_docs"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"course"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -3826,7 +3979,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Esta notificação informa a submissão de um documento do processo de admissão.</p>
-<h3 id='parametros-11'>Parâmetros</h3>
+<h3 id='parametros-12'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -3868,26 +4021,6 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>[document] type</td>
 <td>string</td>
 <td>Tipo do documento</td>
-</tr>
-<tr>
-<td>ref(type)</td>
-<td>object</td>
-<td>Objeto contendo dados de documento (a chave desse objeto é o valor de type)</td>
-</tr>
-<tr>
-<td>ref(type) category</td>
-<td>string</td>
-<td>Categoria do documento</td>
-</tr>
-<tr>
-<td>ref(type) url</td>
-<td>string</td>
-<td>URL que aponta para a imagem do documento</td>
-</tr>
-<tr>
-<td>[document] admission</td>
-<td>object</td>
-<td>Objeto com dados da admissão</td>
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-type'>Significado dos valores em type</h3>
@@ -3950,42 +4083,6 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Comprovante de Voto</td>
 </tr>
 </tbody></table>
-<h3 id='significado-dos-valores-em-category'>Significado dos valores em category</h3>
-<table><thead>
-<tr>
-<th>Nome</th>
-<th>Descrição</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>primary_id</td>
-<td>Documento de Bolso</td>
-</tr>
-<tr>
-<td>guardian_primary_id</td>
-<td>Documento de Bolso do guardião do menor de idade</td>
-</tr>
-<tr>
-<td>government_issued</td>
-<td>Documento homologado por instituição governamental</td>
-</tr>
-<tr>
-<td>academic_history</td>
-<td>Documento de Histórico Escolar</td>
-</tr>
-<tr>
-<td>financial_history</td>
-<td>Documento de Histórico Financeiro</td>
-</tr>
-<tr>
-<td>guardian_financial_history</td>
-<td>Documento de Histórico Financeiro do guardião do menor de idade</td>
-</tr>
-<tr>
-<td>social_history</td>
-<td>Documento de Histório Social</td>
-</tr>
-</tbody></table>
 <h2 id='listagem-de-notificacoes'>Listagem de notificações</h2>
 <blockquote>
 <p>Requisição</p>
@@ -4003,7 +4100,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Lista eventos enviados</p>
-<h3 id='parametros-12'>Parâmetros</h3>
+<h3 id='parametros-13'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
