@@ -447,7 +447,10 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
           }
         },
         "status": "pending_docs",
-        "created_at": "2016-10-01T03:15:44Z"
+        "created_at": "2016-10-01T03:15:44Z",
+        "extra_data": {
+          "external_enrollment_id": "NPW231"
+        }
       }
     ]
   }
@@ -507,6 +510,7 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | [offer] discount | float | Desconto do curso que o aluno adquiriu |
 | [admissions] status | string | Status que se encontra o processo de matrícula |
 | [admissions] created_at | string | Data da criação do processo de matrícula no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| [admissions] [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
 
 ### Significado dos valores em status
 | Nome | Descrição |
@@ -575,7 +579,10 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         }
       },
       "status": "pending_docs",
-      "created_at": "2016-10-01T03:15:44Z"
+      "created_at": "2016-10-01T03:15:44Z",
+      "extra_data": {
+        "external_enrollment_id": "NPW231"
+      }
     }
   ]
 }
@@ -631,6 +638,7 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | [offer] discount | float | Desconto do curso que o aluno adquiriu |
 | [admissions] status | string | Status que se encontra o processo de matrícula |
 | [admissions] created_at | string | Data da criação do processo de matrícula no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| [admissions] [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
 
 ### Significado dos valores em status
 | Nome | Descrição |
@@ -738,7 +746,10 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
           "created_at": "2016-10-01T03:15:44Z"
         }
       ],
-      "created_at": "2016-10-01T03:15:44Z"
+      "created_at": "2016-10-01T03:15:44Z",
+      "extra_data": {
+        "external_enrollment_id": "NPW231"
+      }
     }
   ]
 }
@@ -795,6 +806,7 @@ Também é possível utilizar um parâmetro extra de `status` na URL para filtra
 | [application] result | string | Resultado do exame vestibular |
 | [application] created_at | string | Data de criação da inscrição para exame no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | created_at | string | Data de criação da admissão no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
 
 ### Significado dos valores em status
 
@@ -899,7 +911,10 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
       "created_at": "2016-10-01T03:15:44Z"
     }
   ],
-  "created_at": "2016-10-01T03:15:44Z"
+  "created_at": "2016-10-01T03:15:44Z",
+  "extra_data": {
+    "external_enrollment_id": "NPW231"
+  }
 }
 ```
 
@@ -953,6 +968,7 @@ Retorna uma admissão específica da faculdade.
 | [application] result | string | Resultado do exame vestibular |
 | [application] created_at | string | Data de criação da inscrição para exame no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | created_at | string | Data de criação da admissão no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
 
 ### Significado dos valores em status
 
@@ -986,7 +1002,7 @@ Retorna uma admissão específica da faculdade.
 
 ```bash
 curl -X PUT --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions/12345 \
-  --data '{"status": "enrolled"}'
+  --data '{"status": "enrolled", "extra_data": {"external_enrollment_id": "NPW231"}}'
 ```
 
 > Resposta
@@ -1059,7 +1075,10 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
       "created_at": "2016-10-01T03:15:44Z"
     }
   ],
-  "created_at": "2016-10-01T03:15:44Z"
+  "created_at": "2016-10-01T03:15:44Z",
+  "extra_data": {
+    "external_enrollment_id": "NPW231"
+  }
 }
 ```
 
@@ -1091,6 +1110,7 @@ Realiza atualização de um processo de admissão específico de um aluno. Para 
 | ---- | ---- | --------- |
 | id | path | Id da admissão |
 | status | form | situação da admissão |
+| [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
 
 ### Possíveis valores para o parâmetro status
 
@@ -1139,6 +1159,7 @@ Realiza atualização de um processo de admissão específico de um aluno. Para 
 | [application] result | string | Resultado do exame vestibular |
 | [application] created_at | string | Data de criação da inscrição para exame no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | created_at | string | Data de criação da admissão no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
 
 ### Significado dos valores em status
 
