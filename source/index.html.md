@@ -1110,7 +1110,7 @@ Realiza atualização de um processo de admissão específico de um aluno. Para 
 | ---- | ---- | --------- |
 | id | path | Id da admissão |
 | status | form | situação da admissão |
-| [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
+| [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade (opcional) |
 
 ### Possíveis valores para o parâmetro status
 
