@@ -1096,7 +1096,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
 {
   "error": true,
   "message": "Invalid parameters",
-  "description": "Unknown status. Please check the API manual at https://docs.queroalunos.com/#atualizar-processo-de-admissao"
+  "description": "Unknown status. Please check the API manual at https://docs.queroalunos.com/"
 }
 ```
 
