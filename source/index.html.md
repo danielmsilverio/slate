@@ -65,7 +65,7 @@ Status Code: 200 OK
 ```
 ```json
 {
-  "status": "error",
+  "error": true,
   "errors": [{
     "title": "Invalid Permission",
     "detail": "You are not authorized to access this resource with these parameters"
@@ -524,6 +524,8 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -652,6 +654,8 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -821,6 +825,8 @@ Também é possível utilizar um parâmetro extra de `status` na URL para filtra
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -983,6 +989,8 @@ Retorna uma admissão específica da faculdade.
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -1097,8 +1105,28 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
 ```json
 {
   "error": true,
-  "message": "id not found",
-  "description": "Could not find any admission by given id."
+  "errors":
+  [
+    {
+      "title": "Admission not found",
+      "details": "No admission associated with this ID was found"
+    }
+  ]
+}
+```
+
+> Exemplo de retorno quando há um erro na atualização requisitada
+
+```json
+{
+  "error": true,
+  "errors":
+  [
+    {
+      "title": "Error in Admission API",
+      "details": "Cannot transit to enrolled, current step is enrolled"
+    }
+  ]
 }
 ```
 
@@ -1116,16 +1144,12 @@ Realiza atualização de um processo de admissão específico de um aluno. Para 
 
 | Status | Descrição |
 | ------ | --------- |
-| initiated | Inscrição para exame Pendente |
-| pre_registered | Agendamento solicitado para exame vestibular |
 | registered | Agendamento confirmado no exame vestibular |
 | failed | Reprovado no exame vestibular |
 | approved | Aprovado no exame vestibular |
 | pending_docs | Documentação Pendente |
-| partially_submitted_docs | Documentação de Bolso enviada |
-| submitted_docs | Documentação Completamente Enviada |
-| rejected_docs | Documentação Rejeitada |
 | enrolled | Matriculado |
+| drop_out_confirmed | Confirmação de desistência do aluno |
 
 ### Informações de resultado
 
@@ -1174,6 +1198,8 @@ Realiza atualização de um processo de admissão específico de um aluno. Para 
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -1281,7 +1307,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
 
 ```json
 {
-  "status": "error",
+  "error": true,
   "errors": [
     {
       "title": "Admission not found",
@@ -1295,7 +1321,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
 
 ```json
 {
-  "status": "error",
+  "error": true,
   "errors": [
     {
       "title": "Document not found",
@@ -1427,6 +1453,8 @@ Esta notificação informa o início de um processo de admissão.
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -1516,6 +1544,8 @@ Esta notificação informa a atualização de um processo de admissão.
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
