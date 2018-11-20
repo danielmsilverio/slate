@@ -1346,7 +1346,7 @@ Realiza atualização de um processo de admissão específico de um aluno. Para 
 | Nome | Tipo | Descrição |
 | ---- | ---- | --------- |
 | id | path | Id da admissão |
-| reason | string | Motivo pela rejeição da matrícula |
+| days_to_enroll | string | Previsão para formação de turma para essa admissão (em dias) |
 
 ### Informações de resultado
 
