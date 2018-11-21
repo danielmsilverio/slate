@@ -65,7 +65,7 @@ Status Code: 200 OK
 ```
 ```json
 {
-  "status": "error",
+  "error": true,
   "errors": [{
     "title": "Invalid Permission",
     "detail": "You are not authorized to access this resource with these parameters"
@@ -524,6 +524,8 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -652,6 +654,8 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -821,6 +825,8 @@ Também é possível utilizar um parâmetro extra de `status` na URL para filtra
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -983,6 +989,8 @@ Retorna uma admissão específica da faculdade.
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -1088,7 +1096,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
 {
   "error": true,
   "message": "Invalid parameters",
-  "description": "Unknown status. Please check the API manual at https://docs.queroalunos.com/#atualizar-processo-de-admissao"
+  "description": "Unknown status. Please check the API manual at https://docs.queroalunos.com/"
 }
 ```
 
@@ -1097,8 +1105,28 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
 ```json
 {
   "error": true,
-  "message": "id not found",
-  "description": "Could not find any admission by given id."
+  "errors":
+  [
+    {
+      "title": "Admission not found",
+      "details": "No admission associated with this ID was found"
+    }
+  ]
+}
+```
+
+> Exemplo de retorno quando há um erro na atualização requisitada
+
+```json
+{
+  "error": true,
+  "errors":
+  [
+    {
+      "title": "Error in Admission API",
+      "details": "Cannot transit to enrolled, current step is enrolled"
+    }
+  ]
 }
 ```
 
@@ -1116,16 +1144,12 @@ Realiza atualização de um processo de admissão específico de um aluno. Para 
 
 | Status | Descrição |
 | ------ | --------- |
-| initiated | Inscrição para exame Pendente |
-| pre_registered | Agendamento solicitado para exame vestibular |
 | registered | Agendamento confirmado no exame vestibular |
 | failed | Reprovado no exame vestibular |
 | approved | Aprovado no exame vestibular |
 | pending_docs | Documentação Pendente |
-| partially_submitted_docs | Documentação de Bolso enviada |
-| submitted_docs | Documentação Completamente Enviada |
-| rejected_docs | Documentação Rejeitada |
 | enrolled | Matriculado |
+| drop_out_confirmed | Confirmação de desistência do aluno |
 
 ### Informações de resultado
 
@@ -1174,6 +1198,205 @@ Realiza atualização de um processo de admissão específico de um aluno. Para 
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
+| enrolled | Matriculado |
+| dropped_out | Desistente |
+| dropping_out | Desistindo |
+| drop_out_confirmed | Desistência confirmada |
+
+### Significado dos valores em result
+
+| Nome | Descrição |
+| ---- | --------- |
+| null | Inscrição para exame Pendente |
+| failed | Reprovado no exame vestibular |
+| approved | Aprovado no exame vestibular |
+
+## Aprovar processo de admissão aguardando a formação de turma
+
+> Requisição
+
+```bash
+curl -X PUT --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions/12345/awaiting_enrollment \
+  --data '"days_to_enroll": "5"}'
+```
+
+> Resposta
+
+```json
+{
+  "id": 12345,
+  "course": {
+    "id": "ADM-MANHA-SP",
+    "offer": {
+      "discount": 50.0
+    }
+  },
+  "status": "awaiting_enrollment",
+  "student": {
+    "id": 394932,
+    "name": "José da Silva",
+    "cpf": "111.222.333-44",
+    "birth_date": "1991-01-01",
+    "emails": [
+      "teste@exemplo.com"
+    ],
+    "phones": [
+      "(11) 98888-7777"
+    ],
+    "enem": {
+      "year": 2018,
+      "scores": {
+        "essay": 200.0,
+        "math": 200.1,
+        "language": 200.2,
+        "nature": 200.4,
+        "social": 200.5
+      }
+    },
+    "address_information": {
+      "address": "Rua Sandra",
+      "number": "432S",
+      "neighborhood": "Chácara Dora",
+      "city": "Araçariguama",
+      "state": "SP",
+      "postal_code": "18147-000"
+    }
+  },
+  "applications": [
+    {
+      "id": 123456,
+      "type": "exam",
+      "exam": {
+        "id":456,
+        "course_skus": [
+          "ADM-MANHA-SP",
+          "DIR-MANHA-SP",
+          "ADM-NOITE-RJ"
+        ],
+        "exam_location": {
+          "address": "Rua Márcia",
+          "number": "4231",
+          "neighborhood": "Morro do Barreto",
+          "city": "São Roque",
+          "state": "SP",
+          "postal_code": "19110-000"
+        },
+        "dates": "2016-11-01",
+        "times": "18:30",
+        "status": "active",
+        "created_at": "2016-10-01T03:15:44Z"
+      },
+      "result": "approved",
+      "created_at": "2016-10-01T03:15:44Z"
+    }
+  ],
+  "created_at": "2016-10-01T03:15:44Z",
+  "extra_data": {
+    "external_enrollment_id": "NPW231"
+  }
+}
+```
+
+> Retorno quando parâmetros estão incorretos
+
+```json
+{
+  "error": true,
+  "message": "Invalid parameters",
+  "description": "Unknown status. Please check the API manual at https://docs.queroalunos.com/"
+}
+```
+
+> Retorno quando não encontra a admissão
+
+```json
+{
+  "error": true,
+  "errors":
+  [
+    {
+      "title": "Admission not found",
+      "details": "No admission associated with this ID was found"
+    }
+  ]
+}
+```
+
+> Exemplo de retorno quando há um erro na atualização requisitada
+
+```json
+{
+  "error": true,
+  "errors":
+  [
+    {
+      "title": "Error in Admission API",
+      "details": "Cannot reject enrollment, current step is enrolled"
+    }
+  ]
+}
+```
+
+Realiza atualização de um processo de admissão específico de um aluno. Para isso é preciso enviar a informação atual dele pelo parâmetro `status`.
+
+### Parâmetros
+
+| Nome | Tipo | Descrição |
+| ---- | ---- | --------- |
+| id | path | Id da admissão |
+| days_to_enroll | string | Previsão para formação de turma para essa admissão (em dias) |
+
+### Informações de resultado
+
+| Nome | Tipo | Descrição |
+| ---- | ---- | --------- |
+| id | number | Id da admissão |
+| course | object | Objeto com dados do curso referente a essa matrícula |
+| [course] id | string | Código do curso fornecido pela universidade referente a essa matrícula |
+| [course] offer | object | Objeto com dados da oferta do curso |
+| [offer] discount | float | Desconto do curso que o aluno adquiriu |
+| status | string | Status da admissão do aluno |
+| student | object | Objeto com dados do aluno |
+| application | array | Lista de objetos de inscrição para exame (pode estar vazio) |
+| [application] id | number | Id da inscrição para exame |
+| [application] type | string | Tipo de exame vestibular (exam ou enem) |
+| [application] student | object | Objeto com os dados do aluno referente a essa matrícula |
+| exam | object | Objeto com informações do exame referente a essa matrícula |
+| [exam] id | number | Id do exame vestibular |
+| [exam] course_skus | array | Lista com os cursos pertencentes a este exame vestibular |
+| [exam] local | object | Objeto com dados do local do exame vestibular |
+| [exam_location] address | string | Endereço da localização do exame vestibular |
+| [exam_location] number | string | Número da localização do exame vestibular |
+| [exam_location] neighborhood | string | Bairro da localização do exame vestibular |
+| [exam_location] city | string | Cidade da localização do exame vestibular |
+| [exam_location] state | string | Estado da localização do exame vestibular |
+| [exam_location] postal_code | string | Código postal da localização do exame vestibular |
+| [exam] dates | string | Data da realização do exame vestibular no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| [exam] times | string | Hora da realização do exame vestibular no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| [exam] status | string | Status do exame vestibular |
+| [exam] created_at | string | Data da criação do exame vestibular no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| [application] result | string | Resultado do exame vestibular |
+| [application] created_at | string | Data de criação da inscrição para exame no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| created_at | string | Data de criação da admissão no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
+
+### Significado dos valores em status
+
+| Nome | Descrição |
+| ---- | --------- |
+| initiated | Inscrição para exame Pendente |
+| pre_registered | Agendamento solicitado para exame vestibular |
+| registered | Agendamento confirmado no exame vestibular |
+| failed | Reprovado no exame vestibular |
+| approved | Aprovado no exame vestibular |
+| pending_docs | Documentação Pendente |
+| partially_submitted_docs | Documentação de Bolso enviada |
+| submitted_docs | Documentação Enviada |
+| rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -1281,7 +1504,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
 
 ```json
 {
-  "status": "error",
+  "error": true,
   "errors": [
     {
       "title": "Admission not found",
@@ -1295,7 +1518,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
 
 ```json
 {
-  "status": "error",
+  "error": true,
   "errors": [
     {
       "title": "Document not found",
@@ -1427,6 +1650,8 @@ Esta notificação informa o início de um processo de admissão.
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
@@ -1516,6 +1741,8 @@ Esta notificação informa a atualização de um processo de admissão.
 | partially_submitted_docs | Documentação de Bolso enviada |
 | submitted_docs | Documentação Completamente Enviada |
 | rejected_docs | Documentação Rejeitada |
+| rejected_enrollment | Matrícula rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
 | enrolled | Matriculado |
 | dropped_out | Desistente |
 | dropping_out | Desistindo |
