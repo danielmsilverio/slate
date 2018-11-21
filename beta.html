@@ -284,6 +284,15 @@
                   <li>
                     <a href="#atualizar-processo-de-admissao" class="toc-h2 toc-link" data-title="Atualizar processo de admissão">Atualizar processo de admissão</a>
                   </li>
+                  <li>
+                    <a href="#aprovar-processo-de-admissao-aguardando-a-formacao-de-turma" class="toc-h2 toc-link" data-title="Aprovar processo de admissão aguardando a formação de turma">Aprovar processo de admissão aguardando a formação de turma</a>
+                  </li>
+                  <li>
+                    <a href="#rejeitar-documentacao-de-um-processo-de-admissao" class="toc-h2 toc-link" data-title="Rejeitar documentação de um processo de admissão">Rejeitar documentação de um processo de admissão</a>
+                  </li>
+                  <li>
+                    <a href="#rejeitar-um-processo-de-admissao" class="toc-h2 toc-link" data-title="Rejeitar um processo de admissão">Rejeitar um processo de admissão</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -305,6 +314,9 @@
                   </li>
                   <li>
                     <a href="#notificar-novo-processo-de-admissao" class="toc-h2 toc-link" data-title="Notificar novo processo de admissão">Notificar novo processo de admissão</a>
+                  </li>
+                  <li>
+                    <a href="#notificar-atualizacao-de-um-processo-de-admissao" class="toc-h2 toc-link" data-title="Notificar atualização de um processo de admissão">Notificar atualização de um processo de admissão</a>
                   </li>
                   <li>
                     <a href="#notificar-novo-exame" class="toc-h2 toc-link" data-title="Notificar novo exame">Notificar novo exame</a>
@@ -352,7 +364,7 @@ Status Code: 403 Forbidden
 <h2 id='requisicao-com-token-sem-permissao'>Requisição com token sem permissão</h2><pre class="highlight plaintext"><code>Sem permissão
 Status Code: 200 OK
 </code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
     </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid Permission"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You are not authorized to access this resource with these parameters"</span><span class="w">
@@ -866,7 +878,10 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"extra_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"external_enrollment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NPW231"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1051,6 +1066,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>string</td>
 <td>Data da criação do processo de matrícula no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
+<tr>
+<td>[admissions] [extra_data] external_enrollment_id</td>
+<td>string</td>
+<td>Identificador de matrícula enviado pela faculdade</td>
+</tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status'>Significado dos valores em status</h3>
 <table><thead>
@@ -1084,12 +1104,24 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Documentação Pendente</td>
 </tr>
 <tr>
+<td>partially_submitted_docs</td>
+<td>Documentação de Bolso enviada</td>
+</tr>
+<tr>
 <td>submitted_docs</td>
 <td>Documentação Enviada</td>
 </tr>
 <tr>
 <td>rejected_docs</td>
 <td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>rejected_enrollment</td>
+<td>Matrícula rejeitada</td>
+</tr>
+<tr>
+<td>awaiting_enrollment</td>
+<td>Aguardando formação de turma</td>
 </tr>
 <tr>
 <td>enrolled</td>
@@ -1156,7 +1188,10 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_docs"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"extra_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"external_enrollment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NPW231"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1338,6 +1373,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>string</td>
 <td>Data da criação do processo de matrícula no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
+<tr>
+<td>[admissions] [extra_data] external_enrollment_id</td>
+<td>string</td>
+<td>Identificador de matrícula enviado pela faculdade</td>
+</tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-2'>Significado dos valores em status</h3>
 <table><thead>
@@ -1371,12 +1411,24 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Documentação Pendente</td>
 </tr>
 <tr>
+<td>partially_submitted_docs</td>
+<td>Documentação de Bolso enviada</td>
+</tr>
+<tr>
 <td>submitted_docs</td>
 <td>Documentação Enviada</td>
 </tr>
 <tr>
 <td>rejected_docs</td>
 <td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>rejected_enrollment</td>
+<td>Matrícula rejeitada</td>
+</tr>
+<tr>
+<td>awaiting_enrollment</td>
+<td>Aguardando formação de turma</td>
 </tr>
 <tr>
 <td>enrolled</td>
@@ -1474,7 +1526,10 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
           </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"extra_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"external_enrollment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NPW231"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1669,6 +1724,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>string</td>
 <td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
+<tr>
+<td>[admissions] [extra_data] external_enrollment_id</td>
+<td>string</td>
+<td>Identificador de matrícula enviado pela faculdade</td>
+</tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-3'>Significado dos valores em status</h3>
 <table><thead>
@@ -1702,12 +1762,24 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Documentação Pendente</td>
 </tr>
 <tr>
+<td>partially_submitted_docs</td>
+<td>Documentação de Bolso enviada</td>
+</tr>
+<tr>
 <td>submitted_docs</td>
 <td>Documentação Enviada</td>
 </tr>
 <tr>
 <td>rejected_docs</td>
 <td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>rejected_enrollment</td>
+<td>Matrícula rejeitada</td>
+</tr>
+<tr>
+<td>awaiting_enrollment</td>
+<td>Aguardando formação de turma</td>
 </tr>
 <tr>
 <td>enrolled</td>
@@ -1822,7 +1894,10 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"extra_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"external_enrollment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NPW231"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -1997,6 +2072,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>string</td>
 <td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
+<tr>
+<td>[extra_data] external_enrollment_id</td>
+<td>string</td>
+<td>Identificador de matrícula enviado pela faculdade</td>
+</tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-4'>Significado dos valores em status</h3>
 <table><thead>
@@ -2030,12 +2110,24 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Documentação Pendente</td>
 </tr>
 <tr>
+<td>partially_submitted_docs</td>
+<td>Documentação de Bolso enviada</td>
+</tr>
+<tr>
 <td>submitted_docs</td>
 <td>Documentação Enviada</td>
 </tr>
 <tr>
 <td>rejected_docs</td>
 <td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>rejected_enrollment</td>
+<td>Matrícula rejeitada</td>
+</tr>
+<tr>
+<td>awaiting_enrollment</td>
+<td>Aguardando formação de turma</td>
 </tr>
 <tr>
 <td>enrolled</td>
@@ -2151,16 +2243,23 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
       </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"extra_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"external_enrollment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NPW231"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Retorno quando parâmetros estão incorretos</p>
+<p>Retorno quando parâmetros estão incorretos
+<code>
+Não autorizado
+Status Code: 403 Forbidden
+</code></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown status. Please check the API manual at https://docs.queroalunos.com/#atualizar-processo-de-admissao"</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown status. Please check the API manual at https://docs.queroalunos.com/"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -2168,8 +2267,27 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id not found"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Could not find any admission by given id."</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Admission not found"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No admission associated with this ID was found"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Exemplo de retorno quando há um erro na atualização requisitada</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error in Admission API"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cannot transit to enrolled, current step is enrolled"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Realiza atualização de um processo de admissão específico de um aluno. Para isso é preciso enviar a informação atual dele pelo parâmetro <code>status</code>.</p>
@@ -2182,9 +2300,19 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </tr>
 </thead><tbody>
 <tr>
+<td>id</td>
+<td>path</td>
+<td>Id da admissão</td>
+</tr>
+<tr>
 <td>status</td>
 <td>form</td>
 <td>situação da admissão</td>
+</tr>
+<tr>
+<td>[extra_data] external_enrollment_id</td>
+<td>string</td>
+<td>Identificador de matrícula enviado pela faculdade (opcional)</td>
 </tr>
 </tbody></table>
 <h3 id='possiveis-valores-para-o-parametro-status'>Possíveis valores para o parâmetro status</h3>
@@ -2194,14 +2322,6 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <th>Descrição</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>initiated</td>
-<td>Inscrição para exame Pendente</td>
-</tr>
-<tr>
-<td>pre_registered</td>
-<td>Agendamento solicitado para exame vestibular</td>
-</tr>
 <tr>
 <td>registered</td>
 <td>Agendamento confirmado no exame vestibular</td>
@@ -2219,16 +2339,12 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Documentação Pendente</td>
 </tr>
 <tr>
-<td>submitted_docs</td>
-<td>Documentação Enviada</td>
-</tr>
-<tr>
-<td>rejected_docs</td>
-<td>Documentação Rejeitada</td>
-</tr>
-<tr>
 <td>enrolled</td>
 <td>Matriculado</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Confirmação de desistência do aluno</td>
 </tr>
 </tbody></table>
 <h3 id='informacoes-de-resultado-5'>Informações de resultado</h3>
@@ -2379,6 +2495,11 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>string</td>
 <td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
 </tr>
+<tr>
+<td>[extra_data] external_enrollment_id</td>
+<td>string</td>
+<td>Identificador de matrícula enviado pela faculdade</td>
+</tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-status-5'>Significado dos valores em status</h3>
 <table><thead>
@@ -2412,12 +2533,24 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Documentação Pendente</td>
 </tr>
 <tr>
+<td>partially_submitted_docs</td>
+<td>Documentação de Bolso enviada</td>
+</tr>
+<tr>
 <td>submitted_docs</td>
 <td>Documentação Enviada</td>
 </tr>
 <tr>
 <td>rejected_docs</td>
 <td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>rejected_enrollment</td>
+<td>Matrícula rejeitada</td>
+</tr>
+<tr>
+<td>awaiting_enrollment</td>
+<td>Aguardando formação de turma</td>
 </tr>
 <tr>
 <td>enrolled</td>
@@ -2437,6 +2570,1152 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </tr>
 </tbody></table>
 <h3 id='significado-dos-valores-em-result-3'>Significado dos valores em result</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>null</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+</tbody></table>
+<h2 id='aprovar-processo-de-admissao-aguardando-a-formacao-de-turma'>Aprovar processo de admissão aguardando a formação de turma</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X PUT --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/v1/admissions/12345/awaiting_enrollment <span class="se">\</span>
+  --data <span class="s1">'"days_to_enroll": "5"}'</span>
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"awaiting_enrollment"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">394932</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"José da Silva"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111.222.333-44"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1991-01-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"teste@exemplo.com"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"(11) 98888-7777"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"enem"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scores"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"essay"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"math"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"nature"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.4</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"social"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.5</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"address_information"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Sandra"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"432S"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chácara Dora"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Araçariguama"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">456</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"exam_location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"extra_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"external_enrollment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NPW231"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando parâmetros estão incorretos</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown status. Please check the API manual at https://docs.queroalunos.com/"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando não encontra a admissão</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Admission not found"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No admission associated with this ID was found"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Exemplo de retorno quando há um erro na atualização requisitada</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error in Admission API"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cannot reject enrollment, current step is enrolled"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Realiza atualização de um processo de admissão específico de um aluno. Para isso é preciso enviar a informação atual dele pelo parâmetro <code>status</code>.</p>
+<h3 id='parametros-6'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>Id da admissão</td>
+</tr>
+<tr>
+<td>days_to_enroll</td>
+<td>string</td>
+<td>Previsão para formação de turma para essa admissão (em dias)</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-6'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Id da admissão</td>
+</tr>
+<tr>
+<td>course</td>
+<td>object</td>
+<td>Objeto com dados do curso referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[course] id</td>
+<td>string</td>
+<td>Código do curso fornecido pela universidade referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[course] offer</td>
+<td>object</td>
+<td>Objeto com dados da oferta do curso</td>
+</tr>
+<tr>
+<td>[offer] discount</td>
+<td>float</td>
+<td>Desconto do curso que o aluno adquiriu</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Status da admissão do aluno</td>
+</tr>
+<tr>
+<td>student</td>
+<td>object</td>
+<td>Objeto com dados do aluno</td>
+</tr>
+<tr>
+<td>application</td>
+<td>array</td>
+<td>Lista de objetos de inscrição para exame (pode estar vazio)</td>
+</tr>
+<tr>
+<td>[application] id</td>
+<td>number</td>
+<td>Id da inscrição para exame</td>
+</tr>
+<tr>
+<td>[application] type</td>
+<td>string</td>
+<td>Tipo de exame vestibular (exam ou enem)</td>
+</tr>
+<tr>
+<td>[application] student</td>
+<td>object</td>
+<td>Objeto com os dados do aluno referente a essa matrícula</td>
+</tr>
+<tr>
+<td>exam</td>
+<td>object</td>
+<td>Objeto com informações do exame referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[exam] id</td>
+<td>number</td>
+<td>Id do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] course_skus</td>
+<td>array</td>
+<td>Lista com os cursos pertencentes a este exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] local</td>
+<td>object</td>
+<td>Objeto com dados do local do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] address</td>
+<td>string</td>
+<td>Endereço da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] number</td>
+<td>string</td>
+<td>Número da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] neighborhood</td>
+<td>string</td>
+<td>Bairro da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] city</td>
+<td>string</td>
+<td>Cidade da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] state</td>
+<td>string</td>
+<td>Estado da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] postal_code</td>
+<td>string</td>
+<td>Código postal da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] dates</td>
+<td>string</td>
+<td>Data da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[exam] times</td>
+<td>string</td>
+<td>Hora da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[exam] status</td>
+<td>string</td>
+<td>Status do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] created_at</td>
+<td>string</td>
+<td>Data da criação do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[application] result</td>
+<td>string</td>
+<td>Resultado do exame vestibular</td>
+</tr>
+<tr>
+<td>[application] created_at</td>
+<td>string</td>
+<td>Data de criação da inscrição para exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[extra_data] external_enrollment_id</td>
+<td>string</td>
+<td>Identificador de matrícula enviado pela faculdade</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-status-6'>Significado dos valores em status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento solicitado para exame vestibular</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento confirmado no exame vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>partially_submitted_docs</td>
+<td>Documentação de Bolso enviada</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>rejected_enrollment</td>
+<td>Matrícula rejeitada</td>
+</tr>
+<tr>
+<td>awaiting_enrollment</td>
+<td>Aguardando formação de turma</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-result-4'>Significado dos valores em result</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>null</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+</tbody></table>
+<h2 id='rejeitar-documentacao-de-um-processo-de-admissao'>Rejeitar documentação de um processo de admissão</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X PUT --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/v1/admissions/12345/reject_docs <span class="se">\</span>
+  --data <span class="s1">'"reason": "O RG está ilegível."}'</span>
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rejected_docs"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">394932</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"José da Silva"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111.222.333-44"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1991-01-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"teste@exemplo.com"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"(11) 98888-7777"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"enem"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scores"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"essay"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"math"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"nature"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.4</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"social"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.5</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"address_information"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Sandra"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"432S"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chácara Dora"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Araçariguama"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">456</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"exam_location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"extra_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"external_enrollment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NPW231"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando parâmetros estão incorretos</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown status. Please check the API manual at https://docs.queroalunos.com/"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando não encontra a admissão</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Admission not found"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No admission associated with this ID was found"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Exemplo de retorno quando há um erro na atualização requisitada</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error in Admission API"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cannot reject documents, current step is enrolled"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Realiza atualização de um processo de admissão específico de um aluno. Para isso é preciso enviar a informação atual dele pelo parâmetro <code>status</code>.</p>
+<h3 id='parametros-7'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>Id da admissão</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>string</td>
+<td>Motivo pela rejeição dos documentos</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-7'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Id da admissão</td>
+</tr>
+<tr>
+<td>course</td>
+<td>object</td>
+<td>Objeto com dados do curso referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[course] id</td>
+<td>string</td>
+<td>Código do curso fornecido pela universidade referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[course] offer</td>
+<td>object</td>
+<td>Objeto com dados da oferta do curso</td>
+</tr>
+<tr>
+<td>[offer] discount</td>
+<td>float</td>
+<td>Desconto do curso que o aluno adquiriu</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Status da admissão do aluno</td>
+</tr>
+<tr>
+<td>student</td>
+<td>object</td>
+<td>Objeto com dados do aluno</td>
+</tr>
+<tr>
+<td>application</td>
+<td>array</td>
+<td>Lista de objetos de inscrição para exame (pode estar vazio)</td>
+</tr>
+<tr>
+<td>[application] id</td>
+<td>number</td>
+<td>Id da inscrição para exame</td>
+</tr>
+<tr>
+<td>[application] type</td>
+<td>string</td>
+<td>Tipo de exame vestibular (exam ou enem)</td>
+</tr>
+<tr>
+<td>[application] student</td>
+<td>object</td>
+<td>Objeto com os dados do aluno referente a essa matrícula</td>
+</tr>
+<tr>
+<td>exam</td>
+<td>object</td>
+<td>Objeto com informações do exame referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[exam] id</td>
+<td>number</td>
+<td>Id do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] course_skus</td>
+<td>array</td>
+<td>Lista com os cursos pertencentes a este exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] local</td>
+<td>object</td>
+<td>Objeto com dados do local do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] address</td>
+<td>string</td>
+<td>Endereço da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] number</td>
+<td>string</td>
+<td>Número da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] neighborhood</td>
+<td>string</td>
+<td>Bairro da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] city</td>
+<td>string</td>
+<td>Cidade da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] state</td>
+<td>string</td>
+<td>Estado da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] postal_code</td>
+<td>string</td>
+<td>Código postal da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] dates</td>
+<td>string</td>
+<td>Data da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[exam] times</td>
+<td>string</td>
+<td>Hora da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[exam] status</td>
+<td>string</td>
+<td>Status do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] created_at</td>
+<td>string</td>
+<td>Data da criação do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[application] result</td>
+<td>string</td>
+<td>Resultado do exame vestibular</td>
+</tr>
+<tr>
+<td>[application] created_at</td>
+<td>string</td>
+<td>Data de criação da inscrição para exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[extra_data] external_enrollment_id</td>
+<td>string</td>
+<td>Identificador de matrícula enviado pela faculdade</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-status-7'>Significado dos valores em status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento solicitado para exame vestibular</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento confirmado no exame vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>partially_submitted_docs</td>
+<td>Documentação de Bolso enviada</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>rejected_enrollment</td>
+<td>Matrícula rejeitada</td>
+</tr>
+<tr>
+<td>awaiting_enrollment</td>
+<td>Aguardando formação de turma</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-result-5'>Significado dos valores em result</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>null</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+</tbody></table>
+<h2 id='rejeitar-um-processo-de-admissao'>Rejeitar um processo de admissão</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X PUT --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/v1/admissions/12345/reject_enrollment <span class="se">\</span>
+  --data <span class="s1">'"reason": "Candidato não possui ensino médio completo."}'</span>
+</code></pre>
+<blockquote>
+<p>Resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"course"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rejected_enrollment"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">394932</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"José da Silva"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111.222.333-44"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1991-01-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"teste@exemplo.com"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"(11) 98888-7777"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"enem"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scores"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"essay"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"math"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"nature"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.4</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"social"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.5</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"address_information"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Sandra"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"432S"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chácara Dora"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Araçariguama"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exam"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">456</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"course_skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"DIR-MANHA-SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"ADM-NOITE-RJ"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"exam_location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Márcia"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4231"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morro do Barreto"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Roque"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19110-000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"dates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-01"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:30"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01T03:15:44Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"extra_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"external_enrollment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NPW231"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando parâmetros estão incorretos</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid parameters"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown status. Please check the API manual at https://docs.queroalunos.com/"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Retorno quando não encontra a admissão</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Admission not found"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No admission associated with this ID was found"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Exemplo de retorno quando há um erro na atualização requisitada</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error in Admission API"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cannot reject enrollment, current step is enrolled"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Realiza atualização de um processo de admissão específico de um aluno. Para isso é preciso enviar a informação atual dele pelo parâmetro <code>status</code>.</p>
+<h3 id='parametros-8'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>Id da admissão</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>string</td>
+<td>Motivo pela rejeição da matrícula</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-8'>Informações de resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Id da admissão</td>
+</tr>
+<tr>
+<td>course</td>
+<td>object</td>
+<td>Objeto com dados do curso referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[course] id</td>
+<td>string</td>
+<td>Código do curso fornecido pela universidade referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[course] offer</td>
+<td>object</td>
+<td>Objeto com dados da oferta do curso</td>
+</tr>
+<tr>
+<td>[offer] discount</td>
+<td>float</td>
+<td>Desconto do curso que o aluno adquiriu</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Status da admissão do aluno</td>
+</tr>
+<tr>
+<td>student</td>
+<td>object</td>
+<td>Objeto com dados do aluno</td>
+</tr>
+<tr>
+<td>application</td>
+<td>array</td>
+<td>Lista de objetos de inscrição para exame (pode estar vazio)</td>
+</tr>
+<tr>
+<td>[application] id</td>
+<td>number</td>
+<td>Id da inscrição para exame</td>
+</tr>
+<tr>
+<td>[application] type</td>
+<td>string</td>
+<td>Tipo de exame vestibular (exam ou enem)</td>
+</tr>
+<tr>
+<td>[application] student</td>
+<td>object</td>
+<td>Objeto com os dados do aluno referente a essa matrícula</td>
+</tr>
+<tr>
+<td>exam</td>
+<td>object</td>
+<td>Objeto com informações do exame referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[exam] id</td>
+<td>number</td>
+<td>Id do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] course_skus</td>
+<td>array</td>
+<td>Lista com os cursos pertencentes a este exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] local</td>
+<td>object</td>
+<td>Objeto com dados do local do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] address</td>
+<td>string</td>
+<td>Endereço da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] number</td>
+<td>string</td>
+<td>Número da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] neighborhood</td>
+<td>string</td>
+<td>Bairro da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] city</td>
+<td>string</td>
+<td>Cidade da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] state</td>
+<td>string</td>
+<td>Estado da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam_location] postal_code</td>
+<td>string</td>
+<td>Código postal da localização do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] dates</td>
+<td>string</td>
+<td>Data da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[exam] times</td>
+<td>string</td>
+<td>Hora da realização do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[exam] status</td>
+<td>string</td>
+<td>Status do exame vestibular</td>
+</tr>
+<tr>
+<td>[exam] created_at</td>
+<td>string</td>
+<td>Data da criação do exame vestibular no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[application] result</td>
+<td>string</td>
+<td>Resultado do exame vestibular</td>
+</tr>
+<tr>
+<td>[application] created_at</td>
+<td>string</td>
+<td>Data de criação da inscrição para exame no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Data de criação da admissão no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[extra_data] external_enrollment_id</td>
+<td>string</td>
+<td>Identificador de matrícula enviado pela faculdade</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-status-8'>Significado dos valores em status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento solicitado para exame vestibular</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento confirmado no exame vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>partially_submitted_docs</td>
+<td>Documentação de Bolso enviada</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>rejected_enrollment</td>
+<td>Matrícula rejeitada</td>
+</tr>
+<tr>
+<td>awaiting_enrollment</td>
+<td>Aguardando formação de turma</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-result-6'>Significado dos valores em result</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -2488,7 +3767,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <p>Retorna todas os documentos para um processo de admissão.</p>
 
 <p>A lista de documentos são retornadas em páginas de até 25 elementos, ordenadas pela última atualização realizada. Se houver mais resultados, <code>has_more</code> retorna <code>true</code> indicando que é possível usar o parâmetro <code>ending_before</code> para consultar objetos antecessores à lista atual. Para mais informações, consulte a seção de <a href="#paginacao">paginação</a>.</p>
-<h3 id='parametros-6'>Parâmetros</h3>
+<h3 id='parametros-9'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -2522,7 +3801,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Id da admissão</td>
 </tr>
 </tbody></table>
-<h3 id='informacoes-de-resultado-6'>Informações de resultado</h3>
+<h3 id='informacoes-de-resultado-9'>Informações de resultado</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -2592,7 +3871,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <p>Resposta quando não encontra nenhuma admissão</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Admission not found"</span><span class="p">,</span><span class="w">
@@ -2605,7 +3884,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <p>Resposta quando não encontra nenhum documento associado à admissão</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Document not found"</span><span class="p">,</span><span class="w">
@@ -2615,7 +3894,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retorna um documento específico para um processo de admissão.</p>
-<h3 id='parametros-7'>Parâmetros</h3>
+<h3 id='parametros-10'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -2634,7 +3913,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Id do documento referente à admissão</td>
 </tr>
 </tbody></table>
-<h3 id='informacoes-de-resultado-7'>Informações de resultado</h3>
+<h3 id='informacoes-de-resultado-10'>Informações de resultado</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -2754,7 +4033,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Esta notificação informa o início de um processo de admissão.</p>
-<h3 id='parametros-8'>Parâmetros</h3>
+<h3 id='parametros-11'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -2823,7 +4102,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Objeto com dados do aluno</td>
 </tr>
 </tbody></table>
-<h3 id='significado-dos-valores-em-status-6'>Significado dos valores em status</h3>
+<h3 id='significado-dos-valores-em-status-9'>Significado dos valores em status</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -2855,12 +4134,210 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Documentação Pendente</td>
 </tr>
 <tr>
+<td>partially_submitted_docs</td>
+<td>Documentação de Bolso enviada</td>
+</tr>
+<tr>
 <td>submitted_docs</td>
 <td>Documentação Enviada</td>
 </tr>
 <tr>
 <td>rejected_docs</td>
 <td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>rejected_enrollment</td>
+<td>Matrícula rejeitada</td>
+</tr>
+<tr>
+<td>awaiting_enrollment</td>
+<td>Aguardando formação de turma</td>
+</tr>
+<tr>
+<td>enrolled</td>
+<td>Matriculado</td>
+</tr>
+<tr>
+<td>dropped_out</td>
+<td>Desistente</td>
+</tr>
+<tr>
+<td>dropping_out</td>
+<td>Desistindo</td>
+</tr>
+<tr>
+<td>drop_out_confirmed</td>
+<td>Desistência confirmada</td>
+</tr>
+</tbody></table>
+<h2 id='notificar-atualizacao-de-um-processo-de-admissao'>Notificar atualização de um processo de admissão</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admission.updated"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-15T17:34:26.173"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"api_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"course"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"submitted_docs"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"student"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">394932</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"José da Silva"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111.222.333-44"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1991-01-01"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"teste@exemplo.com"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"(11) 98888-7777"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"enem"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scores"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"essay"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"math"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"nature"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.4</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"social"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.5</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"address_information"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Sandra"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"432S"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chácara Dora"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Araçariguama"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18147-000"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Esta notificação informa a atualização de um processo de admissão.</p>
+<h3 id='parametros-12'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>created</td>
+<td>string</td>
+<td>Data que foi criado o evento no formato UTC <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>api_version</td>
+<td>string</td>
+<td>Informação da versão atual da API</td>
+</tr>
+<tr>
+<td>event_type</td>
+<td>string</td>
+<td>Tipo de evento, no caso <code>admission.updated</code></td>
+</tr>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>Objeto com informações de acordo com o tipo de evento</td>
+</tr>
+<tr>
+<td>admission</td>
+<td>object</td>
+<td>Objeto com dados do processo de admissão do aluno</td>
+</tr>
+<tr>
+<td>[admission] id</td>
+<td>number</td>
+<td>Id do processo de admissão</td>
+</tr>
+<tr>
+<td>[admission] course</td>
+<td>object</td>
+<td>Objeto com dados do curso referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[course] id</td>
+<td>string</td>
+<td>Código do curso fornecido pela universidade referente a essa matrícula</td>
+</tr>
+<tr>
+<td>[course] offer</td>
+<td>object</td>
+<td>Objeto com dados da oferta do curso</td>
+</tr>
+<tr>
+<td>[offer] discount</td>
+<td>float</td>
+<td>Porcentagem de desconto do curso que o aluno adquiriu</td>
+</tr>
+<tr>
+<td>[admission] status</td>
+<td>string</td>
+<td>Status da admissão do aluno</td>
+</tr>
+<tr>
+<td>[admission] student</td>
+<td>object</td>
+<td>Objeto com dados do aluno</td>
+</tr>
+</tbody></table>
+<h3 id='significado-dos-valores-em-status-10'>Significado dos valores em status</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiated</td>
+<td>Inscrição para exame Pendente</td>
+</tr>
+<tr>
+<td>pre_registered</td>
+<td>Agendamento solicitado para exame vestibular</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>Agendamento confirmado no exame vestibular</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>Aprovado no exame vestibular</td>
+</tr>
+<tr>
+<td>pending_docs</td>
+<td>Documentação Pendente</td>
+</tr>
+<tr>
+<td>partially_submitted_docs</td>
+<td>Documentação de Bolso enviada</td>
+</tr>
+<tr>
+<td>submitted_docs</td>
+<td>Documentação Completamente Enviada</td>
+</tr>
+<tr>
+<td>rejected_docs</td>
+<td>Documentação Rejeitada</td>
+</tr>
+<tr>
+<td>rejected_enrollment</td>
+<td>Matrícula rejeitada</td>
+</tr>
+<tr>
+<td>awaiting_enrollment</td>
+<td>Aguardando formação de turma</td>
 </tr>
 <tr>
 <td>enrolled</td>
@@ -2919,7 +4396,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Esta notificação informa a realização do vestibular (via Exame Quero Bolsa ou Nota do Enem) do processo de admissão.</p>
-<h3 id='parametros-9'>Parâmetros</h3>
+<h3 id='parametros-13'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -3061,7 +4538,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Esta notificação informa a submissão de um documento do processo de admissão.</p>
-<h3 id='parametros-10'>Parâmetros</h3>
+<h3 id='parametros-14'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -3182,7 +4659,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Lista eventos enviados</p>
-<h3 id='parametros-11'>Parâmetros</h3>
+<h3 id='parametros-15'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
