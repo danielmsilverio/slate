@@ -9,15 +9,14 @@ search: true
 
 # API de Admissões do Quero Alunos
 
-Bem-vindo à documentação da API de Admissões do Quero Alunos. Aqui você encontrará guias e referências sobre como utilizar nossa API. Qualquer dúvida, entre em contato pelo email api-admissoes@quero.education.
+Bem-vindo à documentação da API de Admissões do Quero Alunos. Aqui você encontrará guias e referências sobre como utilizar nossa API. Qualquer dúvida, entre em contato pelo email [api-admissoes@quero.education](mailto:api-admissoes@quero.education).
 
 ## Informações básicas
 
 Todas as respostas da API são feitas em JSON
 
-Endpoint utilizado
-
-`https://queroalunos.com/api/v1`
+Endpoint de produção: `https://queroalunos.com/api/v1`\
+Endpoint de homologação: `https://queroalunos-admission.querobolsa.space/api/v1`
 
 # Autenticação
 
@@ -394,6 +393,45 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
 | has_more | boolean | Indica se há mais elementos disponíveis antes ou após essa página |
 | items | array | Lista dos elementos retornados pela requisição |
 
+# Possíveis estados de admissão
+## Admissão
+
+| Status | Descrição |
+| ---- | --------- |
+| initiated | Inscrição para exame pendente |
+| pre_registered | Agendamento solicitado para exame vestibular |
+| registered | Agendamento confirmado no exame vestibular |
+| approved | Aprovado no exame vestibular |
+| pending_docs | Documentação pendente |
+| submitted_docs | Documentação completamente enviada |
+| rejected_docs | Documentação rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
+| enrolled | Matriculado |#### Status de interrupção
+| | |
+| rejected_enrollment | Matrícula rejeitada |
+| failed | Reprovado no exame vestibular |
+| dropped_out | Desistente |
+| dropping_out | Desistindo |
+| drop_out_confirmed | Desistência confirmada |
+
+## Admissão digital
+
+| Status | Descrição |
+| ---- | --------- |
+| initiated | Inscrição para exame pendente |
+| pending_docs | Documentação pendente |
+| partially_submitted_docs | Documentação de bolso enviada e contrato assinado |
+| submitted_docs | Documentação completamente enviada |
+| rejected_docs | Documentação rejeitada |
+| awaiting_enrollment | Aguardando formação de turma |
+| enrolled | Matriculado |
+| | |
+| rejected_enrollment | Matrícula rejeitada |
+| failed | Reprovado no exame vestibular |
+| dropped_out | Desistente |
+| dropping_out | Desistindo |
+| drop_out_confirmed | Desistência confirmada |
+
 # Informações de alunos
 
 ## Busca de alunos por CPF
@@ -512,25 +550,6 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | [admissions] created_at | string | Data da criação do processo de matrícula no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | [admissions] [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
 
-### Significado dos valores em status
-| Nome | Descrição |
-| ---- | --------- |
-| initiated | Inscrição para exame Pendente |
-| pre_registered | Agendamento solicitado para exame vestibular |
-| registered | Agendamento confirmado no exame vestibular |
-| failed | Reprovado no exame vestibular |
-| approved | Aprovado no exame vestibular |
-| pending_docs | Documentação Pendente |
-| partially_submitted_docs | Documentação de Bolso enviada |
-| submitted_docs | Documentação Completamente Enviada |
-| rejected_docs | Documentação Rejeitada |
-| rejected_enrollment | Matrícula rejeitada |
-| awaiting_enrollment | Aguardando formação de turma |
-| enrolled | Matriculado |
-| dropped_out | Desistente |
-| dropping_out | Desistindo |
-| drop_out_confirmed | Desistência confirmada |
-
 ## Busca de aluno por id
 
 > Requisição
@@ -641,25 +660,6 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | [admissions] status | string | Status que se encontra o processo de matrícula |
 | [admissions] created_at | string | Data da criação do processo de matrícula no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | [admissions] [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
-
-### Significado dos valores em status
-| Nome | Descrição |
-| ---- | --------- |
-| initiated | Inscrição para exame Pendente |
-| pre_registered | Agendamento solicitado para exame vestibular |
-| registered | Agendamento confirmado no exame vestibular |
-| failed | Reprovado no exame vestibular |
-| approved | Aprovado no exame vestibular |
-| pending_docs | Documentação Pendente |
-| partially_submitted_docs | Documentação de Bolso enviada |
-| submitted_docs | Documentação Completamente Enviada |
-| rejected_docs | Documentação Rejeitada |
-| rejected_enrollment | Matrícula rejeitada |
-| awaiting_enrollment | Aguardando formação de turma |
-| enrolled | Matriculado |
-| dropped_out | Desistente |
-| dropping_out | Desistindo |
-| drop_out_confirmed | Desistência confirmada |
 
 # Informações de processos de admissão
 
@@ -812,26 +812,6 @@ Também é possível utilizar um parâmetro extra de `status` na URL para filtra
 | created_at | string | Data de criação da admissão no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
 
-### Significado dos valores em status
-
-| Nome | Descrição |
-| ---- | --------- |
-| initiated | Inscrição para exame Pendente |
-| pre_registered | Agendamento solicitado para exame vestibular |
-| registered | Agendamento confirmado no exame vestibular |
-| failed | Reprovado no exame vestibular |
-| approved | Aprovado no exame vestibular |
-| pending_docs | Documentação Pendente |
-| partially_submitted_docs | Documentação de Bolso enviada |
-| submitted_docs | Documentação Completamente Enviada |
-| rejected_docs | Documentação Rejeitada |
-| rejected_enrollment | Matrícula rejeitada |
-| awaiting_enrollment | Aguardando formação de turma |
-| enrolled | Matriculado |
-| dropped_out | Desistente |
-| dropping_out | Desistindo |
-| drop_out_confirmed | Desistência confirmada |
-
 ### Significado dos valores em result
 | Nome | Descrição |
 | ---- | --------- |
@@ -975,26 +955,6 @@ Retorna uma admissão específica da faculdade.
 | [application] created_at | string | Data de criação da inscrição para exame no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | created_at | string | Data de criação da admissão no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
-
-### Significado dos valores em status
-
-| Nome | Descrição |
-| ---- | --------- |
-| initiated | Inscrição para exame Pendente |
-| pre_registered | Agendamento solicitado para exame vestibular |
-| registered | Agendamento confirmado no exame vestibular |
-| failed | Reprovado no exame vestibular |
-| approved | Aprovado no exame vestibular |
-| pending_docs | Documentação Pendente |
-| partially_submitted_docs | Documentação de Bolso enviada |
-| submitted_docs | Documentação Completamente Enviada |
-| rejected_docs | Documentação Rejeitada |
-| rejected_enrollment | Matrícula rejeitada |
-| awaiting_enrollment | Aguardando formação de turma |
-| enrolled | Matriculado |
-| dropped_out | Desistente |
-| dropping_out | Desistindo |
-| drop_out_confirmed | Desistência confirmada |
 
 ### Significado dos valores em result
 
@@ -1185,26 +1145,6 @@ Realiza atualização de um processo de admissão específico de um aluno. Para 
 | created_at | string | Data de criação da admissão no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
 
-### Significado dos valores em status
-
-| Nome | Descrição |
-| ---- | --------- |
-| initiated | Inscrição para exame Pendente |
-| pre_registered | Agendamento solicitado para exame vestibular |
-| registered | Agendamento confirmado no exame vestibular |
-| failed | Reprovado no exame vestibular |
-| approved | Aprovado no exame vestibular |
-| pending_docs | Documentação Pendente |
-| partially_submitted_docs | Documentação de Bolso enviada |
-| submitted_docs | Documentação Completamente Enviada |
-| rejected_docs | Documentação Rejeitada |
-| rejected_enrollment | Matrícula rejeitada |
-| awaiting_enrollment | Aguardando formação de turma |
-| enrolled | Matriculado |
-| dropped_out | Desistente |
-| dropping_out | Desistindo |
-| drop_out_confirmed | Desistência confirmada |
-
 ### Significado dos valores em result
 
 | Nome | Descrição |
@@ -1381,26 +1321,6 @@ Realiza atualização de um processo de admissão específico de um aluno. Para 
 | [application] created_at | string | Data de criação da inscrição para exame no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | created_at | string | Data de criação da admissão no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | [extra_data] external_enrollment_id | string | Identificador de matrícula enviado pela faculdade |
-
-### Significado dos valores em status
-
-| Nome | Descrição |
-| ---- | --------- |
-| initiated | Inscrição para exame Pendente |
-| pre_registered | Agendamento solicitado para exame vestibular |
-| registered | Agendamento confirmado no exame vestibular |
-| failed | Reprovado no exame vestibular |
-| approved | Aprovado no exame vestibular |
-| pending_docs | Documentação Pendente |
-| partially_submitted_docs | Documentação de Bolso enviada |
-| submitted_docs | Documentação Enviada |
-| rejected_docs | Documentação Rejeitada |
-| rejected_enrollment | Matrícula rejeitada |
-| awaiting_enrollment | Aguardando formação de turma |
-| enrolled | Matriculado |
-| dropped_out | Desistente |
-| dropping_out | Desistindo |
-| drop_out_confirmed | Desistência confirmada |
 
 ### Significado dos valores em result
 
@@ -1637,25 +1557,6 @@ Esta notificação informa o início de um processo de admissão.
 | [admission] status | string | Status da admissão do aluno |
 | [admission] student | object | Objeto com dados do aluno |
 
-### Significado dos valores em status
-
-| Nome | Descrição |
-| ---- | --------- |
-| initiated | Inscrição para exame Pendente |
-| pre_registered | Agendamento solicitado para exame vestibular |
-| registered | Agendamento confirmado no exame vestibular |
-| failed | Reprovado no exame vestibular |
-| approved | Aprovado no exame vestibular |
-| pending_docs | Documentação Pendente |
-| partially_submitted_docs | Documentação de Bolso enviada |
-| submitted_docs | Documentação Completamente Enviada |
-| rejected_docs | Documentação Rejeitada |
-| rejected_enrollment | Matrícula rejeitada |
-| awaiting_enrollment | Aguardando formação de turma |
-| enrolled | Matriculado |
-| dropped_out | Desistente |
-| dropping_out | Desistindo |
-| drop_out_confirmed | Desistência confirmada |
 
 ## Notificar atualização de um processo de admissão
 
@@ -1727,26 +1628,6 @@ Esta notificação informa a atualização de um processo de admissão.
 | [offer] discount | float | Porcentagem de desconto do curso que o aluno adquiriu |
 | [admission] status | string | Status da admissão do aluno |
 | [admission] student | object | Objeto com dados do aluno |
-
-### Significado dos valores em status
-
-| Nome | Descrição |
-| ---- | --------- |
-| initiated | Inscrição para exame Pendente |
-| pre_registered | Agendamento solicitado para exame vestibular |
-| registered | Agendamento confirmado no exame vestibular |
-| failed | Reprovado no exame vestibular |
-| approved | Aprovado no exame vestibular |
-| pending_docs | Documentação Pendente |
-| partially_submitted_docs | Documentação de Bolso enviada |
-| submitted_docs | Documentação Completamente Enviada |
-| rejected_docs | Documentação Rejeitada |
-| rejected_enrollment | Matrícula rejeitada |
-| awaiting_enrollment | Aguardando formação de turma |
-| enrolled | Matriculado |
-| dropped_out | Desistente |
-| dropping_out | Desistindo |
-| drop_out_confirmed | Desistência confirmada |
 
 ## Notificar novo exame
 
