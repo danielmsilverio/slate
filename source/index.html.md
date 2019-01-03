@@ -15,7 +15,7 @@ Bem-vindo à documentação da API de Admissões do Quero Alunos. Aqui você enc
 
 Todas as respostas da API são feitas em JSON
 
-Endpoint de produção: `https://queroalunos.com/api/v1`\
+Endpoint de produção: `https://queroalunos.com/api/v1`
 Endpoint de homologação: `https://queroalunos-admission.querobolsa.space/api/v1`
 
 # Autenticação
