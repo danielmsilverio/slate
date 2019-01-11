@@ -20,12 +20,6 @@ Endpoint de homologação: `https://queroalunos-admission.querobolsa.space/api/v
 
 # Autenticação
 
-```
-POST https://queroalunos.com/api/v1/{action} HTTP/1.1
-Content-Type: application/json
-authorization: Token ••••••••••••
-```
-
 Todas as requisições são autenticadas por um token adicionado ao header.
 Caso não tenha o token, solicite-o ao setor de desenvolvimento da Quero Educação.
 
