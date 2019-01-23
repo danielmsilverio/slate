@@ -1153,7 +1153,7 @@ Realiza atualização de um processo de admissão específico de um aluno. Para 
 
 ```bash
 curl -X PUT --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions/12345/awaiting_enrollment \
-  --data '"days_to_enroll": "5"}'
+  --data '{"days_to_enroll": "5"}'
 ```
 
 > Resposta
@@ -1395,18 +1395,16 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
 
 ```json
 {
-      "id": 12345,
-      "type": "rg",
-      "url": "https://s3-example.amazonaws.com/example.png",
-      "admission": {
-        "id": 456,
-        "status": "submitted_docs",
-        "course": {
-          "id": "ADM-MANHA-SP",
-          "offer": {
-            "discount": 50.0
-          }
-        }
+  "id": 12345,
+  "type": "rg",
+  "url": "https://s3-example.amazonaws.com/example.png",
+  "admission": {
+    "id": 456,
+    "status": "submitted_docs",
+    "course": {
+      "id": "ADM-MANHA-SP",
+      "offer": {
+        "discount": 50.0
       }
     }
   }
@@ -1460,6 +1458,220 @@ Retorna um documento específico para um processo de admissão.
 | url | string | URL que aponta para a imagem do documento |
 | created_at | string | Data de submissão do documento no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | [admission] | object | Objeto que identifica o processo de admissão a que o documento se refere |
+
+
+# Informações de agendamento de processo seletivo
+
+## Informações de campus pelo código do curso
+
+> Requisição
+
+```bash
+curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://rota-da-faculdade.com/path/de/informacoes/de/campus?course_code=XYZ123
+```
+
+> Exemplo de resposta
+
+```json
+{
+  "campus": {
+    "id": "ABC123",
+    "name": "Unidade SJC",
+    "address": "Rua da Alegria, 999",
+    "city": "São José dos Campos",
+    "state": "SP"
+  }
+}
+```
+
+A rota com informações do campus deve ser fornecida pela faculdade, junto de um token para autenticação via HTTP Basic.
+
+A rota deve aceitar o formato JSON e tipo de requisição GET.
+
+É esperado erro 401 na resposta caso exista algum problema com a autenticação.
+
+É esperado erro 404 na resposta caso o `course_code` não seja reconhecido.
+
+### Parâmetros
+
+| Nome | Tipo | Descrição |
+| ---- | ---- | --------- |
+| course_code | Query | Código interno do curso na faculdade, enviado anteriormente para o Quero Bolsa |
+
+### Informações do resultado
+
+| Nome | Tipo | Descrição |
+| ---- | ---- | --------- |
+| id | string | Código interno do campus |
+| name | string | Nome do campus |
+| address | string | Endereço do campus |
+| city | string | Cidade do campus |
+| state | string | Estado do campus |
+
+## Informações de agendamento de Processo Seletivo por campus
+
+> Requisição
+
+```bash
+curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://rota-da-faculdade.com/path/de/informacoes/de/horarios?campus_code=ADM-MANHA-SP-SJC
+```
+
+> Exemplo de resposta
+
+```json
+{
+  "schedule": [
+    {
+      "date": "2018-02-15",
+      "time": ["10:00", "11:00", "12:00"]
+    },
+    {
+      "date": "2018-02-16",
+      "time": ["10:00", "11:00", "12:00"]
+    },
+    {
+      "data": "2018-02-17",
+      "time": ["10:00", "11:00", "12:00", "15:00", "16:00"]
+    },
+    {
+      "data": "2018-02-18",
+      "time": ["10:00", "11:00", "12:00", "15:00", "16:00"]
+    }
+  ]
+}
+```
+
+A rota com informações para agendamento de Processo Seletivo deve ser fornecida pela faculdade, junto de um token para autenticação via HTTP Basic.
+
+A rota deve aceitar o formato JSON e tipo de requisição GET.
+
+É esperado erro 401 na resposta caso exista algum problema com a autenticação.
+
+É esperado erro 404 na resposta caso o `campus_code` não seja reconhecido.
+
+### Parâmetros
+
+| Nome | Tipo | Descrição |
+| ---- | ---- | --------- |
+| campus_code | Query | Código interno do campus na faculdade, que foi recuperado pelo evento de [informação de campus pelo código do curso](#informacao-de-campus-pelo-codigo-do-curso) |
+
+### Informações de resultado
+
+Os resultados devem vir em um array de objetos `schedule`, onde cada objeto contem chaves `date` e `time`, correspondendo aos dias e horários disponíveis para agendamento de processo seletivo.
+
+| Nome | Tipo | Descrição |
+| ---- | ---- | --------- |
+| schedule | array | Array de objetos com os horários de processo seletivo do campus |
+| [schedule] date | array de string | Array com datas da solicitação de agendamento do processo seletivo no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| [schedule] time | array de string | Array com horários da solicitação de agendamento do processo seletivo. Formato: hh:mm (padrão 24 horas) |
+
+## Realizar agendamento de processo seletivo
+
+> Requisição
+
+```bash
+curl -X POST --header "Authorization: Token ########" --header "Content-Type: application/json" https://rota-da-faculdade.com/path/de/agendar \
+  --data '{
+    "postback_url": "https://queroalunos.com/api/v1/admissions/e9929544-00be-4a2e-b534-5191746fc61c/register",
+    "campus_code": "XYZ123",
+    "date": "2018-02-15",
+    "time": "12:00",
+    "cpf": "416.529.073-43",
+    "full_name": "João da Silva",
+    "course_id": "ADM-MANHA-SP-SJC"
+  }'
+```
+
+> Resposta quando o agendadamento é realizado
+
+```json
+{
+  "status": "registered"
+}
+```
+
+> Resposta quando o agendadamento é rejeitado
+
+```json
+{
+  "status": "rejected",
+  "reason": "Aluno bloqueado no sistema."
+}
+```
+
+A rota para fazer agendamento de Processo Seletivo deve ser fornecida pela faculdade, junto de um token para autenticação via HTTP Basic.
+
+A rota deve aceitar o formato JSON e tipo de requisição POST.
+
+É esperado erro 401 na resposta caso exista algum problema com a autenticação.
+
+### Parâmetros
+
+| Nome | Tipo | Descrição |
+| ---- | ---- | --------- |
+| postback_url | string | Rota de retorno para enviar resultado do processo seletivo do aluno |
+| campus_code | string | Código interno do campus na faculdade |
+| date | string | Data da solicitação de agendamento do processo seletivo no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| time | string | Hora da solicitação de agendamento do processo seletivo. Formato: hh:mm (padrão 24 horas) |
+| cpf | string | CPF do aluno que solicitou agendamento |
+| full_name | string | Nome completo do aluno que solicitou agendamento |
+| course_code | string | Código interno do curso na faculdade |
+
+### Informações do resultado
+
+| Nome | Tipo | Descrição |
+| ---- | ---- | --------- |
+| status | string | Status da solicitação de agendamento |
+| reason | string | Descrição do motivo da rejeição, caso o agendamento falhe ou seja negado |
+
+### Status do resultado
+
+| Nome | Significado |
+| ---- | ----------- |
+| registered | Agendamento realizado com sucesso |
+| rejected | Agendamento não realizado |
+
+## Envio de resultado de processo seletivo
+
+> Requisição
+
+```bash
+curl -X POST --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions/e9929544-00be-4a2e-b534-5191746fc61c/register \
+  --data '{
+    "result": "approved",
+    "grade": "83"
+  }'
+```
+
+> Resposta quando o resultado não é computado
+
+```json
+{
+  "error": "Cannot approve, current step is approved"
+}
+```
+
+A rota para onde a requisição será feita vem no parâmetro `postback_url` no evento de [realizar agendamento de processo seletivo](#realizar-agendamento-de-processo-seletivo)
+
+É enviado status `200` na resposta caso o resultado chegue corretamente.
+
+É enviado status `404` na resposta caso a url de postback seja inválida.
+
+É enviado status `500` com parâmetro `error` na resposta caso o resultado não seja computado.
+
+### Parâmetros
+
+| Nome | Tipo | Descrição |
+| ---- | ---- | --------- |
+| result | string | Resultado do aluno no processo seletivo |
+| grade | string | Nota do aluno no processo seletivo (opcional) |
+
+### Valores para `result`
+
+| Nome | Significado |
+| ---- | ----------- |
+| approved | Aprovado no processo seletivo |
+| failed | Reprovado no processo seletivo |
 
 # Notificações
 
