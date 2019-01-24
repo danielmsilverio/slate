@@ -312,6 +312,23 @@
               </ul>
           </li>
           <li>
+            <a href="#informacoes-de-agendamento-de-processo-seletivo" class="toc-h1 toc-link" data-title="Informações de agendamento de processo seletivo">Informações de agendamento de processo seletivo</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#informacoes-de-campus-pelo-codigo-do-curso" class="toc-h2 toc-link" data-title="Informações de campus pelo código do curso">Informações de campus pelo código do curso</a>
+                  </li>
+                  <li>
+                    <a href="#informacoes-de-horario-de-agendamento-por-campus" class="toc-h2 toc-link" data-title="Informações de horário de agendamento por campus">Informações de horário de agendamento por campus</a>
+                  </li>
+                  <li>
+                    <a href="#realizar-agendamento-de-processo-seletivo" class="toc-h2 toc-link" data-title="Realizar agendamento de processo seletivo">Realizar agendamento de processo seletivo</a>
+                  </li>
+                  <li>
+                    <a href="#envio-de-resultado-de-processo-seletivo" class="toc-h2 toc-link" data-title="Envio de resultado de processo seletivo">Envio de resultado de processo seletivo</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#notificacoes" class="toc-h1 toc-link" data-title="Notificações">Notificações</a>
               <ul class="toc-list-h2">
                   <li>
@@ -2391,7 +2408,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <p>Requisição</p>
 </blockquote>
 <pre class="highlight shell"><code>curl -X PUT --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/v1/admissions/12345/awaiting_enrollment <span class="se">\</span>
-  --data <span class="s1">'"days_to_enroll": "5"}'</span>
+  --data <span class="s1">'{"days_to_enroll": "5"}'</span>
 </code></pre>
 <blockquote>
 <p>Resposta</p>
@@ -2815,18 +2832,16 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <p>Resposta</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3-example.amazonaws.com/example.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"submitted_docs"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"course"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rg"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3-example.amazonaws.com/example.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"submitted_docs"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"course"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADM-MANHA-SP"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -2912,8 +2927,332 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 <td>Objeto que identifica o processo de admissão a que o documento se refere</td>
 </tr>
 </tbody></table>
+<h1 id='informacoes-de-agendamento-de-processo-seletivo'>Informações de agendamento de processo seletivo</h1><h2 id='informacoes-de-campus-pelo-codigo-do-curso'>Informações de campus pelo código do curso</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://rota-da-faculdade.com/path/de/informacoes/de/campus?course_id<span class="o">=</span>XYZ123
+</code></pre>
+<blockquote>
+<p>Exemplo de resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"campus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC123"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unidade SJC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua da Alegria, 999"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São José dos Campos"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A rota com informações do campus deve ser fornecida pela faculdade, junto de um token para autenticação via Basic Auth.</p>
+
+<p>A rota deve aceitar o formato JSON e tipo de requisição GET.</p>
+
+<p>É esperado erro 401 na resposta caso exista algum problema com a autenticação.</p>
+
+<p>É esperado erro 404 na resposta caso o <code>course_id</code> não seja reconhecido.</p>
+<h3 id='parametros-9'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>course_id</td>
+<td>Query</td>
+<td>Código interno do curso na faculdade, enviado anteriormente para o Quero Bolsa</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-do-resultado'>Informações do resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Código interno do campus</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Nome do campus</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>Endereço do campus</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>Cidade do campus</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>Estado do campus</td>
+</tr>
+</tbody></table>
+<h2 id='informacoes-de-horario-de-agendamento-por-campus'>Informações de horário de agendamento por campus</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://rota-da-faculdade.com/path/de/informacoes/de/horarios?campus_id<span class="o">=</span>ADM-MANHA-SP-SJC
+</code></pre>
+<blockquote>
+<p>Exemplo de resposta</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"schedule"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-15"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"10:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"11:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"12:00"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-16"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"10:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"11:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"12:00"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-17"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"10:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"11:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"12:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"15:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"16:00"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-18"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"10:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"11:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"12:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"15:00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"16:00"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A rota com informações para horários de agendamento por campus deve ser fornecida pela faculdade, junto de um token para autenticação via Basic Auth.</p>
+
+<p>A rota deve aceitar o formato JSON e tipo de requisição GET.</p>
+
+<p>É esperado erro 401 na resposta caso exista algum problema com a autenticação.</p>
+
+<p>É esperado erro 404 na resposta caso o <code>campus_id</code> não seja reconhecido.</p>
+<h3 id='parametros-10'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>campus_id</td>
+<td>Query</td>
+<td>Código interno do campus na faculdade, que foi recuperado pelo evento de <a href="#informacoes-de-campus-pelo-codigo-do-curso">informação de campus pelo código do curso</a></td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-de-resultado-9'>Informações de resultado</h3>
+<p>Os resultados devem vir em um array de objetos <code>schedule</code>, onde cada objeto contem chaves <code>date</code> e <code>time</code>, correspondendo aos dias e horários disponíveis para agendamento de processo seletivo.</p>
+
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>schedule</td>
+<td>array</td>
+<td>Array de objetos com os horários de processo seletivo do campus</td>
+</tr>
+<tr>
+<td>[schedule] date</td>
+<td>string</td>
+<td>Data da solicitação de agendamento do processo seletivo no formato <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>[schedule] time</td>
+<td>array de string</td>
+<td>Array com horários da solicitação de agendamento do processo seletivo. Formato: hh:mm (padrão 24 horas)</td>
+</tr>
+</tbody></table>
+<h2 id='realizar-agendamento-de-processo-seletivo'>Realizar agendamento de processo seletivo</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://rota-da-faculdade.com/path/de/agendar <span class="se">\</span>
+  --data <span class="s1">'{
+    "postback_url": "https://queroalunos.com/api/v1/applications/e9929544-00be-4a2e-b534-5191746fc61c/update",
+    "campus_id": "XYZ123",
+    "date": "2018-02-15",
+    "time": "12:00",
+    "cpf": "416.529.073-43",
+    "full_name": "João da Silva",
+    "course_id": "ADM-MANHA-SP-SJC"
+  }'</span>
+</code></pre>
+<blockquote>
+<p>Resposta quando o agendadamento é realizado</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registered"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Resposta quando o agendadamento é rejeitado</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rejected"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aluno bloqueado no sistema."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A rota para fazer agendamento de Processo Seletivo deve ser fornecida pela faculdade, junto de um token para autenticação via HTTP Basic.</p>
+
+<p>A rota deve aceitar o formato JSON e tipo de requisição POST.</p>
+
+<p>É esperado erro 401 na resposta caso exista algum problema com a autenticação.</p>
+<h3 id='parametros-11'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>postback_url</td>
+<td>string</td>
+<td>Rota de retorno para enviar resultado do processo seletivo do aluno</td>
+</tr>
+<tr>
+<td>campus_id</td>
+<td>string</td>
+<td>Código interno do campus na faculdade</td>
+</tr>
+<tr>
+<td>date</td>
+<td>string</td>
+<td>Data da solicitação de agendamento do processo seletivo no formato <a href="https://pt.wikipedia.org/wiki/ISO_8601">ISO 8601</a></td>
+</tr>
+<tr>
+<td>time</td>
+<td>string</td>
+<td>Hora da solicitação de agendamento do processo seletivo. Formato: hh:mm (padrão 24 horas)</td>
+</tr>
+<tr>
+<td>cpf</td>
+<td>string</td>
+<td>CPF do aluno que solicitou agendamento</td>
+</tr>
+<tr>
+<td>full_name</td>
+<td>string</td>
+<td>Nome completo do aluno que solicitou agendamento</td>
+</tr>
+<tr>
+<td>course_id</td>
+<td>string</td>
+<td>Código interno do curso na faculdade</td>
+</tr>
+</tbody></table>
+<h3 id='informacoes-do-resultado-2'>Informações do resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Status da solicitação de agendamento</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>string</td>
+<td>Descrição do motivo da rejeição, caso o agendamento falhe ou seja negado</td>
+</tr>
+</tbody></table>
+<h3 id='status-do-resultado'>Status do resultado</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Significado</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>registered</td>
+<td>Agendamento realizado com sucesso</td>
+</tr>
+<tr>
+<td>rejected</td>
+<td>Agendamento não realizado</td>
+</tr>
+</tbody></table>
+<h2 id='envio-de-resultado-de-processo-seletivo'>Envio de resultado de processo seletivo</h2>
+<blockquote>
+<p>Requisição</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST --header <span class="s2">"Authorization: Token ########"</span> --header <span class="s2">"Content-Type: application/json"</span> https://queroalunos.com/api/v1/applications/e9929544-00be-4a2e-b534-5191746fc61c/update <span class="se">\</span>
+  --data <span class="s1">'{
+    "result": "approved",
+    "grade": "83"
+  }'</span>
+</code></pre>
+<blockquote>
+<p>Resposta quando o resultado não é computado</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cannot approve, current step is approved"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A rota para onde a requisição será feita vem no parâmetro <code>postback_url</code> no evento de <a href="#realizar-agendamento-de-processo-seletivo">realizar agendamento de processo seletivo</a></p>
+
+<p>É enviado status <code>200</code> na resposta caso o resultado chegue corretamente.</p>
+
+<p>É enviado status <code>404</code> na resposta caso a url de postback seja inválida.</p>
+
+<p>É enviado status <code>500</code> com parâmetro <code>error</code> na resposta caso o resultado não seja computado.</p>
+<h3 id='parametros-12'>Parâmetros</h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>result</td>
+<td>string</td>
+<td>Resultado do aluno no processo seletivo</td>
+</tr>
+<tr>
+<td>grade</td>
+<td>string</td>
+<td>Nota do aluno no processo seletivo (opcional)</td>
+</tr>
+</tbody></table>
+<h3 id='valores-para-code-result-code'>Valores para <code>result</code></h3>
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Significado</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>approved</td>
+<td>Aprovado no processo seletivo</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Reprovado no processo seletivo</td>
+</tr>
+</tbody></table>
 <h1 id='notificacoes'>Notificações</h1>
-<p>Notificações utilizam uma rota única de callback, que deve ser fornecida pela faculdade, de um token para autenticação via HTTP Basic.</p>
+<p>Notificações utilizam uma rota única de callback, que deve ser fornecida pela faculdade, de um token para autenticação via Basic Auth.</p>
 
 <p>A rota deve aceitar JSON.</p>
 
@@ -2998,7 +3337,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Esta notificação informa o início de um processo de admissão.</p>
-<h3 id='parametros-9'>Parâmetros</h3>
+<h3 id='parametros-13'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -3116,7 +3455,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Esta notificação informa a atualização de um processo de admissão.</p>
-<h3 id='parametros-10'>Parâmetros</h3>
+<h3 id='parametros-14'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -3226,7 +3565,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Esta notificação informa a realização do vestibular (via Exame Quero Bolsa ou Nota do Enem) do processo de admissão.</p>
-<h3 id='parametros-11'>Parâmetros</h3>
+<h3 id='parametros-15'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -3373,7 +3712,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Esta notificação informa a submissão de um documento do processo de admissão.</p>
-<h3 id='parametros-12'>Parâmetros</h3>
+<h3 id='parametros-16'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
@@ -3494,7 +3833,7 @@ O atributo <code>has_more</code> da resposta indica se há mais dados disponíve
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Lista eventos enviados</p>
-<h3 id='parametros-13'>Parâmetros</h3>
+<h3 id='parametros-17'>Parâmetros</h3>
 <table><thead>
 <tr>
 <th>Nome</th>
