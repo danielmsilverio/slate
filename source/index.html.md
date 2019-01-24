@@ -1467,7 +1467,7 @@ Retorna um documento específico para um processo de admissão.
 > Requisição
 
 ```bash
-curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://rota-da-faculdade.com/path/de/informacoes/de/campus?course_code=XYZ123
+curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://rota-da-faculdade.com/path/de/informacoes/de/campus?course_id=XYZ123
 ```
 
 > Exemplo de resposta
@@ -1484,19 +1484,19 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
 }
 ```
 
-A rota com informações do campus deve ser fornecida pela faculdade, junto de um token para autenticação via HTTP Basic.
+A rota com informações do campus deve ser fornecida pela faculdade, junto de um token para autenticação via Basic Auth.
 
 A rota deve aceitar o formato JSON e tipo de requisição GET.
 
 É esperado erro 401 na resposta caso exista algum problema com a autenticação.
 
-É esperado erro 404 na resposta caso o `course_code` não seja reconhecido.
+É esperado erro 404 na resposta caso o `course_id` não seja reconhecido.
 
 ### Parâmetros
 
 | Nome | Tipo | Descrição |
 | ---- | ---- | --------- |
-| course_code | Query | Código interno do curso na faculdade, enviado anteriormente para o Quero Bolsa |
+| course_id | Query | Código interno do curso na faculdade, enviado anteriormente para o Quero Bolsa |
 
 ### Informações do resultado
 
@@ -1508,12 +1508,12 @@ A rota deve aceitar o formato JSON e tipo de requisição GET.
 | city | string | Cidade do campus |
 | state | string | Estado do campus |
 
-## Informações de agendamento de Processo Seletivo por campus
+## Informações de horário de agendamento por campus
 
 > Requisição
 
 ```bash
-curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://rota-da-faculdade.com/path/de/informacoes/de/horarios?campus_code=ADM-MANHA-SP-SJC
+curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://rota-da-faculdade.com/path/de/informacoes/de/horarios?campus_id=ADM-MANHA-SP-SJC
 ```
 
 > Exemplo de resposta
@@ -1530,30 +1530,30 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
       "time": ["10:00", "11:00", "12:00"]
     },
     {
-      "data": "2018-02-17",
+      "date": "2018-02-17",
       "time": ["10:00", "11:00", "12:00", "15:00", "16:00"]
     },
     {
-      "data": "2018-02-18",
+      "date": "2018-02-18",
       "time": ["10:00", "11:00", "12:00", "15:00", "16:00"]
     }
   ]
 }
 ```
 
-A rota com informações para agendamento de Processo Seletivo deve ser fornecida pela faculdade, junto de um token para autenticação via HTTP Basic.
+A rota com informações para horários de agendamento por campus deve ser fornecida pela faculdade, junto de um token para autenticação via Basic Auth.
 
 A rota deve aceitar o formato JSON e tipo de requisição GET.
 
 É esperado erro 401 na resposta caso exista algum problema com a autenticação.
 
-É esperado erro 404 na resposta caso o `campus_code` não seja reconhecido.
+É esperado erro 404 na resposta caso o `campus_id` não seja reconhecido.
 
 ### Parâmetros
 
 | Nome | Tipo | Descrição |
 | ---- | ---- | --------- |
-| campus_code | Query | Código interno do campus na faculdade, que foi recuperado pelo evento de [informação de campus pelo código do curso](#informacao-de-campus-pelo-codigo-do-curso) |
+| campus_id | Query | Código interno do campus na faculdade, que foi recuperado pelo evento de [informação de campus pelo código do curso](#informacoes-de-campus-pelo-codigo-do-curso) |
 
 ### Informações de resultado
 
@@ -1562,7 +1562,7 @@ Os resultados devem vir em um array de objetos `schedule`, onde cada objeto cont
 | Nome | Tipo | Descrição |
 | ---- | ---- | --------- |
 | schedule | array | Array de objetos com os horários de processo seletivo do campus |
-| [schedule] date | array de string | Array com datas da solicitação de agendamento do processo seletivo no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| [schedule] date | string | Data da solicitação de agendamento do processo seletivo no formato [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | [schedule] time | array de string | Array com horários da solicitação de agendamento do processo seletivo. Formato: hh:mm (padrão 24 horas) |
 
 ## Realizar agendamento de processo seletivo
@@ -1572,8 +1572,8 @@ Os resultados devem vir em um array de objetos `schedule`, onde cada objeto cont
 ```bash
 curl -X POST --header "Authorization: Token ########" --header "Content-Type: application/json" https://rota-da-faculdade.com/path/de/agendar \
   --data '{
-    "postback_url": "https://queroalunos.com/api/v1/admissions/e9929544-00be-4a2e-b534-5191746fc61c/register",
-    "campus_code": "XYZ123",
+    "postback_url": "https://queroalunos.com/api/v1/applications/e9929544-00be-4a2e-b534-5191746fc61c/update",
+    "campus_id": "XYZ123",
     "date": "2018-02-15",
     "time": "12:00",
     "cpf": "416.529.073-43",
@@ -1610,12 +1610,12 @@ A rota deve aceitar o formato JSON e tipo de requisição POST.
 | Nome | Tipo | Descrição |
 | ---- | ---- | --------- |
 | postback_url | string | Rota de retorno para enviar resultado do processo seletivo do aluno |
-| campus_code | string | Código interno do campus na faculdade |
-| date | string | Data da solicitação de agendamento do processo seletivo no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| campus_id | string | Código interno do campus na faculdade |
+| date | string | Data da solicitação de agendamento do processo seletivo no formato [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | time | string | Hora da solicitação de agendamento do processo seletivo. Formato: hh:mm (padrão 24 horas) |
 | cpf | string | CPF do aluno que solicitou agendamento |
 | full_name | string | Nome completo do aluno que solicitou agendamento |
-| course_code | string | Código interno do curso na faculdade |
+| course_id | string | Código interno do curso na faculdade |
 
 ### Informações do resultado
 
@@ -1636,7 +1636,7 @@ A rota deve aceitar o formato JSON e tipo de requisição POST.
 > Requisição
 
 ```bash
-curl -X POST --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions/e9929544-00be-4a2e-b534-5191746fc61c/register \
+curl -X POST --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/applications/e9929544-00be-4a2e-b534-5191746fc61c/update \
   --data '{
     "result": "approved",
     "grade": "83"
@@ -1675,7 +1675,7 @@ A rota para onde a requisição será feita vem no parâmetro `postback_url` no 
 
 # Notificações
 
-Notificações utilizam uma rota única de callback, que deve ser fornecida pela faculdade, de um token para autenticação via HTTP Basic.
+Notificações utilizam uma rota única de callback, que deve ser fornecida pela faculdade, de um token para autenticação via Basic Auth.
 
 A rota deve aceitar JSON.
 
