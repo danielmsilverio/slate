@@ -734,6 +734,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
     "id": 123456,
     "name": "José da Silva",
     "cpf": "111.222.333-44",
+    "rg": "45.478.123-X",
     "birth_date": "1991-01-01",
     "emails": [
       "teste@exemplo.com"
@@ -811,6 +812,7 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | id | number | Id do aluno |
 | name | string | Nome do aluno |
 | cpf | string | CPF do aluno |
+| rg | string | RG do aluno |
 | birth_date | string | Data de nascimento do aluno no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | emails | array de string | Lista de emails do aluno |
 | phones | array de string | Lista de telefones do aluno |
@@ -854,6 +856,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
   "id": 394932,
   "name": "José da Silva",
   "cpf": "111.222.333-44",
+  "rg": "45.478.123-X",
   "birth_date": "1991-01-01",
   "emails": [
     "teste@exemplo.com"
@@ -927,6 +930,7 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | id | number | Id do aluno |
 | name | string | Nome do aluno |
 | cpf | string | CPF do aluno |
+| rg | string | RG do aluno |
 | birth_date | string | Data de nascimento do aluno |
 | emails | array de string | Lista de emails do aluno |
 | phones | array de string | Lista de telefones do aluno |
