@@ -1421,7 +1421,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
   [
     {
       "title": "Error in Admission API",
-      "details": "Cannot transit to enrolled, current step is enrolled"
+      "details": "Cannot transit to enrolled, current status is enrolled"
     }
   ]
 }
@@ -1610,7 +1610,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
   [
     {
       "title": "Error in Admission API",
-      "details": "Cannot reject enrollment, current step is enrolled"
+      "details": "Cannot reject enrollment, current status is enrolled"
     }
   ]
 }
@@ -2017,7 +2017,7 @@ curl -X POST --header "Authorization: Token ########" --header "Content-Type: ap
 
 ```json
 {
-  "error": "Cannot approve, current step is approved"
+  "error": "Cannot approve, current status is approved"
 }
 ```
 
