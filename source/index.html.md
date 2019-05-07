@@ -97,6 +97,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         "id": 394932,
         "name": "José da Silva",
         "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
         "birth_date": "1991-01-01",
         "emails": [
           "teste@exemplo.com"
@@ -220,6 +221,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         "id": 394932,
         "name": "José da Silva",
         "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
         "birth_date": "1991-01-01",
         "emails": [
           "teste@exemplo.com"
@@ -341,6 +343,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         "id": 394932,
         "name": "José da Silva",
         "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
         "birth_date": "1991-01-01",
         "emails": [
           "teste@exemplo.com"
@@ -462,6 +465,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         "id": 394932,
         "name": "José da Silva",
         "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
         "birth_date": "1991-01-01",
         "emails": [
           "teste@exemplo.com"
@@ -583,6 +587,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         "id": 394932,
         "name": "José da Silva",
         "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
         "birth_date": "1991-01-01",
         "emails": [
           "teste@exemplo.com"
