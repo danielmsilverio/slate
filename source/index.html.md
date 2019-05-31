@@ -15,7 +15,7 @@ Bem-vindo à documentação da API de Admissões do Quero Alunos. Aqui você enc
 
 Todas as respostas da API são feitas em JSON
 
-Endpoint de produção: `https://queroalunos.com/api/v1`  
+Endpoint de produção: `https://queroalunos.com/api/v1`
 Endpoint de homologação: `https://queroalunos-admission.querobolsa.space/api/v1`
 
 # Autenticação
@@ -93,26 +93,85 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         }
       },
       "status": "pending_docs",
-      "student": { ... },
-      "applications": [ {...} ],
-      "created_at": "2016-10-01T02:01:44Z"
-    },
-    ...,
-    {
-      "id": 12369,
-      "course": {
-        "id": "ADM-MANHA-SP",
-        "offer": {
-          "discount": 50.0
+      "student": {
+        "id": 394932,
+        "name": "José da Silva",
+        "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
+        "birth_date": "1991-01-01",
+        "emails": [
+          "teste@exemplo.com"
+        ],
+        "phones": [
+          "(11) 98888-7777"
+        ],
+        "enem": {
+          "year": 2018,
+          "scores": {
+            "essay": 200.0,
+            "math": 200.1,
+            "language": 200.2,
+            "nature": 200.4,
+            "social": 200.5
+          }
+        },
+        "address_information": {
+          "address": "Rua Sandra",
+          "number": "432S",
+          "neighborhood": "Chácara Dora",
+          "city": "Araçariguama",
+          "state": "SP",
+          "postal_code": "18147-000"
         }
       },
-      "status": "pre_registered",
-      "student": { ... },
-      "applications": [ {...} ],
-      "created_at": "2016-10-15T03:15:44Z"
+      "applications": [
+        {
+          "id": 123456,
+          "type": "exam",
+          "exam": {
+            "id":456,
+            "course_skus": [
+              "ADM-MANHA-SP",
+              "DIR-MANHA-SP",
+              "ADM-NOITE-RJ"
+            ],
+            "exam_location": {
+              "address": "Rua Márcia",
+              "number": "4231",
+              "neighborhood": "Morro do Barreto",
+              "city": "São Roque",
+              "state": "SP",
+              "postal_code": "19110-000"
+            },
+            "dates": "2016-11-01",
+            "times": "18:30",
+            "status": "active",
+            "created_at": "2016-10-01T03:15:44Z"
+          },
+          "result": "approved",
+          "created_at": "2016-10-01T03:15:44Z"
+        }
+      ],
+      "created_at": "2018-12-05T13:01:38Z",
+      "extra_data": {
+        "external_enrollment_id": "NPW231"
+      },
+      "documents": [
+        {
+          "type": "titulo_de_eleitor",
+          "id": 226,
+          "created_at": "2018-12-19T14:36:37Z"
+        },
+        ...,
+        {
+          "type": "historico_escolar",
+          "id": 225,
+          "created_at": "2018-12-19T14:36:19Z"
+        }
+      ]
     }
   ]
-}
+}, ...
 ```
 
 A API utiliza paginação baseada em cursor atráves dos parâmetros `starting_after` e `ending_before`. Ambos recebem um id de um dado existente e retorna uma lista com até 25 elementos no máximo.
@@ -140,7 +199,7 @@ O atributo `has_more` da resposta indica se há mais dados disponíveis depois d
 > Exemplo de requisição
 
 ```bash
-curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions?starting_after=12369
+curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions?starting_after=12343
 ```
 
 > Retorno
@@ -150,7 +209,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
   "has_more": false,
   "items": [
     {
-      "id": 12370,
+      "id": 12345,
       "course": {
         "id": "ADM-MANHA-SP",
         "offer": {
@@ -158,23 +217,82 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         }
       },
       "status": "pending_docs",
-      "student": { ... },
-      "applications": [ {...} ],
-      "created_at": "2016-10-16T03:15:44Z"
-    },
-    ...,
-    {
-      "id": 12380,
-      "course": {
-        "id": "ADM-MANHA-SP",
-        "offer": {
-          "discount": 50.0
+      "student": {
+        "id": 394932,
+        "name": "José da Silva",
+        "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
+        "birth_date": "1991-01-01",
+        "emails": [
+          "teste@exemplo.com"
+        ],
+        "phones": [
+          "(11) 98888-7777"
+        ],
+        "enem": {
+          "year": 2018,
+          "scores": {
+            "essay": 200.0,
+            "math": 200.1,
+            "language": 200.2,
+            "nature": 200.4,
+            "social": 200.5
+          }
+        },
+        "address_information": {
+          "address": "Rua Sandra",
+          "number": "432S",
+          "neighborhood": "Chácara Dora",
+          "city": "Araçariguama",
+          "state": "SP",
+          "postal_code": "18147-000"
         }
       },
-      "status": "pre_registered",
-      "student": { ... },
-      "applications": [ {...} ],
-      "created_at": "2016-10-20T03:15:44Z"
+      "applications": [
+        {
+          "id": 123456,
+          "type": "exam",
+          "exam": {
+            "id":456,
+            "course_skus": [
+              "ADM-MANHA-SP",
+              "DIR-MANHA-SP",
+              "ADM-NOITE-RJ"
+            ],
+            "exam_location": {
+              "address": "Rua Márcia",
+              "number": "4231",
+              "neighborhood": "Morro do Barreto",
+              "city": "São Roque",
+              "state": "SP",
+              "postal_code": "19110-000"
+            },
+            "dates": "2016-11-01",
+            "times": "18:30",
+            "status": "active",
+            "created_at": "2016-10-01T03:15:44Z"
+          },
+          "result": "approved",
+          "created_at": "2016-10-01T03:15:44Z"
+        }
+      ],
+      "created_at": "2018-12-05T13:01:38Z",
+      "extra_data": {
+        "external_enrollment_id": "NPW231"
+      },
+      "documents": [
+        {
+          "type": "titulo_de_eleitor",
+          "id": 226,
+          "created_at": "2018-12-19T14:36:37Z"
+        },
+        ...,
+        {
+          "type": "historico_escolar",
+          "id": 225,
+          "created_at": "2018-12-19T14:36:19Z"
+        }
+      ]
     }
   ]
 }
@@ -203,14 +321,14 @@ No exemplo acima, vimos que `has_more` retornou `true`, portanto existem mais da
 > Exemplo de requisição
 
 ```bash
-curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions?ending_before=12369
+curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions?ending_before=12346
 ```
 
 > Retorno
 
 ```json
 {
-  "has_more": true,
+  "has_more": false,
   "items": [
     {
       "id": 12345,
@@ -221,23 +339,82 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         }
       },
       "status": "pending_docs",
-      "student": { ... },
-      "applications": [ {...} ],
-      "created_at": "2016-10-01T03:15:44Z"
-    },
-    ...,
-    {
-      "id": 12369,
-      "course": {
-        "id": "ADM-MANHA-SP",
-        "offer": {
-          "discount": 50.0
+      "student": {
+        "id": 394932,
+        "name": "José da Silva",
+        "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
+        "birth_date": "1991-01-01",
+        "emails": [
+          "teste@exemplo.com"
+        ],
+        "phones": [
+          "(11) 98888-7777"
+        ],
+        "enem": {
+          "year": 2018,
+          "scores": {
+            "essay": 200.0,
+            "math": 200.1,
+            "language": 200.2,
+            "nature": 200.4,
+            "social": 200.5
+          }
+        },
+        "address_information": {
+          "address": "Rua Sandra",
+          "number": "432S",
+          "neighborhood": "Chácara Dora",
+          "city": "Araçariguama",
+          "state": "SP",
+          "postal_code": "18147-000"
         }
       },
-      "status": "pre_registered",
-      "student": { ... },
-      "applications": [ {...} ],
-      "created_at": "2016-10-15T03:15:44Z"
+      "applications": [
+        {
+          "id": 123456,
+          "type": "exam",
+          "exam": {
+            "id":456,
+            "course_skus": [
+              "ADM-MANHA-SP",
+              "DIR-MANHA-SP",
+              "ADM-NOITE-RJ"
+            ],
+            "exam_location": {
+              "address": "Rua Márcia",
+              "number": "4231",
+              "neighborhood": "Morro do Barreto",
+              "city": "São Roque",
+              "state": "SP",
+              "postal_code": "19110-000"
+            },
+            "dates": "2016-11-01",
+            "times": "18:30",
+            "status": "active",
+            "created_at": "2016-10-01T03:15:44Z"
+          },
+          "result": "approved",
+          "created_at": "2016-10-01T03:15:44Z"
+        }
+      ],
+      "created_at": "2018-12-05T13:01:38Z",
+      "extra_data": {
+        "external_enrollment_id": "NPW231"
+      },
+      "documents": [
+        {
+          "type": "titulo_de_eleitor",
+          "id": 226,
+          "created_at": "2018-12-19T14:36:37Z"
+        },
+        ...,
+        {
+          "type": "historico_escolar",
+          "id": 225,
+          "created_at": "2018-12-19T14:36:19Z"
+        }
+      ]
     }
   ]
 }
@@ -266,7 +443,7 @@ Assim como avançamos uma página, é possível facilmente retornar a dados ante
 > Exemplo de requisição
 
 ```bash
-curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions?start_date=15/10/2016
+curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions?start_date=05/12/2018
 ```
 
 > Retorno
@@ -276,31 +453,90 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
   "has_more": false,
   "items": [
     {
-      "id": 12369,
+      "id": 12345,
       "course": {
         "id": "ADM-MANHA-SP",
         "offer": {
           "discount": 50.0
         }
       },
-      "status": "pre_registered",
-      "student": { ... },
-      "applications": [ {...} ],
-      "created_at": "2016-10-15T03:15:44Z"
-    },
-    ...,
-    {
-      "id": 12380,
-      "course": {
-        "id": "ADM-MANHA-SP",
-        "offer": {
-          "discount": 50.0
+      "status": "pending_docs",
+      "student": {
+        "id": 394932,
+        "name": "José da Silva",
+        "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
+        "birth_date": "1991-01-01",
+        "emails": [
+          "teste@exemplo.com"
+        ],
+        "phones": [
+          "(11) 98888-7777"
+        ],
+        "enem": {
+          "year": 2018,
+          "scores": {
+            "essay": 200.0,
+            "math": 200.1,
+            "language": 200.2,
+            "nature": 200.4,
+            "social": 200.5
+          }
+        },
+        "address_information": {
+          "address": "Rua Sandra",
+          "number": "432S",
+          "neighborhood": "Chácara Dora",
+          "city": "Araçariguama",
+          "state": "SP",
+          "postal_code": "18147-000"
         }
       },
-      "status": "pre_registered",
-      "student": { ... },
-      "applications": [ {...} ],
-      "created_at": "2016-10-20T03:15:44Z"
+      "applications": [
+        {
+          "id": 123456,
+          "type": "exam",
+          "exam": {
+            "id":456,
+            "course_skus": [
+              "ADM-MANHA-SP",
+              "DIR-MANHA-SP",
+              "ADM-NOITE-RJ"
+            ],
+            "exam_location": {
+              "address": "Rua Márcia",
+              "number": "4231",
+              "neighborhood": "Morro do Barreto",
+              "city": "São Roque",
+              "state": "SP",
+              "postal_code": "19110-000"
+            },
+            "dates": "2016-11-01",
+            "times": "18:30",
+            "status": "active",
+            "created_at": "2016-10-01T03:15:44Z"
+          },
+          "result": "approved",
+          "created_at": "2016-10-01T03:15:44Z"
+        }
+      ],
+      "created_at": "2018-12-05T13:01:38Z",
+      "extra_data": {
+        "external_enrollment_id": "NPW231"
+      },
+      "documents": [
+        {
+          "type": "titulo_de_eleitor",
+          "id": 226,
+          "created_at": "2018-12-19T14:36:37Z"
+        },
+        ...,
+        {
+          "type": "historico_escolar",
+          "id": 225,
+          "created_at": "2018-12-19T14:36:19Z"
+        }
+      ]
     }
   ]
 }
@@ -329,7 +565,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
 > Exemplo de requisição
 
 ```bash
-curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions?end_date=15/10/2016
+curl --header "Authorization: Token ########" --header "Content-Type: application/json" https://queroalunos.com/api/v1/admissions?end_date=15/12/2018
 ```
 
 > Retorno
@@ -347,23 +583,82 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         }
       },
       "status": "pending_docs",
-      "student": { ... },
-      "applications": [ {...} ],
-      "created_at": "2016-10-01T03:15:44Z"
-    },
-    ...,
-    {
-      "id": 12369,
-      "course": {
-        "id": "ADM-MANHA-SP",
-        "offer": {
-          "discount": 50.0
+      "student": {
+        "id": 394932,
+        "name": "José da Silva",
+        "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
+        "birth_date": "1991-01-01",
+        "emails": [
+          "teste@exemplo.com"
+        ],
+        "phones": [
+          "(11) 98888-7777"
+        ],
+        "enem": {
+          "year": 2018,
+          "scores": {
+            "essay": 200.0,
+            "math": 200.1,
+            "language": 200.2,
+            "nature": 200.4,
+            "social": 200.5
+          }
+        },
+        "address_information": {
+          "address": "Rua Sandra",
+          "number": "432S",
+          "neighborhood": "Chácara Dora",
+          "city": "Araçariguama",
+          "state": "SP",
+          "postal_code": "18147-000"
         }
       },
-      "status": "pre_registered",
-      "student": { ... },
-      "applications": [ {...} ],
-      "created_at": "2016-10-15T03:15:44Z"
+      "applications": [
+        {
+          "id": 123456,
+          "type": "exam",
+          "exam": {
+            "id":456,
+            "course_skus": [
+              "ADM-MANHA-SP",
+              "DIR-MANHA-SP",
+              "ADM-NOITE-RJ"
+            ],
+            "exam_location": {
+              "address": "Rua Márcia",
+              "number": "4231",
+              "neighborhood": "Morro do Barreto",
+              "city": "São Roque",
+              "state": "SP",
+              "postal_code": "19110-000"
+            },
+            "dates": "2016-11-01",
+            "times": "18:30",
+            "status": "active",
+            "created_at": "2016-10-01T03:15:44Z"
+          },
+          "result": "approved",
+          "created_at": "2016-10-01T03:15:44Z"
+        }
+      ],
+      "created_at": "2018-12-05T13:01:38Z",
+      "extra_data": {
+        "external_enrollment_id": "NPW231"
+      },
+      "documents": [
+        {
+          "type": "titulo_de_eleitor",
+          "id": 226,
+          "created_at": "2018-12-19T14:36:37Z"
+        },
+        ...,
+        {
+          "type": "historico_escolar",
+          "id": 225,
+          "created_at": "2018-12-19T14:36:19Z"
+        }
+      ]
     }
   ]
 }
@@ -444,6 +739,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
     "id": 123456,
     "name": "José da Silva",
     "cpf": "111.222.333-44",
+    "rg": "45.478.123-X",
     "birth_date": "1991-01-01",
     "emails": [
       "teste@exemplo.com"
@@ -451,6 +747,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
     "phones": [
       "(11) 98888-7777"
     ],
+    "document_expeditor": "SSP-SP",
     "address_information": {
       "address": "Rua Sandra",
       "number": "432S",
@@ -493,9 +790,13 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
 
 ```json
 {
-  "error": true,
-  "message": "CPF not found",
-  "description": "Could not find any student by given CPF. Make sure you are following the pattern: xxx.xxx.xxx-xx"
+  "status": "error",
+  "errors": [
+    {
+      "title": "Student not found",
+      "details": "No student associated with this CPF was found"
+    }
+  ]
 }
 ```
 
@@ -516,6 +817,7 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | id | number | Id do aluno |
 | name | string | Nome do aluno |
 | cpf | string | CPF do aluno |
+| rg | string | RG do aluno |
 | birth_date | string | Data de nascimento do aluno no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
 | emails | array de string | Lista de emails do aluno |
 | phones | array de string | Lista de telefones do aluno |
@@ -559,6 +861,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
   "id": 394932,
   "name": "José da Silva",
   "cpf": "111.222.333-44",
+  "rg": "45.478.123-X",
   "birth_date": "1991-01-01",
   "emails": [
     "teste@exemplo.com"
@@ -566,6 +869,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
   "phones": [
     "(11) 98888-7777"
   ],
+  "document_expeditor": "SSP-SP",
   "address_information": {
     "address": "Rua Sandra",
     "number": "432S",
@@ -606,9 +910,13 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
 
 ```json
 {
-  "error": true,
-  "message": "id not found",
-  "description": "Could not find any student by given id."
+  "status": "error",
+  "errors": [
+    {
+      "title": "Student not found",
+      "details": "No student associated with this ID was found"
+    }
+  ]
 }
 ```
 
@@ -627,6 +935,7 @@ Somente busca por alunos que tenham pré-matrícula na faculdade pertencente ao 
 | id | number | Id do aluno |
 | name | string | Nome do aluno |
 | cpf | string | CPF do aluno |
+| rg | string | RG do aluno |
 | birth_date | string | Data de nascimento do aluno |
 | emails | array de string | Lista de emails do aluno |
 | phones | array de string | Lista de telefones do aluno |
@@ -747,7 +1056,20 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
       "created_at": "2016-10-01T03:15:44Z",
       "extra_data": {
         "external_enrollment_id": "NPW231"
-      }
+      },
+      "documents": [
+        {
+          "type": "titulo_de_eleitor",
+          "id": 226,
+          "created_at": "2018-12-19T14:36:37Z"
+        },
+        ...,
+        {
+          "type": "historico_escolar",
+          "id": 225,
+          "created_at": "2018-12-19T14:36:19Z"
+        }
+      ]
     }
   ]
 }
@@ -832,7 +1154,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
       "discount": 50.0
     }
   },
-  "status": "pending_docs",
+  "status": "submitted_docs",
   "student": {
     "id": 394932,
     "name": "José da Silva",
@@ -894,7 +1216,20 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
   "created_at": "2016-10-01T03:15:44Z",
   "extra_data": {
     "external_enrollment_id": "NPW231"
-  }
+  },
+  "documents": [
+    {
+      "type": "titulo_de_eleitor",
+      "id": 226,
+      "created_at": "2018-12-19T14:36:37Z"
+    },
+    ...,
+    {
+      "type": "historico_escolar",
+      "id": 225,
+      "created_at": "2018-12-19T14:36:19Z"
+    }
+  ]
 }
 ```
 
@@ -902,9 +1237,13 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
 
 ```json
 {
-  "error": true,
-  "message": "id not found",
-  "description": "Could not find any admission by given id."
+  "status": "error",
+  "errors": [
+    {
+      "title": "Admission not found",
+      "details": "No admission associated with this ID was found"
+    }
+  ]
 }
 ```
 
@@ -1040,7 +1379,20 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
   "created_at": "2016-10-01T03:15:44Z",
   "extra_data": {
     "external_enrollment_id": "NPW231"
-  }
+  },
+  "documents": [
+    {
+      "type": "titulo_de_eleitor",
+      "id": 226,
+      "created_at": "2018-12-19T14:36:37Z"
+    },
+    ...,
+    {
+      "type": "historico_escolar",
+      "id": 225,
+      "created_at": "2018-12-19T14:36:19Z"
+    }
+  ]
 }
 ```
 
@@ -1078,7 +1430,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
   [
     {
       "title": "Error in Admission API",
-      "details": "Cannot transit to enrolled, current step is enrolled"
+      "details": "Cannot transit to enrolled, current status is enrolled"
     }
   ]
 }
@@ -1267,7 +1619,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
   [
     {
       "title": "Error in Admission API",
-      "details": "Cannot reject enrollment, current step is enrolled"
+      "details": "Cannot reject enrollment, current status is enrolled"
     }
   ]
 }
@@ -1341,16 +1693,39 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
   "has_more": false,
   "items": [
     {
-      "id": 12345,
-      "type": "rg",
+      "type": "cnh",
+      "id": 220,
+      "created_at": "2018-12-19T14:34:16Z",
       "admission": {
+        "status": "enrolled",
         "id": 456,
-        "status": "submitted_docs",
+        "extra_data": { ... },
+        "created_at": "2018-12-19T14:33:02Z",
         "course": {
-          "id": "ADM-MANHA-SP",
           "offer": {
-            "discount": 50.0
-          }
+            "enrollment_semester": "2019.1",
+            "discount": 10
+          },
+          "id": "dWQ66a#hjnwYa"
+        }
+      }
+    },
+    ...,
+    {
+      "type": "certificado_de_reservista",
+      "id": 222,
+      "created_at": "2018-12-19T14:34:51Z",
+      "admission": {
+        "status": "enrolled",
+        "id": 456,
+        "extra_data": { ... },
+        "created_at": "2018-12-19T14:33:02Z",
+        "course": {
+          "offer": {
+            "enrollment_semester": "2019.1",
+            "discount": 10
+          },
+          "id": "dWQdda#hjnwAa"
         }
       }
     }
@@ -1398,12 +1773,16 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
   "id": 12345,
   "type": "rg",
   "url": "https://s3-example.amazonaws.com/example.png",
+  "created_at": "2018-12-19T14:34:51Z",
   "admission": {
     "id": 456,
     "status": "submitted_docs",
+    "extra_data": { ... },
+    "created_at": "2018-12-19T14:33:02Z",
     "course": {
       "id": "ADM-MANHA-SP",
       "offer": {
+        "enrollment_semester": "2019.1",
         "discount": 50.0
       }
     }
@@ -1647,7 +2026,7 @@ curl -X POST --header "Authorization: Token ########" --header "Content-Type: ap
 
 ```json
 {
-  "error": "Cannot approve, current step is approved"
+  "error": "Cannot approve, current status is approved"
 }
 ```
 
