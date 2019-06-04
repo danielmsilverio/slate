@@ -999,6 +999,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         "id": 394932,
         "name": "José da Silva",
         "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
         "birth_date": "1991-01-01",
         "emails": [
           "teste@exemplo.com"
@@ -1159,6 +1160,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
     "id": 394932,
     "name": "José da Silva",
     "cpf": "111.222.333-44",
+    "rg": "45.478.123-X",
     "birth_date": "1991-01-01",
     "emails": [
       "teste@exemplo.com"
@@ -1322,6 +1324,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
     "id": 394932,
     "name": "José da Silva",
     "cpf": "111.222.333-44",
+    "rg": "45.478.123-X",
     "birth_date": "1991-01-01",
     "emails": [
       "teste@exemplo.com"
@@ -1524,6 +1527,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
     "id": 394932,
     "name": "José da Silva",
     "cpf": "111.222.333-44",
+    "rg": "45.478.123-X",
     "birth_date": "1991-01-01",
     "emails": [
       "teste@exemplo.com"
@@ -2092,6 +2096,7 @@ Estrutura base das notificações:
         "id": 394932,
         "name": "José da Silva",
         "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
         "birth_date": "1991-01-01",
         "emails": [
           "teste@exemplo.com"
@@ -2164,6 +2169,7 @@ Esta notificação informa o início de um processo de admissão.
         "id": 394932,
         "name": "José da Silva",
         "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
         "birth_date": "1991-01-01",
         "emails": [
           "teste@exemplo.com"
