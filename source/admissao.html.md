@@ -427,6 +427,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
     "address_information": {
       "address": "Rua Sandra",
       "number": "432S",
+      "complement": "Apto. 201",
       "neighborhood": "Chácara Dora",
       "city": "Araçariguama",
       "state": "SP",
@@ -542,6 +543,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
   "address_information": {
     "address": "Rua Sandra",
     "number": "432S",
+    "complement": "Apto. 201",
     "neighborhood": "Chácara Dora",
     "city": "Araçariguama",
     "state": "SP",
@@ -688,6 +690,7 @@ Estrutura base das notificações:
         "address_information": {
           "address": "Rua Sandra",
           "number": "432S",
+          "complement": "Apto. 201",
           "neighborhood": "Chácara Dora",
           "city": "Araçariguama",
           "state": "SP",

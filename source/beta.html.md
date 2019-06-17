@@ -416,6 +416,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
     "address_information": {
       "address": "Rua Sandra",
       "number": "432S",
+      "complement": "Apto. 201",
       "neighborhood": "Chácara Dora",
       "city": "Araçariguama",
       "state": "SP",
@@ -550,6 +551,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
   "address_information": {
     "address": "Rua Sandra",
     "number": "432S",
+    "complement": "Apto. 201",
     "neighborhood": "Chácara Dora",
     "city": "Araçariguama",
     "state": "SP",
@@ -704,6 +706,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
         "address_information": {
           "address": "Rua Sandra",
           "number": "432S",
+          "complement": "Apto. 201",
           "neighborhood": "Chácara Dora",
           "city": "Araçariguama",
           "state": "SP",
@@ -867,6 +870,7 @@ curl --header "Authorization: Token ########" --header "Content-Type: applicatio
     "address_information": {
       "address": "Rua Sandra",
       "number": "432S",
+      "complement": "Apto. 201",
       "neighborhood": "Chácara Dora",
       "city": "Araçariguama",
       "state": "SP",
@@ -1033,6 +1037,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
     "address_information": {
       "address": "Rua Sandra",
       "number": "432S",
+      "complement": "Apto. 201",
       "neighborhood": "Chácara Dora",
       "city": "Araçariguama",
       "state": "SP",
@@ -1246,6 +1251,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
     "address_information": {
       "address": "Rua Sandra",
       "number": "432S",
+      "complement": "Apto. 201",
       "neighborhood": "Chácara Dora",
       "city": "Araçariguama",
       "state": "SP",
@@ -1443,6 +1449,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
     "address_information": {
       "address": "Rua Sandra",
       "number": "432S",
+      "complement": "Apto. 201",
       "neighborhood": "Chácara Dora",
       "city": "Araçariguama",
       "state": "SP",
@@ -1641,6 +1648,7 @@ curl -X PUT --header "Authorization: Token ########" --header "Content-Type: app
     "address_information": {
       "address": "Rua Sandra",
       "number": "432S",
+      "complement": "Apto. 201",
       "neighborhood": "Chácara Dora",
       "city": "Araçariguama",
       "state": "SP",
@@ -1990,6 +1998,7 @@ Estrutura base das notificações:
         "address_information": {
           "address": "Rua Sandra",
           "number": "432S",
+          "complement": "Apto. 201",
           "neighborhood": "Chácara Dora",
           "city": "Araçariguama",
           "state": "SP",
@@ -2081,6 +2090,7 @@ Esta notificação informa o início de um processo de admissão.
         "address_information": {
           "address": "Rua Sandra",
           "number": "432S",
+          "complement": "Apto. 201",
           "neighborhood": "Chácara Dora",
           "city": "Araçariguama",
           "state": "SP",
