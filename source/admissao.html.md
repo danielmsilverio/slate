@@ -757,3 +757,78 @@ Lista eventos enviados
 | ---- | ---- | --------- |
 | has_more | boolean          | indica a existência de outras páginas |
 | items    | array de objetos | lista de notificações: [referência](#definicao-base-do-evento)
+
+
+## Notificar universidade sobre aluno pronto para matrícula
+
+```json
+{
+  "event_type": "admission.enroll",
+  "created": "2017-12-15T17:34:26.173",
+  "api_version": "1.0.0",
+  "data": {
+    "admission": {
+      "id": 12345,
+      "course": {
+        "id": "ADM-MANHA-SP",
+        "offer": {
+          "discount": 50.0
+        }
+      },
+      "status": "submitted_docs",
+      "student": {
+        "id": 394932,
+        "name": "José da Silva",
+        "cpf": "111.222.333-44",
+        "rg": "45.478.123-X",
+        "birth_date": "1991-01-01",
+        "emails": [
+          "teste@exemplo.com"
+        ],
+        "phones": [
+          "(11) 98888-7777"
+        ],
+        "enem": {
+          "year": 2018,
+          "scores": {
+            "essay": 200.0,
+            "math": 200.1,
+            "language": 200.2,
+            "nature": 200.4,
+            "social": 200.5
+          }
+        },
+        "address_information": {
+          "address": "Rua Sandra",
+          "number": "432S",
+          "complement": "Apto. 201",
+          "neighborhood": "Chácara Dora",
+          "city": "Araçariguama",
+          "state": "SP",
+          "postal_code": "18147-000"
+        }
+      }
+    }
+  }
+}
+```
+
+Essa notificação informa a universidade que há um aluno pronto para ser matrículado, após todos os documentos terem sido aprovados pela Quero. 
+
+
+### Parâmetros
+
+| Nome | Tipo | Descrição |
+| ---- | ---- | --------- |
+| created | string | Data que foi criado o evento no formato UTC [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601) |
+| api_version | string | Informação da versão atual da API |
+| event_type | string | Tipo de evento, no caso `admission.enroll` |
+| data | object | Objeto com informações de acordo com o tipo de evento |
+| admission | object | Objeto com dados do processo de admissão do aluno |
+| [admission] id | number | Id do processo de admissão |
+| [admission] course | object | Objeto com dados do curso referente a essa matrícula |
+| [course] id | string | Código do curso fornecido pela universidade referente a essa matrícula |
+| [course] offer | object | Objeto com dados da oferta do curso |
+| [offer] discount | float | Porcentagem de desconto do curso que o aluno adquiriu |
+| [admission] status | string | Status da admissão do aluno |
+| [admission] student | object | Objeto com dados do aluno |
