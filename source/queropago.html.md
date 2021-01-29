@@ -759,7 +759,7 @@ curl --header "Authorization: Bearer ########" \
       "refunded_value": 0.0,
       "installments": 1,
       "boleto_barcode": "23791.22928 60004.759696 16000.046900 5 82110000026176",
-      "boleto_url": "https://api.pagar.me/1/boletos/live_ck8ejmmww67co8v3d53jdaqbv",
+      "boleto_url": "https://boleto-url.com",
       "boleto_expiry_date": "2020-03-31",
       "created_at": "2020-03-30T14:03:55Z",
       "updated_at": "2020-03-30T14:03:57Z"
