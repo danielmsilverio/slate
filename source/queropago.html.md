@@ -890,7 +890,7 @@ curl --header "Authorization: Bearer ########" \
      -d id=12345 \
      -d external_id=54321 \
      -X PUT \
-     https://queropago.com.br/api/v1/bills/update_external_id
+     https://queropago.com.br/api/v1/bills/update-external-id
 ```
 
 > Resposta
@@ -906,7 +906,7 @@ curl --header "Authorization: Bearer ########" \
 | Header | `"Authorization: Bearer ########"` |
 | Header | `"Content-Type: application/json"` |
 | Método HTTP | `PUT` |
-| URL | `https://queropago.com.br/api/v1/bills/update_external_id` |
+| URL | `https://queropago.com.br/api/v1/bills/update-external-id` |
 
 ### Possíveis atributos para criar/atualizar o external id
 
