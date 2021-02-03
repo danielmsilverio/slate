@@ -232,63 +232,6 @@ curl --header "Authorization: Bearer ########" \
 | Método HTTP | `GET` |
 | URL | `https://queropago.com.br/api/v1/enrollments/{id}` |
 
-## Update de uma matrícula
-Faz o update de uma matrícula no sistema do Quero Pago e retorna o objeto atualizado
-
-> Requisição
-
-```bash
-curl --header "Authorization: Bearer ########" \
-     --header "Content-Type: application/json" \
-     -d external_id=RA1234 \
-     -X PUT \
-     https://queropago.com.br/api/v1/enrollments/1234567
-```
-
-> Resposta
-
-```json
-{
-  "id": 1234567,
-  "external_id": "RA1234",
-  "value_without_discount": 1000.0,
-  "value_with_discount": 500.0,
-  "discount_percentage": 50.0,
-  "due_day": 10,
-  "start_month": 7,
-  "start_year": 2019,
-  "duration_in_months": 24,
-  "period_installments": 6,
-  "enrollment_semester": "2019.2",
-  "student": {
-    "id": 1,
-    "cpf": "01234567890"
-  },
-  "course": {
-    "id": 1,
-    "external_id": "21348329432"
-  },
-  "created_at": "2019-03-20T22:31:32Z",
-  "updated_at": "2019-03-20T22:32:32Z"
-}
-```
-
-### Parâmetros da request
-
-| Parâmetro | Conteúdo |
-| ---- | --------- |
-| Header | `"Authorization: Bearer ########"` |
-| Header | `"Content-Type: application/json"` |
-| Método HTTP | `PUT` |
-| URL | `https://queropago.com.br/api/v1/enrollments/{id}` |
-
-### Possíveis atributos para realizar o update
-
-| Atributo | Tipo | Descrição |
-| ---- | ---- | --------- |
-| external_id | text | Identificador da matrícula na instituição de ensino |
-| due_day | int | Dia de vencimento das mensalidades, tem que estar entre 1 e 31. Ao atualizar o dia de vencimento das mensalidades, são gerados novos boletos começando a partir do próximo mês, ou seja, não é possível alterar a data de vencimento da mensalidade atual via API |
-
 ## Criação de uma matrícula
 
 > Requisição
@@ -450,38 +393,54 @@ curl --header "Authorization: Bearer ########" \
 | enrollment_semester | text | Sim | Semestre que o aluno ingressou no curso |
 | external_id | text | Não | Identificador externo da matrícula na instituição |
 
-## Interrupção de matrícula
+## Criar ou atualizar external id
+
+Cria ou atualiza o id externo de uma matrícula no Quero Pago.
 
 > Requisição
 
 ```bash
 curl --header "Authorization: Bearer ########" \
      --header "Content-Type: application/json" \
-     -d "@request_body.json" \
-     -X POST \
-     https://queropago.com.br/api/v1/enrollments/1/interrupt
-```
-
-> request_body.json
-
-```json
-{
-  "interruption_reason": "dropout",
-  "remaining_value": 1000,
-  "installments": 10,
-  "first_due_date": "2019-10-10"
-}
+     -d id=12345 \
+     -d external_id=54321 \
+     -X PUT \
+     https://queropago.com.br/api/v1/enrollments/update-external-id
 ```
 
 > Resposta
 
 ```json
 {
-  "message": "Matrícula interrompida com sucesso"
+ "id":12345,
+ "external_id":54321,
+ "course":
+  {"id":652906,
+   "external_id":nil,
+   "name":"Gestão de Recursos Humanos",
+   "shift":"Noite",
+   "kind":"Presencial",
+   "level":"Tecnólogo (graduação)",
+   "campus":{"id":16927, "external_id":nil},
+   "created_at":"2019-07-03T20:23:41Z",
+   "updated_at":"2019-07-03T20:23:41Z"},
+ "student":
+  {"id":52554,
+   "cpf":"03616228212",
+   "name":"orenice sousa ferreira",
+   "email":"52554@server.com",
+   "gender":nil,
+   "birthday":"1991-08-11",
+   "identity_card":nil,
+   "identity_card_emissor":nil,
+   "cellphone":"1299999952554",
+   "address":
+    {"street":"Rua Crisântemos", "number":"07", "neighborhood":nil, "postal_code":"69088-180", "complement":"casa", "city":{"id":5722, "ibge_code":"1302603"}},
+   "created_at":"2020-01-22T16:32:11Z",
+   "updated_at":"2020-01-22T16:32:12Z",
+   "formatted_cellphone":"1299999952554"}
 }
 ```
-
-Interrompe a matrícula de acordo com os parâmetros passados
 
 ### Parâmetros da request
 
@@ -489,27 +448,15 @@ Interrompe a matrícula de acordo com os parâmetros passados
 | ---- | --------- |
 | Header | `"Authorization: Bearer ########"` |
 | Header | `"Content-Type: application/json"` |
-| Método HTTP | `POST` |
-| Body | JSON com os parâmetros para a criação |
-| URL | `https://queropago.com.br/api/v1/enrollments/{id}/interrupt` |
+| Método HTTP | `GET` |
+| URL | `https://queropago.com.br/api/v1/enrollments/update-external-id` |
 
-### Parâmetros do body da request
+### Possíveis atributos para criar/atualizar o external id
 
-| Atributo | Tipo | Obrigatório | Descrição |
-| ---- | ---- | ---- | --------- |
-| interruption_reason | text | Sim | Razão da interrupção da cobrança, podendo ser `cancellation`, `transfer`, `dropout` ou `pause` |
-| remaining_value | float | Não | Valor restante a ser pago, necessário somente se o aluno estiver com saldo devedor |
-| installments | int | Não | Quantidade de mensalidades em que o aluno pode dividir o saldo devedor, necessário somente se o aluno estiver com saldo devedor |
-| first_due_date | date | Não | Data da primeira mensalidade no formato [ISO 8601](https://pt.wikipedia.org/wiki/ISO_8601), necessário somente se o aluno estiver com saldo devedor  |
-
-**Razões de interrupção**
-
-| Atributo | Descrição |
-| ---- | --------- |
-| cancellation | Motivo genérico para interrupção |
-| transfer | Aluno fez transferência de instituição |
-| dropout | Aluno desistiu do curso |
-| pause | Aluno trancou o curso |
+| Atributo | Tipo | Descrição |
+| ---- | ---- | --------- |
+| id | int | Identificador da matrícula no Quero Pago |
+| external_id | text | Identificador da matrícula na instituição de ensino |
 
 # Mensalidades
 
