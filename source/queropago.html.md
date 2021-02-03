@@ -412,33 +412,33 @@ curl --header "Authorization: Bearer ########" \
 
 ```json
 {
- "id":12345,
- "external_id":54321,
- "course":
-  {"id":652906,
-   "external_id":null,
-   "name":"Gestão de Recursos Humanos",
-   "shift":"Noite",
-   "kind":"Presencial",
-   "level":"Tecnólogo (graduação)",
-   "campus":{"id":16927, "external_id":null},
-   "created_at":"2019-07-03T20:23:41Z",
-   "updated_at":"2019-07-03T20:23:41Z"},
- "student":
-  {"id":52554,
-   "cpf":"03616228212",
-   "name":"orenice sousa ferreira",
-   "email":"52554@server.com",
-   "gender":null,
-   "birthday":"1991-08-11",
-   "identity_card":null,
-   "identity_card_emissor":null,
-   "cellphone":"1299999952554",
-   "address":
-    {"street":"Rua Crisântemos", "number":"07", "neighborhood":null, "postal_code":"69088-180", "complement":"casa", "city":{"id":5722, "ibge_code":"1302603"}},
-   "created_at":"2020-01-22T16:32:11Z",
-   "updated_at":"2020-01-22T16:32:12Z",
-   "formatted_cellphone":"1299999952554"}
+  "id":12345,
+  "external_id":54321,
+  "course":
+   {"id":652906,
+    "external_id":null,
+    "name":"Gestão de Recursos Humanos",
+    "shift":"Noite",
+    "kind":"Presencial",
+    "level":"Tecnólogo (graduação)",
+    "campus":{"id":16927, "external_id":null},
+    "created_at":"2019-07-03T20:23:41Z",
+    "updated_at":"2019-07-03T20:23:41Z"},
+  "student":
+   {"id":52554,
+    "cpf":"03616228212",
+    "name":"orenice sousa ferreira",
+    "email":"52554@server.com",
+    "gender":null,
+    "birthday":"1991-08-11",
+    "identity_card":null,
+    "identity_card_emissor":null,
+    "cellphone":"1299999952554",
+    "address":
+     {"street":"Rua Crisântemos", "number":"07", "neighborhood":null, "postal_code":"69088-180", "complement":"casa", "city":{"id":5722, "ibge_code":"1302603"}},
+    "created_at":"2020-01-22T16:32:11Z",
+    "updated_at":"2020-01-22T16:32:12Z",
+    "formatted_cellphone":"1299999952554"}
 }
 ```
 
