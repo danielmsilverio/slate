@@ -416,12 +416,12 @@ curl --header "Authorization: Bearer ########" \
  "external_id":54321,
  "course":
   {"id":652906,
-   "external_id":nil,
+   "external_id":null,
    "name":"Gestão de Recursos Humanos",
    "shift":"Noite",
    "kind":"Presencial",
    "level":"Tecnólogo (graduação)",
-   "campus":{"id":16927, "external_id":nil},
+   "campus":{"id":16927, "external_id":null},
    "created_at":"2019-07-03T20:23:41Z",
    "updated_at":"2019-07-03T20:23:41Z"},
  "student":
@@ -429,13 +429,13 @@ curl --header "Authorization: Bearer ########" \
    "cpf":"03616228212",
    "name":"orenice sousa ferreira",
    "email":"52554@server.com",
-   "gender":nil,
+   "gender":null,
    "birthday":"1991-08-11",
-   "identity_card":nil,
-   "identity_card_emissor":nil,
+   "identity_card":null,
+   "identity_card_emissor":null,
    "cellphone":"1299999952554",
    "address":
-    {"street":"Rua Crisântemos", "number":"07", "neighborhood":nil, "postal_code":"69088-180", "complement":"casa", "city":{"id":5722, "ibge_code":"1302603"}},
+    {"street":"Rua Crisântemos", "number":"07", "neighborhood":null, "postal_code":"69088-180", "complement":"casa", "city":{"id":5722, "ibge_code":"1302603"}},
    "created_at":"2020-01-22T16:32:11Z",
    "updated_at":"2020-01-22T16:32:12Z",
    "formatted_cellphone":"1299999952554"}
